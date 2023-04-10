@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         float verticalInput = Input.GetAxisRaw("Vertical");
 
         Vector3 moveDirection = (horizontalInput * transform.right + verticalInput * transform.forward).normalized;
-        Vector3 newPosition = transform.position + moveDirection * Time.deltaTime;
+        Vector3 newPosition = transform.position + moveDirection * Time.deltaTime * moveSpeed;
         playerRigidbody.MovePosition(newPosition);
     }   //  Movement()
 
