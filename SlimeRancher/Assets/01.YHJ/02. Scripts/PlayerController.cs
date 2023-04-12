@@ -5,25 +5,30 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = default;
+    [SerializeField] private float sprintSpeed = default;
+    [SerializeField] private float normalSpeed = default;
     [SerializeField] private float jumpForce = default;
-
 
     [SerializeField] private float groundCheckDistance = default;
     [SerializeField] private LayerMask groundLayer = default;
 
     private bool isGrounded = false;
-
-    float suctionForce = 10f;
-    float launchForce = 10f;
-    public Transform nozzle; // 진공팩 노즐
-    public LayerMask slimeLayer; // 슬라임 레이어
+    private bool isSprinting = false;
 
 
     private Rigidbody playerRigidbody = default;
 
+
+
+
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        normalSpeed = moveSpeed;
     }
 
     private void FixedUpdate()
@@ -33,7 +38,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        KeyControll();
+        Jump();
+        Sprint();
+        Absorption();
+
     }
 
     private void Movement()
@@ -46,43 +54,49 @@ public class PlayerController : MonoBehaviour
         playerRigidbody.MovePosition(newPosition);
     }
 
-    private void KeyControll()
+    private void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
         isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
+    }
 
-        // 마우스 왼쪽 버튼 누를 때 슬라임 흡수
-        if (Input.GetMouseButton(0))
+    private void Sprint()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            // 슬라임 흡수
-            Collider[] slimeColliders = Physics.OverlapSphere(nozzle.position, 0.5f, slimeLayer);
-            foreach (Collider slimeCollider in slimeColliders)
+            if (!isSprinting)
             {
-                Rigidbody slimeRigidbody = slimeCollider.GetComponent<Rigidbody>();
-                if (slimeRigidbody != null)
-                {
-                    Vector3 direction = slimeRigidbody.position - playerRigidbody.position;
-                    slimeRigidbody.AddForce(direction.normalized * suctionForce, ForceMode.Force);
-                }
+                isSprinting = true;
+                moveSpeed = sprintSpeed;
+            }
+            else
+            {
+                isSprinting = false;
+                moveSpeed = normalSpeed;
             }
         }
-        // 마우스 오른쪽 버튼 누를 때 슬라임 발사
-        else if (Input.GetMouseButton(1))
+    }
+
+    private void Absorption()
+    {
+        if (Input.GetMouseButton(1))
         {
-            // 슬라임 발사
-            Collider[] slimeColliders = Physics.OverlapSphere(nozzle.position, 0.5f, slimeLayer);
-            foreach (Collider slimeCollider in slimeColliders)
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
             {
-                Rigidbody slimeRigidbody = slimeCollider.GetComponent<Rigidbody>();
-                if (slimeRigidbody != null)
+                Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+                if (rb != null)
                 {
-                    Vector3 direction = slimeRigidbody.position - playerRigidbody.position;
-                    slimeRigidbody.AddForce(direction.normalized * launchForce, ForceMode.Impulse);
+                    Vector3 direction = transform.position - hit.transform.position;
+                    rb.AddForce(direction.normalized * 10f);
                 }
             }
         }
     }
+
 }
