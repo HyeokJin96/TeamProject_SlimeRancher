@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header ("ÇÃ·¹ÀÌ¾î")]
+    [Header ("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½")]
     [SerializeField] private float moveSpeed = default; 
 
-    [Header("Ä«¸Þ¶ó")] 
+    [Header("Ä«ï¿½Þ¶ï¿½")] 
     [SerializeField] private Camera playerCamera = default;
     [SerializeField] private float cameraSensitivity = default;
     [SerializeField] private float cameraRotationLimit = default;
