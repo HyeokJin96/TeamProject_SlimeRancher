@@ -119,8 +119,6 @@ public class SlimeBase : MonoBehaviour
                 else
                 {
                     //play animation bite
-                    /* currentActionState = ActionState.Eat;
-                    Invoke("Eat", 3); */
                     if (targetToEat != null && currentActionState != ActionState.Eat)
                     {
                         StartCoroutine(Eat());
@@ -134,22 +132,6 @@ public class SlimeBase : MonoBehaviour
             targetToEat = null;
         }
     }
-    /* void Eat()
-    {
-        Debug.Log("Eat");
-        hungerValue = 0;
-        agitatedValue = 0;
-        targetToEat.SetActive(false);
-        currentActionState = ActionState.Idle;
-        if (targetToEat.tag == "Plort")
-        {
-            Debug.Log("변신");
-        }
-        else if (targetToEat.tag == "Food")
-        {
-            Debug.Log("플로트 생산");
-        }
-    } */
 
     IEnumerator Eat()
     {
@@ -168,6 +150,9 @@ public class SlimeBase : MonoBehaviour
             Debug.Log("플로트 생산");
             GameObject clone_ = Resources.Load<GameObject>("02.HT/Prefabs/Plort/Plort");
             Instantiate(clone_, transform.position, transform.rotation);
+            
+            //색상부여 관련 수정예정
+            clone_.GetComponent<PlortBase>().plortType = 1;
         }
     }
 
