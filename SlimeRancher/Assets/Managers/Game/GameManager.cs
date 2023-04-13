@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : GSingleton<GameManager>
+public class GameManager : KSingleton<GameManager>
 {
     protected override void Init()
     {

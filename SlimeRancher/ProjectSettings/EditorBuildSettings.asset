@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/03.KMS/KMS/Scenes/InitScene.unity
+    path: Assets/03.KMS/KMS/Scenes/BackUp/InitScene.unity
     guid: 59f3218d221308c4b935dbccb6bfd1ae
   - enabled: 1
-    path: Assets/03.KMS/KMS/Scenes/TitleScene.unity
+    path: Assets/03.KMS/KMS/Scenes/BackUp/TitleScene.unity
     guid: 8f29e3c4ac21af0489b1f19ab9c33efc
   - enabled: 1
-    path: Assets/Scenes/01.PlayScene.unity
-    guid: 860cf8b94de8a4942bbc9e4b81a58e7f
+    path: Assets/03.KMS/KMS/Scenes/TestScene.unity
+    guid: b9e15e5d3df80b948bb6a5d6c4070d8e
   m_configObjects: {}

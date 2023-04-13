@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class DataManager : GSingleton<DataManager>
+public class DataManager : KSingleton<DataManager>
 {
     PlayerData playerData_ = new PlayerData();
     string path = default;
@@ -30,7 +30,7 @@ public class DataManager : GSingleton<DataManager>
         playerData_.SetRot();
     }
 
-    private new void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
