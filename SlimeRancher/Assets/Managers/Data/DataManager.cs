@@ -3,40 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class DataManager : MonoBehaviour
+public class DataManager : GSingleton<DataManager>
 {
-    private static DataManager instance;
-
     PlayerData playerData_ = new PlayerData();
     string path = default;
     string fileName = "p_Data.json";
 
-    public static DataManager Instance
+    private new void Awake()
     {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<DataManager>();
-                if (instance == null)
-                {
-                    instance = new GameObject("DataManager").AddComponent<DataManager>();
-                }
-            }
-            return instance;
-        }
-    }
-
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-
         path = Application.persistentDataPath + "/";
     }
 
@@ -56,7 +30,7 @@ public class DataManager : MonoBehaviour
         playerData_.SetRot();
     }
 
-    private void Update()
+    private new void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {

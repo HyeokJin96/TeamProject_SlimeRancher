@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 public static partial class GData
 {
+    // Scene Name
+    public const string SCENENAME_INIT = "InitScene";
+    public const string SCENENAME_TITLE = "TitleScene";
+    public const string SCENENAME_LOADING = "LoadingScene";
+    public const string SCENENAME_PLAY = "PlayScene";
 }
 
 //! 지형의 속성을 정의하기 위한 타입

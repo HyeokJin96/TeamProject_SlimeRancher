@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 986228831105161166}
   - component: {fileID: 2485377421571712687}
   - component: {fileID: 765287534}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cellReef_TunnelQuarry_Proxy_7 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,9 +107,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5151406623692711251}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,6 +204,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8670224568947433130, guid: f87d400146d39a342b5e4c230853ad13, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -5634634364600033209, guid: f87d400146d39a342b5e4c230853ad13, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -211,6 +215,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f87d400146d39a342b5e4c230853ad13, type: 3}
       propertyPath: m_Name
       value: areaEdge01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f87d400146d39a342b5e4c230853ad13, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f87d400146d39a342b5e4c230853ad13, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f87d400146d39a342b5e4c230853ad13, type: 3}
@@ -309,6 +321,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: caveRoof2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 607edf0a0cf995c40b35c513ff1c54ef, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 607edf0a0cf995c40b35c513ff1c54ef, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 4454542355887810216, guid: 607edf0a0cf995c40b35c513ff1c54ef, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 607edf0a0cf995c40b35c513ff1c54ef, type: 3}
 --- !u!4 &543450653037825553 stripped
@@ -398,6 +422,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: cliffBase04 #491831
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 1317589849090122261, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
 --- !u!4 &543450652716024269 stripped
@@ -483,22 +519,50 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b9d51d3073d7e4b4d8c7b0631f11a1d6, type: 2}
+    - target: {fileID: -6403141714807369679, guid: a36790b19280a014d9554c579a3ca8da, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -5322547256929417821, guid: a36790b19280a014d9554c579a3ca8da, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -4774387479437195335, guid: a36790b19280a014d9554c579a3ca8da, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a891ca7dcf986464baebed89ccd55ace, type: 2}
     - target: {fileID: -3982159118183138593, guid: a36790b19280a014d9554c579a3ca8da, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -3982159118183138593, guid: a36790b19280a014d9554c579a3ca8da, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3714269456578036919, guid: a36790b19280a014d9554c579a3ca8da, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a36790b19280a014d9554c579a3ca8da, type: 3}
       propertyPath: m_Name
       value: cellQuarry_CaveHub_Proxy
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a36790b19280a014d9554c579a3ca8da, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a36790b19280a014d9554c579a3ca8da, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
     - target: {fileID: 2118702735166006398, guid: a36790b19280a014d9554c579a3ca8da, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b9d51d3073d7e4b4d8c7b0631f11a1d6, type: 2}
+    - target: {fileID: 2202403070782209363, guid: a36790b19280a014d9554c579a3ca8da, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a36790b19280a014d9554c579a3ca8da, type: 3}
 --- !u!4 &543450652318603273 stripped
@@ -589,6 +653,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5151406623692711251}
     m_Modifications:
+    - target: {fileID: -9161632418896983107, guid: f8c7a7da0da85a64582c9178b9a6d9fc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8c7a7da0da85a64582c9178b9a6d9fc, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -648,6 +716,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f8c7a7da0da85a64582c9178b9a6d9fc, type: 3}
       propertyPath: m_Name
       value: cliffWall01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f8c7a7da0da85a64582c9178b9a6d9fc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f8c7a7da0da85a64582c9178b9a6d9fc, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     - target: {fileID: 2857265158499075766, guid: f8c7a7da0da85a64582c9178b9a6d9fc, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -734,9 +810,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7332030386712544946, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
       propertyPath: m_Name
       value: cliffBase05
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     - target: {fileID: 6776002673453437624, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -827,6 +915,58 @@ PrefabInstance:
       propertyPath: m_Name
       value: cliffBase04 #491831
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 1317589849090122261, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3447043876825641011, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3447043876825641011, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3447043876825641011, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3447043876825641011, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3447043876825641011, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.0200195
+      objectReference: {fileID: 0}
+    - target: {fileID: 3447043876825641011, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 3447043876825641011, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.17882185
+      objectReference: {fileID: 0}
+    - target: {fileID: 3447043876825641011, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3447043876825641011, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9838815
+      objectReference: {fileID: 0}
+    - target: {fileID: 3447043876825641011, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 200.602
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59ec5243ef8201d4280b3b2b52f06377, type: 3}
 --- !u!4 &543450652005495547 stripped
@@ -916,6 +1056,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: caveDoor2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 23758b5b45a72e140a0dd83b9e9b5501, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 23758b5b45a72e140a0dd83b9e9b5501, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494433728125105855, guid: 23758b5b45a72e140a0dd83b9e9b5501, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8494851099253468174, guid: 23758b5b45a72e140a0dd83b9e9b5501, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.62
@@ -997,6 +1149,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7332030386712544946, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -4875912127028024645, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
       propertyPath: m_LocalPosition.z
       value: 1.07
@@ -1004,6 +1160,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
       propertyPath: m_Name
       value: cliffBase05
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     - target: {fileID: 6776002673453437624, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1086,9 +1250,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7332030386712544946, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
       propertyPath: m_Name
       value: cliffBase05 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     - target: {fileID: 6776002673453437624, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1171,6 +1347,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7332030386712544946, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -4875912127028024645, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
       propertyPath: m_LocalPosition.z
       value: 1.54
@@ -1178,6 +1358,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
       propertyPath: m_Name
       value: cliffBase05 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     - target: {fileID: 6776002673453437624, guid: 475fad8e197e8a348b005b1eae893ead, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1272,6 +1460,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1865489999508325411, guid: 447246c7a5ef8a345adae017c4fe17bf, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -659900646543009928, guid: 447246c7a5ef8a345adae017c4fe17bf, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1279,6 +1471,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 447246c7a5ef8a345adae017c4fe17bf, type: 3}
       propertyPath: m_Name
       value: areaBlock06
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 447246c7a5ef8a345adae017c4fe17bf, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 447246c7a5ef8a345adae017c4fe17bf, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 447246c7a5ef8a345adae017c4fe17bf, type: 3}
@@ -1357,6 +1557,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7300869446375364273, guid: eecd87e52263a6f4fbc2a6b1510f7445, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -7199581257046484098, guid: eecd87e52263a6f4fbc2a6b1510f7445, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -5608949776910834248, guid: eecd87e52263a6f4fbc2a6b1510f7445, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1365,9 +1573,25 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 34ffff43dd78e0b4e82ca3536f22a742, type: 2}
+    - target: {fileID: -516506297845144122, guid: eecd87e52263a6f4fbc2a6b1510f7445, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -306091108101734179, guid: eecd87e52263a6f4fbc2a6b1510f7445, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eecd87e52263a6f4fbc2a6b1510f7445, type: 3}
       propertyPath: m_Name
       value: cellRanch_Home_Proxy
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: eecd87e52263a6f4fbc2a6b1510f7445, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: eecd87e52263a6f4fbc2a6b1510f7445, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     - target: {fileID: 973149432588883471, guid: eecd87e52263a6f4fbc2a6b1510f7445, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1377,14 +1601,30 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8571fbeb207406b47bafc6eca5ad16bb, type: 2}
+    - target: {fileID: 4159167199019480785, guid: eecd87e52263a6f4fbc2a6b1510f7445, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245639847223261900, guid: eecd87e52263a6f4fbc2a6b1510f7445, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5316035074335777072, guid: eecd87e52263a6f4fbc2a6b1510f7445, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 47a1104e2df81d64c94e648c157b39fb, type: 2}
+    - target: {fileID: 5577996934999642007, guid: eecd87e52263a6f4fbc2a6b1510f7445, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5666227415776029492, guid: eecd87e52263a6f4fbc2a6b1510f7445, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: be13b88e4ac47dd4595bccbd6b8968f4, type: 2}
+    - target: {fileID: 5993648725235808195, guid: eecd87e52263a6f4fbc2a6b1510f7445, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6038616030400921765, guid: eecd87e52263a6f4fbc2a6b1510f7445, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1559,6 +1799,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5151406623692711251}
     m_Modifications:
+    - target: {fileID: -8705670408778620448, guid: 305273c15c7653c4285980346d1012b8, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 305273c15c7653c4285980346d1012b8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1607,9 +1851,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ddc18af80d136d842b174e09c43eaecb, type: 2}
+    - target: {fileID: -597437537694697834, guid: 305273c15c7653c4285980346d1012b8, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 305273c15c7653c4285980346d1012b8, type: 3}
       propertyPath: m_Name
       value: cellRanch_Lab_Proxy
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 305273c15c7653c4285980346d1012b8, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 305273c15c7653c4285980346d1012b8, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     - target: {fileID: 7670017431375412894, guid: 305273c15c7653c4285980346d1012b8, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1667,6 +1923,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5151406623692711251}
     m_Modifications:
+    - target: {fileID: -8710700333255333463, guid: b952482ea39cc6e4bac220995c7ac9df, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8684883942633440899, guid: b952482ea39cc6e4bac220995c7ac9df, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b952482ea39cc6e4bac220995c7ac9df, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1711,6 +1975,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7304632146306692685, guid: b952482ea39cc6e4bac220995c7ac9df, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -3295922809630993515, guid: b952482ea39cc6e4bac220995c7ac9df, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1719,9 +1987,25 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 52e370961c33fa24f9391fffd7c8177b, type: 2}
+    - target: {fileID: -82514130360302548, guid: b952482ea39cc6e4bac220995c7ac9df, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b952482ea39cc6e4bac220995c7ac9df, type: 3}
       propertyPath: m_Name
       value: cellRanch_Docks_Proxy
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b952482ea39cc6e4bac220995c7ac9df, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b952482ea39cc6e4bac220995c7ac9df, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 2160775712812946049, guid: b952482ea39cc6e4bac220995c7ac9df, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2400979146680045067, guid: b952482ea39cc6e4bac220995c7ac9df, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1743,6 +2027,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0712000aeceb7f94d97aa29905894c6e, type: 2}
+    - target: {fileID: 7187900265286347182, guid: b952482ea39cc6e4bac220995c7ac9df, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8902758542348475755, guid: b952482ea39cc6e4bac220995c7ac9df, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b952482ea39cc6e4bac220995c7ac9df, type: 3}
 --- !u!1 &2647540653981367311 stripped
@@ -1890,6 +2182,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5151406623692711251}
     m_Modifications:
+    - target: {fileID: -9060423489361042501, guid: 7ab6a4c35eca61943895463e3e2109d1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -8771897512992024462, guid: 7ab6a4c35eca61943895463e3e2109d1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1938,6 +2234,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8189991432240790246, guid: 7ab6a4c35eca61943895463e3e2109d1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -7034141791927365972, guid: 7ab6a4c35eca61943895463e3e2109d1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -7034141791927365972, guid: 7ab6a4c35eca61943895463e3e2109d1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1946,6 +2250,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ddc18af80d136d842b174e09c43eaecb, type: 2}
+    - target: {fileID: -4516273641668236860, guid: 7ab6a4c35eca61943895463e3e2109d1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2501357640731665463, guid: 7ab6a4c35eca61943895463e3e2109d1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2237349452277853455, guid: 7ab6a4c35eca61943895463e3e2109d1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -1976452145779601093, guid: 7ab6a4c35eca61943895463e3e2109d1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 11.94
@@ -1966,13 +2282,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: cellReef_TunnelQuarry_Proxy
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7ab6a4c35eca61943895463e3e2109d1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7ab6a4c35eca61943895463e3e2109d1, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
     - target: {fileID: 2229499760587762692, guid: 7ab6a4c35eca61943895463e3e2109d1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 93f03d43b309ba643bcb1db3cae0eb9e, type: 2}
+    - target: {fileID: 2879068577238702265, guid: 7ab6a4c35eca61943895463e3e2109d1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2900016717452631714, guid: 7ab6a4c35eca61943895463e3e2109d1, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4686719662277891700, guid: 7ab6a4c35eca61943895463e3e2109d1, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5965781863237256642, guid: 7ab6a4c35eca61943895463e3e2109d1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2173,9 +2505,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 47a1104e2df81d64c94e648c157b39fb, type: 2}
+    - target: {fileID: -792567700329548519, guid: 5087b718bef2abc4c9bebfac7f221fe9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5087b718bef2abc4c9bebfac7f221fe9, type: 3}
       propertyPath: m_Name
       value: cellRanch_PassageOvergrowth_Proxy
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5087b718bef2abc4c9bebfac7f221fe9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5087b718bef2abc4c9bebfac7f221fe9, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     - target: {fileID: 4360275913837499525, guid: 5087b718bef2abc4c9bebfac7f221fe9, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2185,6 +2529,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4059364991b2b694c9bd69bf74f109d8, type: 2}
+    - target: {fileID: 4506129848525237264, guid: 5087b718bef2abc4c9bebfac7f221fe9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718664793548123378, guid: 5087b718bef2abc4c9bebfac7f221fe9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5087b718bef2abc4c9bebfac7f221fe9, type: 3}
 --- !u!1 &585958691491680724 stripped
@@ -2300,9 +2652,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4677239511239527011, guid: 6e3e5f04788d62342909f04ff4fcbbe9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6e3e5f04788d62342909f04ff4fcbbe9, type: 3}
       propertyPath: m_Name
       value: cliffBase04B_COL
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6e3e5f04788d62342909f04ff4fcbbe9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6e3e5f04788d62342909f04ff4fcbbe9, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     - target: {fileID: 5763015233998921484, guid: 6e3e5f04788d62342909f04ff4fcbbe9, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2351,7 +2715,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7ae7d66e57c522c47a1cc8d8baf334e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 953.0955
+      value: 951.14
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7ae7d66e57c522c47a1cc8d8baf334e5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2392,6 +2756,18 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7ae7d66e57c522c47a1cc8d8baf334e5, type: 3}
       propertyPath: m_Name
       value: cliffBase04
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7ae7d66e57c522c47a1cc8d8baf334e5, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7ae7d66e57c522c47a1cc8d8baf334e5, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 1317589849090122261, guid: 7ae7d66e57c522c47a1cc8d8baf334e5, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ae7d66e57c522c47a1cc8d8baf334e5, type: 3}
@@ -2470,9 +2846,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4677239511239527011, guid: 6e3e5f04788d62342909f04ff4fcbbe9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6e3e5f04788d62342909f04ff4fcbbe9, type: 3}
       propertyPath: m_Name
       value: cliffBase04B_COL (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6e3e5f04788d62342909f04ff4fcbbe9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6e3e5f04788d62342909f04ff4fcbbe9, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     - target: {fileID: 5763015233998921484, guid: 6e3e5f04788d62342909f04ff4fcbbe9, type: 3}
       propertyPath: m_Materials.Array.data[0]
