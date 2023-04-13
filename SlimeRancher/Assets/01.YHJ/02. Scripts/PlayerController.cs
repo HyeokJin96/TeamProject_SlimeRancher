@@ -19,17 +19,29 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRigidbody = default;
 
 
-    [Space (20f)]
+    [Space(20f)]
     [SerializeField] private GameObject vacpack = default;
     [SerializeField] private Animator vacpackAnimator = default;
+    [SerializeField] private GameManager gameManager = default;
+    [SerializeField] private Camera playerCamera = default;
+    [SerializeField] private CameraController cameraController = default;
 
+    private float currentX;
+    private float currentY;
+
+
+    private GameObject hand = default;
 
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
-        vacpack = transform.GetChild(1).GetChild(0).gameObject;
+        vacpack = transform.GetChild(0).GetChild(1).gameObject;
         vacpackAnimator = vacpack.GetComponent<Animator>();
+        playerCamera = transform.GetChild(0).GetChild(0).GetComponent<Camera>();
+        cameraController = playerCamera.GetComponent<CameraController>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
+        hand = transform.GetChild(0).gameObject;
     }
 
     private void Start()
@@ -47,7 +59,43 @@ public class PlayerController : MonoBehaviour
         Jump();
         Sprint();
         AnimationControll();
+        RotatePlayer();
     }
+
+    private void RotatePlayer()
+    {
+        //RotateCharacter();
+        RotateVacpack();
+    }
+
+    private void RotateCharacter()
+    {
+        float mouseX = Input.GetAxisRaw("Mouse X") * gameManager.mouseSensitivity;
+
+        currentX += mouseX;
+
+        this.transform.rotation = Quaternion.Euler(0f, currentX, 0f);
+    }
+
+
+
+    private void RotateVacpack()
+    {
+        float mouseY = Input.GetAxisRaw("Mouse Y") * gameManager.mouseSensitivity;
+        currentY -= mouseY;
+        currentY = Mathf.Clamp(currentY, cameraController.minAngle, cameraController.maxAngle);
+        hand.transform.rotation = Quaternion.Euler(currentY, 0f, 0f);
+    }
+
+
+
+
+
+
+
+
+
+
 
     private void Movement()
     {
