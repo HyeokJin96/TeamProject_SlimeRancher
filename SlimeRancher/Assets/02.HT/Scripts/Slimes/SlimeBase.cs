@@ -192,7 +192,7 @@ public class SlimeBase : MonoBehaviour
 
     protected void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Ground")
+        if (other.gameObject.tag == "Terrain")
         {
             isGrounded = true;
         }
@@ -200,7 +200,7 @@ public class SlimeBase : MonoBehaviour
 
     protected void OnCollisionStay(Collision other)
     {
-        if (other.gameObject.tag == "Ground")
+        if (other.gameObject.tag == "Terrain")
         {
             isGrounded = true;
         }

@@ -9,11 +9,10 @@ TagManager:
   - Gordo Slime
   - Feral Slime
   - Tarr Slime
-  - Fruit
-  - Vegetable
-  - Meat
   - Facility
-  - Star
+  - Food
+  - Plort
+  - Terrain
   layers:
   - Default
   - TransparentFX
@@ -21,7 +20,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Terrain
   - 
   - 
   - 
