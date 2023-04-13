@@ -20,6 +20,9 @@ public class SlimeBase : MonoBehaviour
     Vector3 targetPosition;
     float targetDistance;
 
+    public string slimeType;
+    public string[] slimeTypeArray = { "Pink", "Rock" };
+
     public enum MoodState   // after test, delete public
     {
         Elated,
@@ -37,7 +40,7 @@ public class SlimeBase : MonoBehaviour
 
     public ActionState currentActionState;
 
-    protected void Start()
+    public virtual void Start()
     {
         rigid = GetComponent<Rigidbody>();
 
@@ -45,6 +48,8 @@ public class SlimeBase : MonoBehaviour
         currentActionState = ActionState.Idle;
 
         seekRange = transform.GetChild(1).GetComponent<SphereCollider>();
+
+
 
         StartCoroutine(IncreaseHunger(1)); // test value 1: after test, change to 60
     }
@@ -99,30 +104,37 @@ public class SlimeBase : MonoBehaviour
 
                 Debug.Log(targetDistance);
 
-                if (targetDistance > 1.5)
+                if (targetDistance > 5)
                 {
                     currentActionState = ActionState.Idle;
                     CancelInvoke("Eat");
                     transform.LookAt(targetPosition);
                     transform.position += transform.forward * 3 * Time.deltaTime;
                 }
-                else if (targetDistance <= 1.5 && targetDistance > 1f)
+                else if (targetDistance <= 5 && targetDistance > 2.5f)
                 {
                     transform.LookAt(targetPosition);
                     transform.position += transform.forward * 3 * Time.deltaTime;
                 }
                 else
                 {
-
                     //play animation bite
-                    currentActionState = ActionState.Eat;
-                    Invoke("Eat", 3);
+                    /* currentActionState = ActionState.Eat;
+                    Invoke("Eat", 3); */
+                    if (targetToEat != null && currentActionState != ActionState.Eat)
+                    {
+                        StartCoroutine(Eat());
+                    }
                 }
             }
         }
-    }
 
-    void Eat()
+        if (targetToEat != null && targetToEat.activeSelf == false)
+        {
+            targetToEat = null;
+        }
+    }
+    /* void Eat()
     {
         Debug.Log("Eat");
         hungerValue = 0;
@@ -136,6 +148,26 @@ public class SlimeBase : MonoBehaviour
         else if (targetToEat.tag == "Food")
         {
             Debug.Log("플로트 생산");
+        }
+    } */
+
+    IEnumerator Eat()
+    {
+        currentActionState = ActionState.Eat;
+        yield return new WaitForSeconds(3f);
+        hungerValue = 0;
+        agitatedValue = 0;
+        targetToEat.SetActive(false);
+        currentActionState = ActionState.Idle;
+        if (targetToEat.tag == "Plort")
+        {
+            Debug.Log("변신");
+        }
+        else if (targetToEat.tag == "Food")
+        {
+            Debug.Log("플로트 생산");
+            GameObject clone_ = Resources.Load<GameObject>("02.HT/Prefabs/Plort/Plort");
+            Instantiate(clone_, transform.position, transform.rotation);
         }
     }
 

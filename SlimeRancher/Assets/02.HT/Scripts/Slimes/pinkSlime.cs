@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class pinkSlime : SlimeBase
 {
+
+    public override void Start()
+    {
+        base.Start();
+        slimeType = slimeTypeArray[0];
+    }
+
     public override void Update()
     {
         base.Update();

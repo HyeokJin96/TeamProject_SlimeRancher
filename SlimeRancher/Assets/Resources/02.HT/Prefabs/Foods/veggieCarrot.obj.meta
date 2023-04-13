@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c01d862221b7c464883936a9b992cb47
+guid: 40f286537c9b51845bee2fd781aec359
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: fruitPogo_0Mat
-    second: {fileID: 2100000, guid: dfce93754bc533b42b9babdc61bf70cb, type: 2}
+      name: veggieCarrot_0Mat
+    second: {fileID: 2100000, guid: 960f4752859a8184d8cb150b0b30dfb6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
