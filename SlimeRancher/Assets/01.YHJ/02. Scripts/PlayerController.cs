@@ -4,21 +4,37 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header ("플레이어")]
-    [SerializeField] private float moveSpeed = default; 
+    [SerializeField] private float moveSpeed = default;
+    [SerializeField] private float sprintSpeed = default;
+    [SerializeField] private float normalSpeed = default;
+    [SerializeField] private float jumpForce = default;
 
-    [Header("카메라")] 
-    [SerializeField] private Camera playerCamera = default;
-    [SerializeField] private float cameraSensitivity = default;
-    [SerializeField] private float cameraRotationLimit = default;
-    [SerializeField] private float currentCameraRotationX = default;
+    [SerializeField] private float groundCheckDistance = default;
+    [SerializeField] private LayerMask groundLayer = default;
+
+    private bool isGrounded = false;
+    private bool isSprinting = false;
+
 
     private Rigidbody playerRigidbody = default;
+
+
+    [Space (20f)]
+    [SerializeField] private GameObject vacpack = default;
+    [SerializeField] private Animator vacpackAnimator = default;
+
 
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
-        playerCamera = transform.GetChild(0).GetComponent<Camera>();
+        vacpack = transform.GetChild(1).GetChild(0).gameObject;
+        vacpackAnimator = vacpack.GetComponent<Animator>();
+
+    }
+
+    private void Start()
+    {
+        normalSpeed = moveSpeed;
     }
 
     private void FixedUpdate()
@@ -28,8 +44,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        RotateCharacter();
-        RotateCamera();
+        Jump();
+        Sprint();
+        AnimationControll();
     }
 
     private void Movement()
@@ -38,21 +55,65 @@ public class PlayerController : MonoBehaviour
         float verticalInput = Input.GetAxisRaw("Vertical");
 
         Vector3 moveDirection = (horizontalInput * transform.right + verticalInput * transform.forward).normalized;
-        Vector3 newPosition = transform.position + moveDirection * Time.deltaTime;
+        Vector3 newPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
         playerRigidbody.MovePosition(newPosition);
-    }   //  Movement()
+    }
 
-    private void RotateCharacter()
+    private void Jump()
     {
-        float rotationY = Input.GetAxisRaw("Mouse X") * cameraSensitivity;
-        playerRigidbody.MoveRotation(playerRigidbody.rotation * Quaternion.Euler(0f, rotationY, 0f));
-    }   //  CharacterRotation()
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
+    }
 
-    private void RotateCamera()
+    private void Sprint()
     {
-        float rotationX = Input.GetAxisRaw("Mouse Y") * cameraSensitivity;
-        currentCameraRotationX = Mathf.Clamp(currentCameraRotationX - rotationX, -cameraRotationLimit, cameraRotationLimit);
-        playerCamera.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
+        if (Input.GetKeyDown(KeyCode.LeftShift) && isGrounded)
+        {
+            if (!isSprinting)
+            {
+                isSprinting = true;
+                moveSpeed = sprintSpeed;
+            }
+            else
+            {
+                isSprinting = false;
+                moveSpeed = normalSpeed;
+            }
+        }
+    }
+
+    private void Absorption()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    Vector3 direction = transform.position - hit.transform.position;
+                    rb.AddForce(direction.normalized * 10f);
+                }
+            }
+        }
+    }
+
+    private void AnimationControll()
+    {
+        if (isSprinting)
+        {
+            vacpackAnimator.SetBool("isSprinting", true);
+        }
+        else
+        {
+            vacpackAnimator.SetBool("isSprinting", false);
+        }
     }
 
 }

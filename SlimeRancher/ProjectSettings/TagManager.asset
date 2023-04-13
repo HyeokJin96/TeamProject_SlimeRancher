@@ -13,6 +13,7 @@ TagManager:
   - Vegetable
   - Meat
   - Facility
+  - Star
   layers:
   - Default
   - TransparentFX
