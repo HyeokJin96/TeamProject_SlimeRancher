@@ -751,6 +751,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Appearance
       objectReference: {fileID: 0}
+    - target: {fileID: 4960560774281280381, guid: c20abd728166b6f4b81753aecee162ad, type: 3}
+      propertyPath: m_TagString
+      value: Normal Slime
+      objectReference: {fileID: 0}
     - target: {fileID: 5736639320642937287, guid: c20abd728166b6f4b81753aecee162ad, type: 3}
       propertyPath: m_RootOrder
       value: 2
