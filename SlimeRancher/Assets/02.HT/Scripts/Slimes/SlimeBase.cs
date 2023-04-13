@@ -51,16 +51,19 @@ public class SlimeBase : MonoBehaviour
 
     public virtual void Update()
     {
+        SetHungerValue();
+        SetMoodState();
+        Move();
+    }
+
+    void SetHungerValue()
+    {
         if (hungerValue > maxHunger)
         {
             hungerValue = maxHunger;
         }
         else { }
-
-        SetMoodState();
-        Move();
     }
-
 
     protected void Jump(int jumpForce_, int delayTime_)
     {
@@ -94,15 +97,23 @@ public class SlimeBase : MonoBehaviour
                 targetPosition = new Vector3(targetToEat.transform.position.x, transform.position.y, targetToEat.transform.position.z);
                 targetDistance = Vector3.Distance(transform.position, targetPosition);
 
-                if (targetDistance > 0.9)
+                Debug.Log(targetDistance);
+
+                if (targetDistance > 1.5)
                 {
                     currentActionState = ActionState.Idle;
                     CancelInvoke("Eat");
                     transform.LookAt(targetPosition);
                     transform.position += transform.forward * 3 * Time.deltaTime;
                 }
+                else if (targetDistance <= 1.5 && targetDistance > 1f)
+                {
+                    transform.LookAt(targetPosition);
+                    transform.position += transform.forward * 3 * Time.deltaTime;
+                }
                 else
                 {
+
                     //play animation bite
                     currentActionState = ActionState.Eat;
                     Invoke("Eat", 3);
