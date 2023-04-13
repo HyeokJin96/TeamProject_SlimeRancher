@@ -19,11 +19,17 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRigidbody = default;
 
 
+    [Space (20f)]
+    [SerializeField] private GameObject vacpack = default;
+    [SerializeField] private Animator vacpackAnimator = default;
 
 
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
+        vacpack = transform.GetChild(1).GetChild(0).gameObject;
+        vacpackAnimator = vacpack.GetComponent<Animator>();
+
     }
 
     private void Start()
@@ -40,8 +46,7 @@ public class PlayerController : MonoBehaviour
     {
         Jump();
         Sprint();
-        Absorption();
-
+        AnimationControll();
     }
 
     private void Movement()
@@ -65,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     private void Sprint()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && isGrounded)
         {
             if (!isSprinting)
             {
@@ -96,6 +101,18 @@ public class PlayerController : MonoBehaviour
                     rb.AddForce(direction.normalized * 10f);
                 }
             }
+        }
+    }
+
+    private void AnimationControll()
+    {
+        if (isSprinting)
+        {
+            vacpackAnimator.SetBool("isSprinting", true);
+        }
+        else
+        {
+            vacpackAnimator.SetBool("isSprinting", false);
         }
     }
 
