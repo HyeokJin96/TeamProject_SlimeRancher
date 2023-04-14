@@ -21,27 +21,43 @@ public class PlayerController : MonoBehaviour
 
     [Space(20f)]
     [SerializeField] private GameObject vacpack = default;
-    [SerializeField] private Animator vacpackAnimator = default;
-    [SerializeField] private GameManager gameManager = default;
+    [SerializeField] private GameObject playerBody = default;
+    [SerializeField] private GameObject vacpackPivot = default;
+    [SerializeField] private GameObject model_V3 = default;
+
+    [Space(10f)]
     [SerializeField] private Camera playerCamera = default;
+
+    [Space(10f)]
+    [SerializeField] private Animator vacpackAnimator = default;
     [SerializeField] private CameraController cameraController = default;
+
+    [Space(10f)]
+    [SerializeField] private GameManager gameManager = default;
+
+
+
+
 
     private float currentX;
     private float currentY;
 
 
-    private GameObject hand = default;
-
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
-        vacpack = transform.GetChild(0).GetChild(1).gameObject;
-        vacpackAnimator = vacpack.GetComponent<Animator>();
-        playerCamera = transform.GetChild(0).GetChild(0).GetComponent<Camera>();
-        cameraController = playerCamera.GetComponent<CameraController>();
+
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-        hand = transform.GetChild(0).gameObject;
+
+        vacpack = transform.GetChild(0).gameObject;
+        playerBody = transform.GetChild(1).gameObject;
+        vacpackPivot = vacpack.transform.GetChild(0).gameObject;
+        model_V3 = vacpackPivot.transform.GetChild(1).gameObject;
+        playerCamera = vacpackPivot.transform.GetChild(0).gameObject.GetComponent<Camera>();
+
+        cameraController = playerCamera.GetComponent<CameraController>();
+        vacpackAnimator = model_V3.GetComponent<Animator>();
     }
 
     private void Start()
@@ -64,38 +80,19 @@ public class PlayerController : MonoBehaviour
 
     private void RotatePlayer()
     {
-        //RotateCharacter();
-        RotateVacpack();
-    }
-
-    private void RotateCharacter()
-    {
         float mouseX = Input.GetAxisRaw("Mouse X") * gameManager.mouseSensitivity;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * gameManager.mouseSensitivity;
 
         currentX += mouseX;
-
-        this.transform.rotation = Quaternion.Euler(0f, currentX, 0f);
-    }
-
-
-
-    private void RotateVacpack()
-    {
-        float mouseY = Input.GetAxisRaw("Mouse Y") * gameManager.mouseSensitivity;
         currentY -= mouseY;
         currentY = Mathf.Clamp(currentY, cameraController.minAngle, cameraController.maxAngle);
-        hand.transform.rotation = Quaternion.Euler(currentY, 0f, 0f);
+
+        Quaternion characterTargetRotation = Quaternion.Euler(0f, currentX, 0f);
+        Quaternion vacpackTargetRotation = Quaternion.Euler(currentY, 0f, 0f);
+
+        transform.rotation = characterTargetRotation;
+        vacpackPivot.transform.rotation = transform.rotation * vacpackTargetRotation;
     }
-
-
-
-
-
-
-
-
-
-
 
     private void Movement()
     {
