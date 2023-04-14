@@ -9,16 +9,15 @@ public class PlortBase : MonoBehaviour
 
     //[PlortType] 0: Default(White), 1: Pink...
     public int plortType;
-    List<Color32> plortColor;
+    public List<Color32> plortColor;    //test public
     // Start is called before the first frame update
 
     private void Awake()
     {
         plortColor = new List<Color32>();
-        plortColor.Add(Color.white);
-        plortColor.Add(new Color32(225, 60, 90, 255));
-        //test
-        plortColor.Add(Color.black);
+        plortColor.Add(new Color32(255, 255, 255, 255));
+        plortColor.Add(new Color32(225, 60, 90, 255));  //pink
+        plortColor.Add(new Color32(30, 125, 200, 255));  //rock
     }
     void Start()
     {
@@ -33,6 +32,7 @@ public class PlortBase : MonoBehaviour
     void Update()
     {
         SetPlortColor();
+
     }
 
     void SetPlortColor()
@@ -45,6 +45,7 @@ public class PlortBase : MonoBehaviour
     }
     void FindPlortColor()
     {
+
         for (int i = 0; i < plortColor.Count; i++)
         {
             if (plortType == i)

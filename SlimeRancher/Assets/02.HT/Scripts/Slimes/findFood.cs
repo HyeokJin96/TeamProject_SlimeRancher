@@ -6,6 +6,8 @@ public class findFood : MonoBehaviour
 {
     SlimeBase slimeBase;
     GameObject closestObject = null;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,17 @@ public class findFood : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Plort") || other.gameObject.CompareTag("Food"))
             {
-                PlortCheck(other.gameObject.GetComponents<Collider>());
+                if (other.gameObject.CompareTag("Plort"))
+                {
+                    if (other.GetComponent<PlortBase>().plortType != slimeBase.slimeType1 && other.GetComponent<PlortBase>().plortType != slimeBase.slimeType2)
+                    {
+                        PlortCheck(other.gameObject.GetComponents<Collider>());
+                    }
+                }
+                else
+                {
+                    PlortCheck(other.gameObject.GetComponents<Collider>());
+                }
             }
         }
     }
