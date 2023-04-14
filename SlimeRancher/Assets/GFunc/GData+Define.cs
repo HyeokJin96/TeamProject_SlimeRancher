@@ -7,7 +7,7 @@ public static partial class GData
     public const string SCENENAME_INIT = "InitScene";
     public const string SCENENAME_TITLE = "TitleScene";
     public const string SCENENAME_LOADING = "LoadingScene";
-    public const string SCENENAME_PLAY = "PlayScene";
+    public const string SCENENAME_PLAY = "TestScene";
 }
 
 //! 지형의 속성을 정의하기 위한 타입
