@@ -24,6 +24,17 @@ public class GSingleton<T> : GComponent where T : GSingleton<T>
     public override void Awake()
     {
         base.Awake();
+
+        if(_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        _instance = this as T;
+        DontDestroyOnLoad(gameObject);
+
+        Init();
     }       // Awake()
 
     public void Create()

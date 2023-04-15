@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : KSingleton<GameManager>
 {
-    protected override void Init()
+    public override void Init()
     {
         // GameManager의 초기화 작업을 수행합니다.
         Debug.Log("GameManager Initialized!");

@@ -12,22 +12,7 @@ public class SceneManager_ : KSingleton<SceneManager_>
 
     public void GoPlayScene()
     {
+        UIManager.Instance.isPlayMenu_Open = false;
         GFunc.LoadScene(GData.SCENENAME_PLAY);
-    }
-
-    public void test_()
-    {
-        if (
-            SceneManager.GetActiveScene().name == GData.SCENENAME_PLAY
-            && Input.GetKeyDown(KeyCode.Tab)
-        )
-        {
-            GoTitleScene();
-        }
-    }
-
-    private void Update()
-    {
-        test_();
     }
 }

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KSingleton<T> : MonoBehaviour where T : KSingleton<T>
+public class KSingleton<T> : GComponent where T : KSingleton<T>
 {
-    private static T _instance;
+    private static T _instance = default;
 
     public static T Instance 
     {
@@ -21,17 +21,11 @@ public class KSingleton<T> : MonoBehaviour where T : KSingleton<T>
                     DontDestroyOnLoad(obj);
                 }
             }       
-
             return _instance;
         }
     }
 
-    protected virtual void Init()
-    {
-        /* Do something */
-    }
-
-    public void Awake()
+    public override void Awake()
     {
         if(_instance != null && _instance != this)
         {
@@ -43,5 +37,15 @@ public class KSingleton<T> : MonoBehaviour where T : KSingleton<T>
         DontDestroyOnLoad(gameObject);
 
         Init();
+    }
+
+    public void Create()
+    {
+        this.Init();
+    }
+
+    public virtual void Init()
+    {
+        /* Do something */
     }
 }

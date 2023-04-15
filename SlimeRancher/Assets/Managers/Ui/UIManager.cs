@@ -5,20 +5,28 @@ using UnityEngine.UI;
 
 public class UIManager : KSingleton<UIManager>
 {
+    #region Variable Declaration
     [Header("Ui Objects")]
     //UiObjects
     public GameObject UiObjs = default;
     public GameObject buttons = default;
-    public GameObject optionMenu = default;
-    public GameObject LoadMenu = default;
+
+    //Play
     public GameObject PlayMenu = default;
 
-    //Option Menu Background
+    //Load
+    public GameObject LoadMenu = default;
+
+    //Option
+    public GameObject optionMenu = default;
     public GameObject bg_GraphicOption = default;
     public GameObject bg_SoundOption = default;
     public GameObject bg_GamePlayOption = default;
     public GameObject bg_GamePadOption = default;
     public GameObject bg_EtcOption = default;
+
+    //InGame
+    public GameObject inGameMenu = default;
 
     [Header("Buttons")]
     //Main Buttons
@@ -56,6 +64,19 @@ public class UIManager : KSingleton<UIManager>
     public GameObject btn_EtcOption = default;
     public Button btn_EtcOption_ = default;
 
+    //InGame Button
+    public GameObject btn_Resume = default;
+    public Button btn_Resume_ = default;
+
+    public GameObject btn_IGOption = default;
+    public Button btn_IGOption_ = default;
+    public GameObject btn_IGOptionExit = default;
+    public Button btn_IGOptionExit_ = default;
+
+    public GameObject btn_SaveExit = default;
+    public Button btn_SaveExit_ = default;
+
+
     [Header("Open Check")]
     //Open Check Main
     public bool isOptionMenu_Open = false;
@@ -69,22 +90,21 @@ public class UIManager : KSingleton<UIManager>
     public bool isGamePadOp_Open = false;
     public bool isEtcOp_Open = false;
 
-    private new void Awake()
+    //Open Check InGame
+    public bool isInGameMenu_Open = false;
+    #endregion
+
+    public override void Init()
     {
-        //Cashing
-        UiObjs = GameObject.Find("UiObjs_Title").gameObject;
+        //Caching
+        UiObjs = GameObject.Find("UiObjs").gameObject;
         buttons = UiObjs.transform.GetChild(1).gameObject;
-        optionMenu = UiObjs.transform.GetChild(2).gameObject;
-        LoadMenu = UiObjs.transform.GetChild(3).gameObject;
+
+        #region Main Objects
         PlayMenu = UiObjs.transform.GetChild(4).gameObject;
+        LoadMenu = UiObjs.transform.GetChild(3).gameObject;
+        optionMenu = UiObjs.transform.GetChild(2).gameObject;
 
-        //Test Button
-        btn_TestPlay = PlayMenu.transform.GetChild(5).gameObject;
-        btn_TestPlay_ = btn_TestPlay.GetComponent<Button>();
-        btn_TestPlay_.onClick.AddListener(() => SceneManager_.Instance.GoPlayScene());
-        //Test Button
-
-        #region Main Buttons
         btn_Play = buttons.transform.GetChild(0).gameObject;
         btn_Play_ = btn_Play.GetComponent<Button>();
         btn_Load = buttons.transform.GetChild(1).gameObject;
@@ -93,26 +113,16 @@ public class UIManager : KSingleton<UIManager>
         btn_Option_ = btn_Option.GetComponent<Button>();
         btn_Exit = buttons.transform.GetChild(3).gameObject;
         btn_Exit_ = btn_Exit.GetComponent<Button>();
-
-
-        btn_Play_.onClick.AddListener(() => GamePlay());
-        btn_Load_.onClick.AddListener(() => GameLoad());
-        btn_Option_.onClick.AddListener(() => GameOption());
-        btn_Exit_.onClick.AddListener(() => GameExit());
         #endregion
 
         #region PlayMenu Objects
         btn_PlayExit = PlayMenu.transform.GetChild(4).gameObject;
         btn_PlayExit_ = btn_PlayExit.GetComponent<Button>();
-
-        btn_PlayExit_.onClick.AddListener(() => Exit_PlayMenu());
         #endregion
 
         #region LoadMenu Objects
         btn_LoadExit = LoadMenu.transform.GetChild(4).gameObject;
         btn_LoadExit_ = btn_LoadExit.GetComponent<Button>();
-
-        btn_LoadExit_.onClick.AddListener(() => Exit_LoadMenu());
         #endregion
 
         #region OptionMenu Objects
@@ -134,17 +144,30 @@ public class UIManager : KSingleton<UIManager>
         btn_EtcOption_ = btn_EtcOption.GetComponent<Button>();
         btn_optionExit = optionMenu.transform.GetChild(13).gameObject;
         btn_optionExit_ = btn_optionExit.GetComponent<Button>();
-
-        btn_GraphicOption_.onClick.AddListener(() => GraphicOption_Btn());
-        btn_SoundOption_.onClick.AddListener(() => SoundOption_Btn());
-        btn_GamePlayOption_.onClick.AddListener(() => GamePlayOption_Btn());
-        btn_GamePadOption_.onClick.AddListener(() => GamePadOption_Btn());
-        btn_EtcOption_.onClick.AddListener(() => EtcOption_Btn());
-        btn_optionExit_.onClick.AddListener(() => Exit_GameOption());
         #endregion
+
+        #region InGameMenu Objects
+        inGameMenu = UiObjs.transform.GetChild(5).gameObject;
+        btn_Resume = inGameMenu.transform.GetChild(0).gameObject;
+        btn_Resume_ = btn_Resume.GetComponent<Button>();
+
+        btn_IGOption = inGameMenu.transform.GetChild(3).gameObject;
+        btn_IGOption_ = btn_IGOption.GetComponent<Button>();
+        btn_IGOptionExit = optionMenu.transform.GetChild(13).gameObject;
+        btn_IGOptionExit_ = btn_IGOptionExit.GetComponent<Button>();
+
+        btn_SaveExit = inGameMenu.transform.GetChild(6).gameObject;
+        btn_SaveExit_ = btn_SaveExit.GetComponent<Button>();
+
+        #endregion
+
+        //Test Button
+        btn_TestPlay = PlayMenu.transform.GetChild(5).gameObject;
+        btn_TestPlay_ = btn_TestPlay.GetComponent<Button>();
+        //Test Button
     }
 
-#region Play Button Function
+    #region Play Button Function
     public void GamePlay()
     {
         PlayMenu.SetActive(true);
@@ -168,9 +191,9 @@ public class UIManager : KSingleton<UIManager>
             isPlayMenu_Open = false;
         }
     }
-#endregion
+    #endregion
 
-#region Load Button Function
+    #region Load Button Function
     public void GameLoad()
     {
         LoadMenu.SetActive(true);
@@ -194,9 +217,9 @@ public class UIManager : KSingleton<UIManager>
             isLoadMenu_Open = false;
         }
     }
-#endregion
+    #endregion
 
-#region Option Button Function
+    #region Option Button Function
     public void GameOption()
     {
         optionMenu.SetActive(true);
@@ -343,12 +366,104 @@ public class UIManager : KSingleton<UIManager>
         bg_GamePadOption.SetActive(false);
         isGamePadOp_Open = false;
     }
-#endregion
+    #endregion
 
-#region Exit Button Function
+    #region Exit Button Function
     public void GameExit()
     {
         GFunc.QuitThisGame();
     }
-#endregion
+    #endregion
+
+    #region InGameMenu Button Function
+    public void InGameMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isInGameMenu_Open = !isInGameMenu_Open;
+            if (isInGameMenu_Open == true)
+            {
+                inGameMenu.SetActive(true);
+                //Time 0
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            if (isInGameMenu_Open == false && isOptionMenu_Open == false)
+            {
+                inGameMenu.SetActive(false);
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
+    }
+
+    public void Resume_Btn()
+    {
+        isInGameMenu_Open = false;
+        inGameMenu.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void IGOption_Btn()
+    {
+        optionMenu.SetActive(true);
+        inGameMenu.SetActive(false);
+        isOptionMenu_Open = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void IGOptionExit_Btn()
+    {
+        optionMenu.SetActive(false);
+        inGameMenu.SetActive(true);
+
+        //false else
+        bg_GraphicOption.SetActive(false);
+        bg_SoundOption.SetActive(false);
+        bg_GamePlayOption.SetActive(false);
+        bg_GamePadOption.SetActive(false);
+        bg_EtcOption.SetActive(false);
+
+        isGraphicOp_Open = false;
+        isSoundOp_Open = false;
+        isGamePlayOp_Open = false;
+        isGamePadOp_Open = false;
+        isEtcOp_Open = false;
+
+        isOptionMenu_Open = false;
+    }
+
+    public void IGOptionExit_Key()
+    {
+        if (isOptionMenu_Open == true && Input.GetKeyDown(KeyCode.Escape))
+        {
+            optionMenu.SetActive(false);
+            inGameMenu.SetActive(true);
+
+            //false else
+            bg_GraphicOption.SetActive(false);
+            bg_SoundOption.SetActive(false);
+            bg_GamePlayOption.SetActive(false);
+            bg_GamePadOption.SetActive(false);
+            bg_EtcOption.SetActive(false);
+
+            isGraphicOp_Open = false;
+            isSoundOp_Open = false;
+            isGamePlayOp_Open = false;
+            isGamePadOp_Open = false;
+            isEtcOp_Open = false;
+
+            isOptionMenu_Open = false;
+        }
+    }
+
+    public void SaveExit_Btn()
+    {
+        //Save First
+        isInGameMenu_Open = false;
+        SceneManager_.Instance.GoTitleScene();
+    }
+    #endregion
 }

@@ -30,13 +30,13 @@ public class DataManager : KSingleton<DataManager>
         playerData_.SetRot();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            playerData_.GetPos();
-            playerData_.GetRot();
-            Debug.Log("Ready");
-        }
-    }
+    // private void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.Escape))
+    //     {
+    //         playerData_.GetPos();
+    //         playerData_.GetRot();
+    //         Debug.Log("Ready");
+    //     }
+    // }
 }
