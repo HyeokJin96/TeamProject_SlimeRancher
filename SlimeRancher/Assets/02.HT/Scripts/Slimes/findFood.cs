@@ -23,22 +23,37 @@ public class findFood : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
 
-        if (slimeBase.currentMoodState != SlimeBase.MoodState.Elated && slimeBase.currentActionState == SlimeBase.ActionState.Idle && (slimeBase.targetToEat == null || slimeBase.targetToEat.activeSelf == false))
+        if (!slimeBase.isTarrSlime)
         {
-            if (other.gameObject.CompareTag("Plort") || other.gameObject.CompareTag("Food"))
+            if (slimeBase.currentMoodState != SlimeBase.MoodState.Elated && slimeBase.currentActionState == SlimeBase.ActionState.Idle && (slimeBase.targetToEat == null || slimeBase.targetToEat.activeSelf == false))
             {
-                if (other.gameObject.CompareTag("Plort"))
+                if (other.gameObject.CompareTag("Plort") || other.gameObject.CompareTag("Food"))
                 {
-                    if (other.GetComponent<PlortBase>().plortType != slimeBase.slimeType1 && other.GetComponent<PlortBase>().plortType != slimeBase.slimeType2)
+                    if (other.gameObject.CompareTag("Plort"))
+                    {
+                        if (other.GetComponent<PlortBase>().plortType != slimeBase.slimeType1 && other.GetComponent<PlortBase>().plortType != slimeBase.slimeType2)
+                        {
+                            PlortCheck(other.gameObject.GetComponents<Collider>());
+                        }
+                    }
+                    else
                     {
                         PlortCheck(other.gameObject.GetComponents<Collider>());
                     }
                 }
-                else
+            }
+        }
+        else
+        {
+            //temporary test
+            if (slimeBase.currentActionState == SlimeBase.ActionState.Idle && (slimeBase.targetToEat == null || slimeBase.targetToEat.activeSelf == false))
+            {
+                if (other.gameObject.CompareTag("Normal Slime") || other.gameObject.CompareTag("Largo Slime") || other.gameObject.CompareTag("Player"))
                 {
                     PlortCheck(other.gameObject.GetComponents<Collider>());
                 }
             }
+            //test
         }
     }
 

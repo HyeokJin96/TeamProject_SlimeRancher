@@ -21,6 +21,9 @@ public class SlimeBase : MonoBehaviour
     Vector3 targetPosition;
     float targetDistance;
 
+    protected float targetDistanceValue1;
+    protected float targetDistanceValue2;
+
     //var for move
 
     float minRadius = 8;
@@ -32,7 +35,13 @@ public class SlimeBase : MonoBehaviour
     bool isSetDestination;
 
 
-    public GameObject[] slimeArray;
+    //public GameObject[] slimeArray;
+
+    GameObject[] normalSlimeArray;
+    GameObject[] largoSlimeArray;
+    public GameObject tarrSlime;
+
+    public bool isTarrSlime;
     //[SimeSize] 0: normal, 1: largo 2: gordo
     public int slimeSize;
 
@@ -75,11 +84,18 @@ public class SlimeBase : MonoBehaviour
 
     private void Awake()
     {
-        slimeArray = Resources.LoadAll<GameObject>("02.HT/Prefabs/Slimes");
+        //slimeArray = Resources.LoadAll<GameObject>("02.HT/Prefabs/Slimes");
+        normalSlimeArray = Resources.LoadAll<GameObject>("02.HT/Prefabs/Slimes/NormalSlimes");
+        largoSlimeArray = Resources.LoadAll<GameObject>("02.HT/Prefabs/Slimes/LargoSlimes");
+        tarrSlime = Resources.Load<GameObject>("02.HT/Prefabs/Slimes/TarrSlime/TarrSlime");
+
         slimeColor = new List<Color32>();
         slimeColor.Add(new Color32(255, 255, 255, 255));
         slimeColor.Add(new Color32(225, 60, 90, 255));
         slimeColor.Add(new Color32(30, 125, 200, 255));  //rock
+
+        targetDistanceValue1 = 5;
+        targetDistanceValue2 = 2.5f;
     }
     public virtual void Start()
     {
@@ -133,8 +149,8 @@ public class SlimeBase : MonoBehaviour
         switch (currentActionState)
         {
             case ActionState.Idle:
-                Move();
-                Jump(jumpForce, jumpDelay); //move 메서드 안으로 이동?
+                Move(targetDistanceValue1, targetDistanceValue2);
+                //Jump(jumpForce, jumpDelay); //move 메서드 안으로 이동?
                 break;
             case ActionState.Eat:
                 StartCoroutine(Eat());
@@ -181,8 +197,9 @@ public class SlimeBase : MonoBehaviour
         }
     }
 
-    protected void Move()
+    protected void Move(float targetDistanceValue1_, float targetDistanceValue2_)
     {
+        Jump(jumpForce, jumpDelay); //move 메서드 안으로 이동?
         if (!isSetDestination)
         {
             StartCoroutine(SetDestination());
@@ -219,16 +236,16 @@ public class SlimeBase : MonoBehaviour
                 targetPosition = new Vector3(targetToEat.transform.position.x, transform.position.y, targetToEat.transform.position.z);
                 targetDistance = Vector3.Distance(transform.position, targetPosition);
 
-                Debug.Log(targetDistance);
+                //Debug.Log(targetDistance);
 
-                if (targetDistance > 5)
+                if (targetDistance > targetDistanceValue1_)
                 {
                     currentActionState = ActionState.Idle;
                     StopCoroutine(Eat());
                     transform.LookAt(targetPosition);
                     transform.position += transform.forward * 3 * Time.deltaTime;
                 }
-                else if (targetDistance <= 5 && targetDistance > 2.5f)
+                else if (targetDistance <= targetDistanceValue1_ && targetDistance > targetDistanceValue2_)
                 {
                     transform.LookAt(targetPosition);
                     transform.position += transform.forward * 3 * Time.deltaTime;
@@ -244,10 +261,21 @@ public class SlimeBase : MonoBehaviour
             }
         }
 
-        if (targetToEat != null && targetToEat.activeSelf == false)
+        if (!isTarrSlime)
         {
-            targetToEat = null;
+            if (targetToEat != null && targetToEat.activeSelf == false)
+            {
+                targetToEat = null;
+            }
         }
+        else
+        {
+            if (targetToEat != null && targetToEat.transform.root.gameObject.activeSelf == false)
+            {
+                targetToEat = null;
+            }
+        }
+
     }
 
     float destinationDistance;
@@ -267,7 +295,7 @@ public class SlimeBase : MonoBehaviour
         isSetDestination = false;
     }
 
-    IEnumerator Eat()
+    public virtual IEnumerator Eat()
     {
         //currentActionState = ActionState.Eat;
         currentActionState = ActionState.Wait;
@@ -277,26 +305,19 @@ public class SlimeBase : MonoBehaviour
         agitatedValue = 0;
         if (targetToEat.tag == "Plort")
         {
-            Debug.Log("변신");
+            Debug.Log("합체");
             if (slimeSize == 0)
             {
                 slimeSize = 1;
                 slimeType2 = targetToEat.GetComponent<PlortBase>().plortType;
 
-                for (int i = 0; i < slimeArray.Length; i++)
-                {
-                    if (i == slimeType1 + slimeType2)
-                    {
-                        //세부사항 수정
-                        Instantiate(slimeArray[i], transform.position, transform.rotation);
-                        gameObject.SetActive(false);
-                    }
-                }
+                TransformSlime();
             }
             else if (slimeSize == 1)
             {
                 //Transform into TarrSlime
-
+                Instantiate(tarrSlime, transform.position, transform.rotation);
+                gameObject.SetActive(false);
             }
         }
         else if (targetToEat.tag == "Food")
@@ -390,6 +411,30 @@ public class SlimeBase : MonoBehaviour
         if (other.gameObject.tag == "Terrain")
         {
             currentActionState = ActionState.Jump;
+        }
+    }
+    void TransformSlime()
+    {
+        int largoSlimeIndex_ = 0;
+        for (int i = 1; i < normalSlimeArray.Length - 1; i++)
+        {
+            for (int j = i + 1; j < normalSlimeArray.Length; j++)
+            {
+                largoSlimeIndex_++;
+
+                if (slimeType1 > slimeType2 && i == slimeType2 && j == slimeType1)
+                {
+                    Instantiate(largoSlimeArray[largoSlimeIndex_], transform.position, transform.rotation);
+                    gameObject.SetActive(false);
+
+                }
+                else if (slimeType1 < slimeType2 && i == slimeType1 && j == slimeType2)
+                {
+                    Instantiate(largoSlimeArray[largoSlimeIndex_], transform.position, transform.rotation);
+                    gameObject.SetActive(false);
+                }
+
+            }
         }
     }
 }
