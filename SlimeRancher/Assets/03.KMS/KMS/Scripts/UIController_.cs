@@ -16,6 +16,9 @@ public class UIController_ : MonoBehaviour
         UIManager.Instance.btn_IGOption_.onClick.AddListener(() => UIManager.Instance.IGOption_Btn());
         UIManager.Instance.btn_IGOptionExit_.onClick.AddListener(() => UIManager.Instance.IGOptionExit_Btn());
 
+        //ScreenShot
+        UIManager.Instance.btn_ScreenShot_.onClick.AddListener(() => UIManager.Instance.ScreenShot_Btn());
+
         //Take TitleScene Option
         UIManager.Instance.btn_GraphicOption_.onClick.AddListener(() => UIManager.Instance.GraphicOption_Btn());
         UIManager.Instance.btn_SoundOption_.onClick.AddListener(() => UIManager.Instance.SoundOption_Btn());

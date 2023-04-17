@@ -73,6 +73,9 @@ public class UIManager : KSingleton<UIManager>
     public GameObject btn_IGOptionExit = default;
     public Button btn_IGOptionExit_ = default;
 
+    public GameObject btn_ScreenShot = default;
+    public Button btn_ScreenShot_ = default;
+
     public GameObject btn_SaveExit = default;
     public Button btn_SaveExit_ = default;
 
@@ -155,6 +158,9 @@ public class UIManager : KSingleton<UIManager>
         btn_IGOption_ = btn_IGOption.GetComponent<Button>();
         btn_IGOptionExit = optionMenu.transform.GetChild(13).gameObject;
         btn_IGOptionExit_ = btn_IGOptionExit.GetComponent<Button>();
+
+        btn_ScreenShot = inGameMenu.transform.GetChild(4).gameObject;
+        btn_ScreenShot_ = btn_ScreenShot.GetComponent<Button>();
 
         btn_SaveExit = inGameMenu.transform.GetChild(6).gameObject;
         btn_SaveExit_ = btn_SaveExit.GetComponent<Button>();
@@ -384,13 +390,14 @@ public class UIManager : KSingleton<UIManager>
             if (isInGameMenu_Open == true)
             {
                 inGameMenu.SetActive(true);
-                //Time 0
+                Time.timeScale = 0;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
             }
             if (isInGameMenu_Open == false && isOptionMenu_Open == false)
             {
                 inGameMenu.SetActive(false);
+                Time.timeScale = 1;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
             }
@@ -401,6 +408,7 @@ public class UIManager : KSingleton<UIManager>
     {
         isInGameMenu_Open = false;
         inGameMenu.SetActive(false);
+        Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -459,10 +467,23 @@ public class UIManager : KSingleton<UIManager>
         }
     }
 
+    public void ScreenShot_Btn()
+    {
+        inGameMenu.SetActive(false);
+        ScreenCapture.CaptureScreenshot($"ScreenShot{System.DateTime.Now.ToString("MMddHHmmss")}.png");
+        StartCoroutine(DelayForSS());
+    }
+    private IEnumerator DelayForSS()
+    {
+        yield return null;
+        inGameMenu.SetActive(true);
+    }
+
     public void SaveExit_Btn()
     {
         //Save First
         isInGameMenu_Open = false;
+        Time.timeScale = 1;
         SceneManager_.Instance.GoTitleScene();
     }
     #endregion
