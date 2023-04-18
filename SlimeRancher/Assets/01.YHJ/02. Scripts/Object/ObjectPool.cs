@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class ObjectPool : GSingleton<ObjectPool>
 {
-    private string bulletPath = "01.YHJ";
+    //private string bulletPath = "01.YHJ";
 
-    private GameObject[] bulletPrefabs = new GameObject[7];
+    //private GameObject[] bulletPrefabs = new GameObject[7];
 
-    GameObject[] bulletBasic = default;
+    [SerializeField] private GameObject carrotPrefabs = default;
 
+    GameObject[] carrot = default;
 
     GameObject[] targetPool = default;
 
     public override void Awake()
     {
-        bulletPrefabs = Resources.LoadAll<GameObject>(bulletPath);
+        //bulletPrefabs = Resources.LoadAll<GameObject>(bulletPath);
 
-        bulletBasic = new GameObject[500];
+        carrot = new GameObject[10];
 
 
         Generate();
@@ -25,11 +26,11 @@ public class ObjectPool : GSingleton<ObjectPool>
 
     private void Generate()
     {
-        for (int index = 0; index < bulletBasic.Length; index++)
+        for (int index = 0; index < carrot.Length; index++)
         {
-            bulletBasic[index] = Instantiate(bulletPrefabs[0]);
-            bulletBasic[index].transform.parent = transform;
-            bulletBasic[index].SetActive(false);
+            carrot[index] = Instantiate(carrotPrefabs);
+            carrot[index].transform.parent = transform;
+            carrot[index].SetActive(false);
         }
     }  
 
@@ -37,8 +38,8 @@ public class ObjectPool : GSingleton<ObjectPool>
     {
         switch (type_)
         {
-            case "Bullet_Basic":
-                targetPool = bulletBasic;
+            case "Carrot":
+                targetPool = carrot;
                 break;
 
         }
@@ -59,8 +60,8 @@ public class ObjectPool : GSingleton<ObjectPool>
     {
         switch (type_)
         {
-            case "Bullet_Basic":
-                targetPool = bulletBasic;
+            case "Carrot":
+                targetPool = carrot;
                 break;
         }
 
