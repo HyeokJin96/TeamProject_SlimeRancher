@@ -4,46 +4,47 @@ using UnityEngine;
 
 public class SunRotation : MonoBehaviour
 {
-    public bool isDay = default;
-    private float timer = 0;
-    private float setTime = 720;
+    private Light thisLight = default;
+    public static bool isDay = false;
 
     private void Start()
     {
         isDay = true;
+        thisLight = gameObject.GetComponent<Light>();
+
+        //Daybreak Start
+        transform.localEulerAngles = new Vector3(180, 0, 0);
     }
-    //fix need
+
     private void Update()
     {
         RotateSun();
-        timer += 1/*Time.deltaTime*/;
+        // DayAndNight();
+        Debug.Log(isDay);
     }
 
     private void RotateSun()
     {
-        if (timer == setTime && isDay == true) // change night
-        {
-            isDay = false;
-            timer = 0;
-        }
+        transform.Rotate(new Vector3(-0.25f, 0, 0) * Time.deltaTime);
 
-        if (timer == setTime && isDay == false) // change day
+        if (transform.rotation.x <= 0)
         {
-            isDay = true;
-            timer = 0;
-        }
-
-        if (isDay == true)
-        {
-            transform.Rotate(
-                new Vector3(-0.25f, 0, 0)
-            /**Time.deltaTime*/);
-        }
-        else
-        {
-            transform.Rotate(
-                new Vector3(0.25f, 0, 0)
-            /**Time.deltaTime*/);
+            isDay = !isDay;
+            transform.localEulerAngles = new Vector3(180, 0, 0);
         }
     }
+
+    // private void DayAndNight()
+    // {
+    //     if (isDay == true)
+    //     {
+    //         thisLight.intensity = 1;
+    //         RenderSettings.skybox = day;
+    //     }
+    //     else
+    //     {
+    //         thisLight.intensity = 0;
+    //         RenderSettings.skybox = night;
+    //     }
+    // }
 }
