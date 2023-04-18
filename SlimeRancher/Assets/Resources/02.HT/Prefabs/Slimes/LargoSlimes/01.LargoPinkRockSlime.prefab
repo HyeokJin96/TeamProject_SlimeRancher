@@ -920,7 +920,7 @@ Transform:
   m_GameObject: {fileID: 4040691804467192469}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1036.2363, y: 944.45, z: -732.9265}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 964387530831166409}
@@ -980,7 +980,9 @@ MonoBehaviour:
   hungerValue: 0
   agitatedValue: 0
   targetToEat: {fileID: 0}
-  slimeArray: []
+  destination: {x: 0, y: 0, z: 0}
+  tarrSlime: {fileID: 0}
+  isTarrSlime: 0
   slimeSize: 0
   slimeType1: 0
   slimeType2: 0

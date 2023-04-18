@@ -17,6 +17,8 @@ public class LargoPinkRockSlime : SlimeBase
         defaultLod1Material.color = slimeColor[1];
         defaultLod2Material.color = slimeColor[1];
         defaultLod3Material.color = slimeColor[1];
+        targetDistanceValue1 = 7;
+        targetDistanceValue2 = 5;
     }
 
     public override void Update()

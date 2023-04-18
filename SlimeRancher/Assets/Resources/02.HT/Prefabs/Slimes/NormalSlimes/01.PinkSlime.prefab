@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2213762892673847493}
   m_Layer: 0
   m_Name: bone_jiggle_bac
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 3386222495629228767}
   m_Layer: 0
   m_Name: bone_skin_fro
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 5194368272703157096}
   m_Layer: 0
   m_Name: Shadow
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 2245109097148812620}
   m_Layer: 0
   m_Name: bone_slime
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 1424109199343183733}
   m_Layer: 0
   m_Name: bone_ring
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 2488149723832543085}
   m_Layer: 0
   m_Name: bone_root
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 7975144465375185542}
   m_Layer: 0
   m_Name: bone_attachment
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 7876327464448389949}
   m_Layer: 0
   m_Name: bone_core
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 7292226907091494399}
   m_Layer: 0
   m_Name: bone_jiggle_rig
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 8928853407650964580}
   m_Layer: 0
   m_Name: bone_jiggle_lef
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 677023567441425755}
   m_Layer: 0
   m_Name: bone_jiggle_bot
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 8189278249308463649}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 7347731068885950431}
   m_Layer: 0
   m_Name: bone_spinner
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -474,7 +474,7 @@ GameObject:
   - component: {fileID: 6802727201361025361}
   m_Layer: 0
   m_Name: bone_skin_lef
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -522,7 +522,7 @@ Transform:
   m_GameObject: {fileID: 4960560774281280381}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.05, y: 1.09, z: -8.26}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8189278249308463649}
@@ -561,6 +561,17 @@ MonoBehaviour:
   hungerValue: 0
   agitatedValue: 0
   targetToEat: {fileID: 0}
+  destination: {x: 0, y: 0, z: 0}
+  tarrSlime: {fileID: 0}
+  isTarrSlime: 0
+  slimeSize: 0
+  slimeType1: 0
+  slimeType2: 0
+  slimeColor: []
+  defaultMaterial: {fileID: 0}
+  defaultLod1Material: {fileID: 0}
+  defaultLod2Material: {fileID: 0}
+  defaultLod3Material: {fileID: 0}
   currentMoodState: 0
   currentActionState: 0
 --- !u!95 &4960560774281280380
@@ -595,7 +606,7 @@ GameObject:
   - component: {fileID: 5194368271940007921}
   m_Layer: 0
   m_Name: slime_default_LOD3(Clone)
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -627,7 +638,7 @@ GameObject:
   - component: {fileID: 5194368271943654493}
   m_Layer: 0
   m_Name: slime_default_LOD1(Clone)
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -720,7 +731,7 @@ GameObject:
   - component: {fileID: 5194368272080176127}
   m_Layer: 0
   m_Name: slime_default_LOD3_0
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -818,7 +829,7 @@ GameObject:
   - component: {fileID: 5194368272395290172}
   m_Layer: 0
   m_Name: slime_default_LOD2_0
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -913,7 +924,7 @@ GameObject:
   - component: {fileID: 5194368272466606788}
   m_Layer: 0
   m_Name: slime_default_LOD2(Clone)
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -948,7 +959,7 @@ GameObject:
   - component: {fileID: 5194368272610699113}
   m_Layer: 0
   m_Name: slime_default_0
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1043,7 +1054,7 @@ GameObject:
   - component: {fileID: 5194368272922358398}
   m_Layer: 0
   m_Name: slime_default(Clone)
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1078,7 +1089,7 @@ GameObject:
   - component: {fileID: 5194368273517946441}
   m_Layer: 0
   m_Name: slime_default_LOD1_0
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1173,7 +1184,7 @@ GameObject:
   - component: {fileID: 3989339279858162139}
   m_Layer: 0
   m_Name: bone_skin_bot
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1204,7 +1215,7 @@ GameObject:
   - component: {fileID: 4282659988636968383}
   m_Layer: 0
   m_Name: bone_skin_bac
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1235,7 +1246,7 @@ GameObject:
   - component: {fileID: 7053973822652353166}
   m_Layer: 0
   m_Name: bone_skin_top
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1266,7 +1277,7 @@ GameObject:
   - component: {fileID: 1604738929394941088}
   m_Layer: 0
   m_Name: slimePink
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1298,7 +1309,7 @@ GameObject:
   - component: {fileID: 5258678719392110459}
   m_Layer: 0
   m_Name: bone_skin_rig
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1329,7 +1340,7 @@ GameObject:
   - component: {fileID: 1366882091646858430}
   m_Layer: 0
   m_Name: bone_wing_right
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1360,7 +1371,7 @@ GameObject:
   - component: {fileID: 255945960230384694}
   m_Layer: 0
   m_Name: bone_jiggle_fro
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1392,7 +1403,7 @@ GameObject:
   - component: {fileID: 4374661639936031900}
   m_Layer: 0
   m_Name: bone_jiggle_top
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1424,7 +1435,7 @@ GameObject:
   - component: {fileID: 3865098887442890846}
   m_Layer: 0
   m_Name: Appearance
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1456,7 +1467,7 @@ GameObject:
   - component: {fileID: 1721238961888259926}
   m_Layer: 0
   m_Name: bone_wing_left
-  m_TagString: Untagged
+  m_TagString: Normal Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

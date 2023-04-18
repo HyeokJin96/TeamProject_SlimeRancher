@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 12770b1c65b3cb44e8d33d8314aa4668
+guid: 2d7e7dc234409274384de9e1af7c721c
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: slime_tarr_0Mat
-    second: {fileID: 2100000, guid: 79b39a3460a8c814b921866faccc2233, type: 2}
+      name: slime_tarr_bite_0Mat
+    second: {fileID: 2100000, guid: aed4022bb3b71a643b29db7c27c5f425, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

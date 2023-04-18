@@ -48,6 +48,7 @@ public class findFood : MonoBehaviour
             //temporary test
             if (slimeBase.currentActionState == SlimeBase.ActionState.Idle && (slimeBase.targetToEat == null || slimeBase.targetToEat.activeSelf == false))
             {
+
                 if (other.gameObject.CompareTag("Normal Slime") || other.gameObject.CompareTag("Largo Slime") || other.gameObject.CompareTag("Player"))
                 {
                     PlortCheck(other.gameObject.GetComponents<Collider>());

@@ -16,6 +16,7 @@ public class SlimeBase : MonoBehaviour
     public float agitatedValue; // after test, delete public
     float minHunger = 0;
     float maxHunger = 100;
+    float increaseHungerValue = 5.56f;
 
     public GameObject targetToEat = null;
     Vector3 targetPosition;
@@ -93,6 +94,7 @@ public class SlimeBase : MonoBehaviour
         slimeColor.Add(new Color32(255, 255, 255, 255));
         slimeColor.Add(new Color32(225, 60, 90, 255));
         slimeColor.Add(new Color32(30, 125, 200, 255));  //rock
+        slimeColor.Add(new Color32(75, 75, 75, 255));  //tabby
 
         targetDistanceValue1 = 5;
         targetDistanceValue2 = 2.5f;
@@ -119,7 +121,7 @@ public class SlimeBase : MonoBehaviour
         defaultLod3Material = defaultLod3MeshRenderer.materials[0];
 
 
-        StartCoroutine(IncreaseHunger(1)); // test value 1: after test, change to 60
+        StartCoroutine(IncreaseHunger(1, increaseHungerValue)); // test value 1: after test, change to 60
     }
 
     public virtual void Update()
@@ -299,7 +301,7 @@ public class SlimeBase : MonoBehaviour
     {
         //currentActionState = ActionState.Eat;
         currentActionState = ActionState.Wait;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         targetToEat.SetActive(false);
         hungerValue = 0;
         agitatedValue = 0;
@@ -315,6 +317,7 @@ public class SlimeBase : MonoBehaviour
             }
             else if (slimeSize == 1)
             {
+                Debug.Log("!!?");
                 //Transform into TarrSlime
                 Instantiate(tarrSlime, transform.position, transform.rotation);
                 gameObject.SetActive(false);
@@ -353,18 +356,18 @@ public class SlimeBase : MonoBehaviour
         isJumpDelay = false;
     }
 
-    IEnumerator IncreaseHunger(int time_)
+    protected IEnumerator IncreaseHunger(int time_, float increaseHungerValue_)
     {
         while (currentMoodState != MoodState.Agitated)
         {
             yield return new WaitForSeconds(time_);
             if (hungerValue != maxHunger)
             {
-                hungerValue += 5.56f;
+                hungerValue += increaseHungerValue_;
             }
             else
             {
-                agitatedValue += 5.56f;
+                agitatedValue += increaseHungerValue_;
             }
         }
     }

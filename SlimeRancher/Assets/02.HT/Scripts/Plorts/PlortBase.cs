@@ -18,6 +18,7 @@ public class PlortBase : MonoBehaviour
         plortColor.Add(new Color32(255, 255, 255, 255));
         plortColor.Add(new Color32(225, 60, 90, 255));  //pink
         plortColor.Add(new Color32(30, 125, 200, 255));  //rock
+        plortColor.Add(new Color32(75, 75, 75, 255));  //tabby
     }
     void Start()
     {
