@@ -20,17 +20,17 @@ public class ChangeSkyBox : MonoBehaviour
 
     void Update()
     {
-        if(SunRotation.isDay == true)
-        {
-            ChangeToNight();
-            Debug.Log(blendFactor);
-        }
+        // if(SunRotation.isDay == true)
+        // {
+        //     ChangeToNight();
+        //     Debug.Log(blendFactor);
+        // }
         
-        if(SunRotation.isDay == false)
-        {
-            ChangeToDay();
-            Debug.Log("낮되냐");
-        }
+        // if(SunRotation.isDay == false)
+        // {
+        //     ChangeToDay();
+        //     Debug.Log("낮되냐");
+        // }
     }
 
     private void ChangeToNight()
