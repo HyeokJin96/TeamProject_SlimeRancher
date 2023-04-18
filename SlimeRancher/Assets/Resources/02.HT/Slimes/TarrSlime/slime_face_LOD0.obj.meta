@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 38a409d9444f27c4e8430cb8201e2fdf
+guid: d031460223aa385469e28ef0feb561e8
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: slime_face_LOD0_0Mat
+    second: {fileID: 2100000, guid: e0333bbfb27b17342a13081b0ee3aea6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

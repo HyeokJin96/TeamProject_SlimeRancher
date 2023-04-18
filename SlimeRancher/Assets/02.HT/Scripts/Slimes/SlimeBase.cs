@@ -168,6 +168,13 @@ public class SlimeBase : MonoBehaviour
         }
     }
 
+    public IEnumerator DestroyTarr()
+    {
+        yield return new WaitForSeconds(10);
+        StopAllCoroutines();
+        Destroy(this.gameObject);
+    }
+
 
     //목적지 설정 테스트용
     private void OnDrawGizmos()
@@ -317,7 +324,6 @@ public class SlimeBase : MonoBehaviour
             }
             else if (slimeSize == 1)
             {
-                Debug.Log("!!?");
                 //Transform into TarrSlime
                 Instantiate(tarrSlime, transform.position, transform.rotation);
                 gameObject.SetActive(false);
