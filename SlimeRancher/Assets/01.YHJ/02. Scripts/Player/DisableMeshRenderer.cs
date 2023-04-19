@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class DisableMeshRenderer : MonoBehaviour
 {
+    [SerializeField] private GameObject body = default;
     [SerializeField] private MeshRenderer[] meshRenderer = default;
 
     private void Awake()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        body = transform.GetChild(1).gameObject;
+
+        for (int i = 0; i < body.transform.childCount; i++)
         {
-            meshRenderer[i] = transform.GetChild(i).GetComponent<MeshRenderer>();
+            meshRenderer[i] = body.transform.GetChild(i).GetComponent<MeshRenderer>();
         }
     }
 

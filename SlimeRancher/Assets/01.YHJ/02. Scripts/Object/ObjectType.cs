@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+public enum Type
+{
+    Slime,
+    Food
+}
+
 public enum FoodType
 {
     Vegetable,
