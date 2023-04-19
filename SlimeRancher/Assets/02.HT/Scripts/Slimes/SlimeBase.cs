@@ -64,6 +64,13 @@ public class SlimeBase : MonoBehaviour
     MeshRenderer defaultLod3MeshRenderer;
     public Material defaultLod3Material;
 
+    //var for set slime appearence;
+    protected GameObject rockAttachment;
+    protected GameObject rockSpineLod0;
+    protected GameObject rockSpineLod1;
+
+    protected GameObject tabbyEarsAndTail;
+
     public enum MoodState   // after test, delete public
     {
         Elated,
@@ -94,7 +101,7 @@ public class SlimeBase : MonoBehaviour
         slimeColor.Add(new Color32(255, 255, 255, 255));
         slimeColor.Add(new Color32(225, 60, 90, 255));
         slimeColor.Add(new Color32(30, 125, 200, 255));  //rock
-        slimeColor.Add(new Color32(75, 75, 75, 255));  //tabby
+        slimeColor.Add(new Color32(185, 185, 185, 255));  //tabby
 
         targetDistanceValue1 = 5;
         targetDistanceValue2 = 2.5f;
@@ -120,6 +127,11 @@ public class SlimeBase : MonoBehaviour
         defaultLod3MeshRenderer = shadow.GetChild(3).GetChild(0).GetComponent<MeshRenderer>();
         defaultLod3Material = defaultLod3MeshRenderer.materials[0];
 
+        rockAttachment = transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).gameObject;
+        rockSpineLod0 = shadow.GetChild(4).gameObject;
+        rockSpineLod1 = shadow.GetChild(5).gameObject;
+
+        tabbyEarsAndTail = shadow.GetChild(6).gameObject;
 
         StartCoroutine(IncreaseHunger(1, increaseHungerValue)); // test value 1: after test, change to 60
     }
