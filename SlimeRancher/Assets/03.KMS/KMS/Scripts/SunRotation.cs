@@ -5,80 +5,75 @@ using UnityEngine;
 public class SunRotation : MonoBehaviour
 {
     private Light thisLight = default;
+    public bool isDay = false;
 
-    public static bool isDay = false;
-
-    public bool isMorning = false;
-    public bool isAfternoon = false;
-    public bool isEvening = false;
-    public bool isNight = false;
+    float timer = 0;
+    float setTime_sec = 5f;
+    int setTime_min = 0;
 
     private void Start()
     {
         isDay = true;
         thisLight = gameObject.GetComponent<Light>();
 
-        //Daybreak Start
-        transform.localEulerAngles = new Vector3(90, 0, 0);
+        transform.localEulerAngles = new Vector3(180, 0, 0);
+
     }
 
     private void Update()
     {
+        timer += Time.deltaTime;
+
         RotateSun();
-        // DayAndNight();
-        Debug.Log(isDay);
+        SunColor();
+
+        TimeChecker();
+        Debug.Log($"{setTime_min}");
+        Debug.Log($"{thisLight.intensity}");
     }
 
     private void RotateSun()
     {
-        transform.Rotate(new Vector3(-0.25f, 0, 0) * Time.deltaTime);
+        transform.Rotate(new Vector3(-0.25f, 0, 0) * Time.deltaTime * 12); //6
 
-        if (0 < transform.eulerAngles.x && transform.eulerAngles.x <= 90)
+        if (setTime_min == 12)
         {
-            if (isDay == true)
-            {
-                isAfternoon = true;
-                isMorning = false;
-            }
-            else
-            {
-                isNight = true;
-                isEvening = false;
-            }
+            isDay = false;
         }
 
-        if (90 < transform.eulerAngles.x && transform.eulerAngles.x <= 180)
+        if (setTime_min == 24)
         {
-            if (isDay == true)
-            {
-                isMorning = true;
-                isNight = false;
-            }
-            else
-            {
-                isEvening = true;
-                isAfternoon = false;
-            }
-        }
-
-        if (transform.eulerAngles.x <= 0)
-        {
-            isDay = !isDay;
-            transform.localEulerAngles = new Vector3(180, 0, 0);
+            isDay = true;
+            setTime_min = 0;
         }
     }
 
-    // private void DayAndNight()
-    // {
-    //     if (isDay == true)
-    //     {
-    //         thisLight.intensity = 1;
-    //         RenderSettings.skybox = day;
-    //     }
-    //     else
-    //     {
-    //         thisLight.intensity = 0;
-    //         RenderSettings.skybox = night;
-    //     }
-    // }
+    private void TimeChecker()
+    {
+        if (timer >= setTime_sec)
+        {
+            setTime_min++;
+            timer = 0;
+        }
+    }
+
+    private void SunColor()
+    {
+        if (isDay == false)
+        {
+            thisLight.intensity -= 0.05555f * Time.deltaTime * 12; //6
+        }
+        else
+        {
+            if (thisLight.intensity < 1)
+            {
+                thisLight.intensity += 0.05555f * Time.deltaTime * 12; //6
+            }
+        }
+
+        if (thisLight.intensity > 1f)
+        {
+            thisLight.intensity = 1;
+        }
+    }
 }
