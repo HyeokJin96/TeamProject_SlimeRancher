@@ -6,7 +6,7 @@ using UnityEngine;
 public class test : MonoBehaviour
 {
     [SerializeField] public FoodType foodType;
-    [SerializeField] public FoodName foodName;
+    [SerializeField] public  FoodName foodName;
 
     private void OnGUI()
     {
