@@ -16,6 +16,9 @@ public class TarrSlime : SlimeBase
         targetDistanceValue1 = 7;
         targetDistanceValue2 = 5;
         StartCoroutine(IncreaseHunger(1, 10)); // test value 1: after test, change to 60
+
+        anim = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -32,11 +35,40 @@ public class TarrSlime : SlimeBase
         }
     }
 
-    public override IEnumerator Eat()
+    // Eat(): legacy
+    // public override IEnumerator Eat()
+    // {
+    //     currentActionState = ActionState.Wait;
+    //     yield return new WaitForSeconds(3f);
+    //     //working-
+    //     if (targetToEat != null)
+    //     {
+    //         if (targetToEat.tag == "Player")
+    //         {
+    //             /*Do Nothing*/
+    //             //player Hp 감소 추가 예정
+    //             Debug.Log("player attack");
+    //         }
+    //         else
+    //         {
+    //             //다른 슬라임을 먹었을때
+    //             targetToEat.transform.root.gameObject.SetActive(false);   //먹은 슬라임 false
+    //             hungerValue = 0;
+    //             agitatedValue = 0;
+    //             targetToEat = null;
+    //             Instantiate(tarrSlime, transform.position, transform.rotation); //타르 슬라임 추가 생성//차후 오브젝트풀에서 pop
+    //         }
+    //     }
+    //     else
+    //     {
+    //         /*Do Nothing*/
+    //     }
+    //     yield return new WaitForSeconds(1f);
+    //     currentActionState = ActionState.Idle;
+    // }
+
+    protected override void Eat()
     {
-        currentActionState = ActionState.Wait;
-        yield return new WaitForSeconds(3f);
-        //working-
         if (targetToEat != null)
         {
             if (targetToEat.tag == "Player")
@@ -48,6 +80,7 @@ public class TarrSlime : SlimeBase
             else
             {
                 //다른 슬라임을 먹었을때
+                Debug.Log("eat slime");
                 targetToEat.transform.root.gameObject.SetActive(false);   //먹은 슬라임 false
                 hungerValue = 0;
                 agitatedValue = 0;
@@ -59,7 +92,8 @@ public class TarrSlime : SlimeBase
         {
             /*Do Nothing*/
         }
-        yield return new WaitForSeconds(1f);
         currentActionState = ActionState.Idle;
+        anim.SetBool("isBite", false);
     }
 }
+

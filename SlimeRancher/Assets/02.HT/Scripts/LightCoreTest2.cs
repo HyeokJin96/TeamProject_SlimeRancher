@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class LightCoreTest2 : MonoBehaviour
 {
-    Light light;
+    Light lightComponent;
     bool checkpoint1;
     bool checkpoint2;
     float lightRangeValue;
     // Start is called before the first frame update
     void Start()
     {
-        light = GetComponent<Light>();
-        lightRangeValue = light.range;
+        lightComponent = GetComponent<Light>();
+        lightRangeValue = lightComponent.range;
         checkpoint1 = true;
     }
 
@@ -33,11 +33,11 @@ public class LightCoreTest2 : MonoBehaviour
             checkpoint2 = true;
         }
 
-        light.range = lightRangeValue;
+        lightComponent.range = lightRangeValue;
 
         if (lightRangeValue < 1)
         {
-            light.range = 0;
+            lightComponent.range = 0;
         }
 
         StartCoroutine(SetLightRange());

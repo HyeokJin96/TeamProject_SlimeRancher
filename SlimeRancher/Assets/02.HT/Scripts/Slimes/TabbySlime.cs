@@ -13,11 +13,12 @@ public class TabbySlime : SlimeBase
     Texture2D tabbyBodyTexture;
     Texture2D tabbyEarNTailTexture1;
     Texture2D tabbyEarNTailTexture2;
+    GameObject tabbyEarsAndTail;
     public override void Start()
     {
         base.Start();
         slimeSize = 0;
-        slimeType1 = 2;
+        slimeType1 = 3;
 
         defaultMaterial.color = slimeColor[3];
         defaultLod1Material.color = slimeColor[3];
@@ -34,11 +35,9 @@ public class TabbySlime : SlimeBase
         defaultLod2Material.SetTexture("_MainTex", tabbyBodyTexture);
         defaultLod3Material.SetTexture("_MainTex", tabbyBodyTexture);
 
+        tabbyEarsAndTail = shadow.GetChild(6).gameObject;
 
         tabbyEarsAndTail.SetActive(true);
-
-
-
     }
 
     public override void Update()
