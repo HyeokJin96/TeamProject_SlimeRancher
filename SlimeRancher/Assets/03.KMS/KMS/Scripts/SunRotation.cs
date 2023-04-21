@@ -28,8 +28,6 @@ public class SunRotation : MonoBehaviour
         SunColor();
 
         TimeChecker();
-        Debug.Log($"{setTime_min}");
-        Debug.Log($"{thisLight.intensity}");
     }
 
     private void RotateSun()

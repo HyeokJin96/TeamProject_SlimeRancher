@@ -27,6 +27,7 @@ public class UIManager : KSingleton<UIManager>
 
     //InGame
     public GameObject inGameMenu = default;
+    public GameObject playerUI = default;
 
     public GameObject inGameDay_Text = default;
     public Text inGameDay_Text_ = default;
@@ -54,6 +55,9 @@ public class UIManager : KSingleton<UIManager>
     //Load Buttons
     public GameObject btn_LoadExit = default;
     public Button btn_LoadExit_ = default;
+
+    public GameObject btn_TestLoad = default; // test
+    public Button btn_TestLoad_ = default; // test
 
     //Option Buttons
     public GameObject btn_optionExit = default;
@@ -83,7 +87,6 @@ public class UIManager : KSingleton<UIManager>
 
     public GameObject btn_SaveExit = default;
     public Button btn_SaveExit_ = default;
-
 
     [Header("Open Check")]
     //Open Check Main
@@ -172,16 +175,21 @@ public class UIManager : KSingleton<UIManager>
         #endregion
 
         #region InGameTime Texts
-        inGameDay_Text = UiObjs.transform.GetChild(7).gameObject;
+        inGameDay_Text = UiObjs.transform.GetChild(6).gameObject;
         inGameDay_Text_ = inGameDay_Text.GetComponent<Text>();
 
         inGameTime_Text = inGameDay_Text.transform.GetChild(0).gameObject;
         inGameTime_Text_ = inGameTime_Text.GetComponent<Text>();
+
+        playerUI = UiObjs.transform.GetChild(7).gameObject;
         #endregion
 
         //Test Button
         btn_TestPlay = PlayMenu.transform.GetChild(5).gameObject;
         btn_TestPlay_ = btn_TestPlay.GetComponent<Button>();
+
+        btn_TestLoad = LoadMenu.transform.GetChild(5).gameObject;
+        btn_TestLoad_ = btn_TestLoad.GetComponent<Button>();
         //Test Button
     }
 
@@ -234,6 +242,13 @@ public class UIManager : KSingleton<UIManager>
             buttons.SetActive(true);
             isLoadMenu_Open = false;
         }
+    }
+
+    public void LoadPlayerData_Btn()
+    {
+        //DataManager.Instance.LoadData();
+        DataManager.Instance.isLoad = true;
+        SceneManager_.Instance.GoPlayScene();
     }
     #endregion
 
@@ -482,13 +497,20 @@ public class UIManager : KSingleton<UIManager>
     public void ScreenShot_Btn()
     {
         inGameMenu.SetActive(false);
-        ScreenCapture.CaptureScreenshot($"ScreenShot{System.DateTime.Now.ToString("MMddHHmmss")}.png");
+        inGameDay_Text.SetActive(false);
+        playerUI.SetActive(false);
+        ScreenCapture.CaptureScreenshot(
+            $"ScreenShot{System.DateTime.Now.ToString("MMddHHmmss")}.png"
+        );
         StartCoroutine(DelayForSS());
     }
+
     private IEnumerator DelayForSS()
     {
         yield return null;
         inGameMenu.SetActive(true);
+        inGameDay_Text.SetActive(true);
+        playerUI.SetActive(true);
     }
 
     public void SaveExit_Btn()
@@ -496,8 +518,8 @@ public class UIManager : KSingleton<UIManager>
         //Save First
         isInGameMenu_Open = false;
         Time.timeScale = 1;
+        DataManager.Instance.SaveData();
         SceneManager_.Instance.GoTitleScene();
     }
     #endregion
-
 }
