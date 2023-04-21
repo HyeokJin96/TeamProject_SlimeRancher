@@ -9,16 +9,64 @@ public class SlimeBase : MonoBehaviour
     protected bool isGrounded;
     protected bool isJumpDelay;
 
+    int jumpDelay = 5;
+    int jumpForce = 5;
+
     public float hungerValue;   // after test, delete public 
     public float agitatedValue; // after test, delete public
     float minHunger = 0;
     float maxHunger = 100;
-
-    SphereCollider seekRange;
+    float increaseHungerValue = 5.56f;
 
     public GameObject targetToEat = null;
     Vector3 targetPosition;
     float targetDistance;
+
+    protected float targetDistanceValue1;
+    protected float targetDistanceValue2;
+
+    //var for move
+
+    float minRadius = 8;
+    float maxRadius = 10;
+    float angle;
+    float posX;
+    float posZ;
+    float radiusX;
+    float radiusZ;
+    public Vector3 destination = Vector3.zero;
+    bool isSetDestination;
+
+
+    //public GameObject[] slimeArray;
+
+    GameObject[] normalSlimeArray;
+    GameObject[] largoSlimeArray;
+    public GameObject tarrSlime;
+
+    public bool isTarrSlime;
+    //[SimeSize] 0: normal, 1: largo 2: gordo
+    public int slimeSize;
+
+    //[SlimeType]  0: Default(White), 1: Pink, 2: Rock...
+    public int slimeType1;
+    public int slimeType2;
+
+
+    //set color
+    public List<Color32> slimeColor;
+
+    protected Transform shadow;
+    MeshRenderer defaultMeshRenderer;
+    public Material defaultMaterial;
+    MeshRenderer defaultLod1MeshRenderer;
+    public Material defaultLod1Material;
+    MeshRenderer defaultLod2MeshRenderer;
+    public Material defaultLod2Material;
+    MeshRenderer defaultLod3MeshRenderer;
+    public Material defaultLod3Material;
+
+    protected Animator anim;
 
     public enum MoodState   // after test, delete public
     {
@@ -32,28 +80,153 @@ public class SlimeBase : MonoBehaviour
     public enum ActionState
     {
         Idle,
-        Eat
+        Eat,
+        Jump,
+        Wait,
+        RockFire
+
     }
 
     public ActionState currentActionState;
 
-    protected void Start()
+    private void Awake()
+    {
+        //slimeArray = Resources.LoadAll<GameObject>("02.HT/Prefabs/Slimes");
+        normalSlimeArray = Resources.LoadAll<GameObject>("02.HT/Prefabs/Slimes/NormalSlimes");
+        largoSlimeArray = Resources.LoadAll<GameObject>("02.HT/Prefabs/Slimes/LargoSlimes");
+        tarrSlime = Resources.Load<GameObject>("02.HT/Prefabs/Slimes/TarrSlime/TarrSlime");
+
+        slimeColor = new List<Color32>();
+        slimeColor.Add(new Color32(255, 255, 255, 255));
+        slimeColor.Add(new Color32(225, 60, 90, 255));
+        slimeColor.Add(new Color32(30, 125, 200, 255));  //rock
+        slimeColor.Add(new Color32(185, 185, 185, 255));  //tabby
+        slimeColor.Add(new Color32(175, 175, 255, 200));  //phosphor
+        //slimeColor.Add(new Color32(95, 95, 185, 200));  //phosphor_Legacy
+
+        targetDistanceValue1 = 5;
+        targetDistanceValue2 = 2.5f;
+    }
+    public virtual void Start()
     {
         rigid = GetComponent<Rigidbody>();
 
         currentMoodState = MoodState.Elated;
         currentActionState = ActionState.Idle;
 
-        seekRange = transform.GetChild(1).GetComponent<SphereCollider>();
+        shadow = transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(3);
 
-        StartCoroutine(IncreaseHunger(1)); // test value 1: after test, change to 60
+        defaultMeshRenderer = shadow.GetChild(0).GetChild(0).GetComponent<MeshRenderer>();
+        defaultMaterial = defaultMeshRenderer.materials[0];
+
+        defaultLod1MeshRenderer = shadow.GetChild(1).GetChild(0).GetComponent<MeshRenderer>();
+        defaultLod1Material = defaultLod1MeshRenderer.materials[0];
+
+        defaultLod2MeshRenderer = shadow.GetChild(2).GetChild(0).GetComponent<MeshRenderer>();
+        defaultLod2Material = defaultLod2MeshRenderer.materials[0];
+
+        defaultLod3MeshRenderer = shadow.GetChild(3).GetChild(0).GetComponent<MeshRenderer>();
+        defaultLod3Material = defaultLod3MeshRenderer.materials[0];
+
+        anim = GetComponent<Animator>();
+
+        StartCoroutine(IncreaseHunger(1, increaseHungerValue)); // test value 1: after test, change to 60
     }
 
     public virtual void Update()
     {
         SetHungerValue();
         SetMoodState();
-        Move();
+        if (!isSetDestination)
+        {
+            StartCoroutine(SetDestination());
+        }
+
+        switch (currentMoodState)
+        {
+            case MoodState.Elated:
+            case MoodState.Happy:
+                jumpForce = 5;
+                jumpDelay = 5;
+                break;
+            case MoodState.Hungry:
+                jumpForce = 6;
+                jumpDelay = 4;
+                break;
+            case MoodState.Agitated:
+                jumpForce = 7;
+                jumpDelay = 3;
+                break;
+            default:
+                break;
+        }
+
+        switch (currentActionState)
+        {
+            case ActionState.Idle:
+                Move(targetDistanceValue1, targetDistanceValue2);
+                Jump(jumpForce, jumpDelay); //move 메서드 안으로 이동?
+                break;
+            case ActionState.Eat:
+                Debug.Log(anim);
+                anim.SetBool("isBite", true);
+
+                destination = Vector3.zero;
+                isSetDestination = false;
+                //StartCoroutine(Eat());
+                break;
+            case ActionState.Jump:
+                //Do Nothing
+                break;
+            case ActionState.Wait:
+                //Do Nothing
+                break;
+            case ActionState.RockFire:
+                anim.SetBool("isWindup", true);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    protected void RockFire()
+    {
+        anim.SetBool("isWindup", false);
+        anim.SetBool("isRockFire", true);
+        //test
+        rigid.AddForce(transform.forward * 20, ForceMode.Impulse);
+    }
+
+    protected void RockRecover()
+    {
+        anim.SetBool("isRockFire", false);
+        anim.SetBool("isRockRecover", true);
+    }
+
+    protected void RockAnimationEnd()
+    {
+        StartCoroutine(JumpDelay(jumpDelay));
+        anim.SetBool("isRockRecover", false);
+        rigid.velocity = Vector3.zero;
+        currentActionState = ActionState.Idle;
+    }
+    public IEnumerator DestroyTarr()
+    {
+        yield return new WaitForSeconds(10);
+        StopAllCoroutines();
+        Destroy(this.gameObject);
+    }
+
+
+    //목적지 설정 테스트용
+    private void OnDrawGizmos()
+    {
+        if (destination != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, destination);
+        }
     }
 
     void SetHungerValue()
@@ -65,78 +238,247 @@ public class SlimeBase : MonoBehaviour
         else { }
     }
 
+
+
     protected void Jump(int jumpForce_, int delayTime_)
     {
         if (!isJumpDelay)
         {
-            isGrounded = false;
+            int frequency_;
+            frequency_ = Random.Range(0, 5);
             isJumpDelay = true;
-            rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
-            StartCoroutine(JumpDelay(delayTime_));
+            if (slimeType1 == 2)
+            {
+                //if (frequency_ >= 0 && frequency_ < 3)//origin
+                if (frequency_ >= 0 && frequency_ < 1)//test
+                {
+                    currentActionState = ActionState.Jump;
+                    rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
+                    StartCoroutine(JumpDelay(delayTime_));
+                }
+                else
+                {
+                    currentActionState = ActionState.RockFire;
+                }
+            }
+            else
+            {
+                currentActionState = ActionState.Jump;
+                rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
+                StartCoroutine(JumpDelay(delayTime_));
+            }
         }
     }
-    protected void FindFood()
-    {
 
-    }
-
-    protected void Move()
+    protected void Move(float targetDistanceValue1_, float targetDistanceValue2_)
     {
+        //Jump(jumpForce, jumpDelay); //move 메서드 안으로 이동?
+        /* if (!isSetDestination)
+        {
+            StartCoroutine(SetDestination());
+        } */
+
         if (currentMoodState == MoodState.Elated)
         {
-            //랜덤 움직임 부여 예정
+            if (Vector3.Distance(transform.position, destination) > 0.3f && destination != Vector3.zero)
+            {
+                transform.LookAt(destination);
+                transform.position += transform.forward * 3 * Time.deltaTime;
+            }
+            else
+            {
+                destination = Vector3.zero;
+                StopCoroutine(SetDestination());
+
+            }
         }
         else
         {
             if (targetToEat == null)
             {
-                //랜덤 움직임 부여 예정
+                if (Vector3.Distance(transform.position, destination) > 0.3f && destination != Vector3.zero)
+                {
+                    transform.LookAt(destination);
+                    transform.position += transform.forward * 3 * Time.deltaTime;
+                }
+                else
+                {
+                    destination = Vector3.zero;
+                    StopCoroutine(SetDestination());
+                }
             }
             else
             {
                 targetPosition = new Vector3(targetToEat.transform.position.x, transform.position.y, targetToEat.transform.position.z);
                 targetDistance = Vector3.Distance(transform.position, targetPosition);
 
-                Debug.Log(targetDistance);
+                //Debug.Log(targetDistance);
 
-                if (targetDistance > 1.5)
+                if (targetDistance > targetDistanceValue1_)
                 {
                     currentActionState = ActionState.Idle;
-                    CancelInvoke("Eat");
+                    //StopCoroutine(Eat());
                     transform.LookAt(targetPosition);
                     transform.position += transform.forward * 3 * Time.deltaTime;
                 }
-                else if (targetDistance <= 1.5 && targetDistance > 1f)
+                else if (targetDistance <= targetDistanceValue1_ && targetDistance > targetDistanceValue2_)
                 {
                     transform.LookAt(targetPosition);
                     transform.position += transform.forward * 3 * Time.deltaTime;
                 }
                 else
                 {
-
                     //play animation bite
-                    currentActionState = ActionState.Eat;
-                    Invoke("Eat", 3);
+                    if (targetToEat != null && currentActionState != ActionState.Eat)
+                    {
+                        currentActionState = ActionState.Eat;
+                    }
                 }
             }
         }
+
+        if (!isTarrSlime)
+        {
+            if (targetToEat != null && targetToEat.activeSelf == false)
+            {
+                targetToEat = null;
+            }
+        }
+        else
+        {
+            if (targetToEat != null && targetToEat.transform.root.gameObject.activeSelf == false)
+            {
+                targetToEat = null;
+            }
+        }
+
     }
 
-    void Eat()
+    float destinationDistance;
+    IEnumerator SetDestination()
     {
-        Debug.Log("Eat");
+        isSetDestination = true;
+        yield return new WaitForSeconds(7);
+        if (destination == Vector3.zero)
+        {
+            angle = Random.Range(0f, 360f);
+            radiusX = Random.Range(5, 10);
+            radiusZ = Random.Range(5, 10);
+            posX = transform.position.x + radiusX * Mathf.Cos(angle * Mathf.Deg2Rad);
+            posZ = transform.position.z + radiusZ * Mathf.Sin(angle * Mathf.Deg2Rad);
+            destinationDistance = Mathf.Sqrt(Mathf.Pow(posX - transform.position.x, 2f) + Mathf.Pow(posZ - transform.position.z, 2f));
+        }
+
+        destination = new Vector3(posX, transform.position.y, posZ);
+
+        isSetDestination = false;
+
+        yield return new WaitForSeconds(7);
+        destination = Vector3.zero;
+        isSetDestination = false;
+
+    }
+
+    //Eat(): Legacy
+    /* public virtual IEnumerator Eat()
+    {
+        //currentActionState = ActionState.Eat;
+        currentActionState = ActionState.Wait;
+        yield return new WaitForSeconds(1f);
+        targetToEat.SetActive(false);
         hungerValue = 0;
         agitatedValue = 0;
-        targetToEat.SetActive(false);
-        currentActionState = ActionState.Idle;
         if (targetToEat.tag == "Plort")
         {
-            Debug.Log("변신");
+            Debug.Log("합체");
+            if (slimeSize == 0)
+            {
+                slimeSize = 1;
+                slimeType2 = targetToEat.GetComponent<PlortBase>().plortType;
+
+                TransformSlime();
+            }
+            else if (slimeSize == 1)
+            {
+                //Transform into TarrSlime
+                Instantiate(tarrSlime, transform.position, transform.rotation);
+                gameObject.SetActive(false);
+            }
         }
         else if (targetToEat.tag == "Food")
         {
             Debug.Log("플로트 생산");
+            GameObject clone_ = Resources.Load<GameObject>("02.HT/Prefabs/Plort/Plort");
+            if (slimeSize == 0)
+            {
+                clone_.GetComponent<PlortBase>().plortType = slimeType1;
+                Instantiate(clone_, transform.position, transform.rotation);
+            }
+            else if (slimeSize == 1)
+            {
+                clone_.GetComponent<PlortBase>().plortType = slimeType1;
+                Instantiate(clone_, transform.position, transform.rotation);
+                clone_.GetComponent<PlortBase>().plortType = slimeType2;
+                Instantiate(clone_, transform.position, transform.rotation);
+            }
+            else
+            {
+
+            }
+
+            //색상부여 관련 수정예정
         }
+        yield return new WaitForSeconds(1f);
+        currentActionState = ActionState.Idle;
+    } */
+
+    protected virtual void Eat()
+    {
+        targetToEat.SetActive(false);
+        hungerValue = 0;
+        agitatedValue = 0;
+        if (targetToEat.tag == "Plort")
+        {
+            Debug.Log("합체");
+            if (slimeSize == 0)
+            {
+                slimeSize = 1;
+                slimeType2 = targetToEat.GetComponent<PlortBase>().plortType;
+
+                TransformSlime();
+            }
+            else if (slimeSize == 1)
+            {
+                //Transform into TarrSlime
+                Instantiate(tarrSlime, transform.position, transform.rotation);
+                gameObject.SetActive(false);
+            }
+        }
+        else if (targetToEat.tag == "Food")
+        {
+            Debug.Log("플로트 생산");
+            GameObject clone_ = Resources.Load<GameObject>("02.HT/Prefabs/Plort/Plort");
+            if (slimeSize == 0)
+            {
+                clone_.GetComponent<PlortBase>().plortType = slimeType1;
+                Instantiate(clone_, transform.position, transform.rotation);
+            }
+            else if (slimeSize == 1)
+            {
+                clone_.GetComponent<PlortBase>().plortType = slimeType1;
+                Instantiate(clone_, transform.position, transform.rotation);
+                clone_.GetComponent<PlortBase>().plortType = slimeType2;
+                Instantiate(clone_, transform.position, transform.rotation);
+            }
+            else
+            {
+
+            }
+
+            //색상부여 관련 수정예정
+        }
+        currentActionState = ActionState.Idle;
+        anim.SetBool("isBite", false);
     }
 
     IEnumerator JumpDelay(int delayTime_)
@@ -145,18 +487,18 @@ public class SlimeBase : MonoBehaviour
         isJumpDelay = false;
     }
 
-    IEnumerator IncreaseHunger(int time_)
+    protected IEnumerator IncreaseHunger(int time_, float increaseHungerValue_)
     {
         while (currentMoodState != MoodState.Agitated)
         {
             yield return new WaitForSeconds(time_);
             if (hungerValue != maxHunger)
             {
-                hungerValue += 5.56f;
+                hungerValue += increaseHungerValue_;
             }
             else
             {
-                agitatedValue += 5.56f;
+                agitatedValue += increaseHungerValue_;
             }
         }
     }
@@ -194,15 +536,39 @@ public class SlimeBase : MonoBehaviour
     {
         if (other.gameObject.tag == "Terrain")
         {
-            isGrounded = true;
+            currentActionState = ActionState.Idle;
         }
     }
 
-    protected void OnCollisionStay(Collision other)
+    private void OnCollisionExit(Collision other)
     {
-        if (other.gameObject.tag == "Terrain")
+        /* if (other.gameObject.tag == "Terrain")
         {
-            isGrounded = true;
+            currentActionState = ActionState.Jump;
+        } */
+    }
+    void TransformSlime()
+    {
+        int largoSlimeIndex_ = 0;
+        for (int i = 1; i < normalSlimeArray.Length - 1; i++)
+        {
+            for (int j = i + 1; j < normalSlimeArray.Length; j++)
+            {
+                largoSlimeIndex_++;
+
+                if (slimeType1 > slimeType2 && i == slimeType2 && j == slimeType1)
+                {
+                    Instantiate(largoSlimeArray[largoSlimeIndex_], transform.position, transform.rotation);
+                    gameObject.SetActive(false);
+
+                }
+                else if (slimeType1 < slimeType2 && i == slimeType1 && j == slimeType2)
+                {
+                    Instantiate(largoSlimeArray[largoSlimeIndex_], transform.position, transform.rotation);
+                    gameObject.SetActive(false);
+                }
+
+            }
         }
     }
 }

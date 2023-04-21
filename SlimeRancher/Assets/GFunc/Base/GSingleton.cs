@@ -15,9 +15,8 @@ public class GSingleton<T> : GComponent where T : GSingleton<T>
                 GSingleton<T>._instance = 
                     GFunc.CreateObj<T>(typeof(T).ToString());
                 DontDestroyOnLoad(_instance.gameObject);
-            }       // if: 인스턴스가 비어 있을 때 새로 인스턴스화 한다
+            }       
 
-            // 여기서 부터는 인스턴스가 절대 비어있지 않을듯?
             return _instance;
         }
     }
@@ -25,6 +24,17 @@ public class GSingleton<T> : GComponent where T : GSingleton<T>
     public override void Awake()
     {
         base.Awake();
+
+        if(_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        _instance = this as T;
+        DontDestroyOnLoad(gameObject);
+
+        Init();
     }       // Awake()
 
     public void Create()
@@ -36,5 +46,4 @@ public class GSingleton<T> : GComponent where T : GSingleton<T>
     {
         /* Do something */
     }
-
 }

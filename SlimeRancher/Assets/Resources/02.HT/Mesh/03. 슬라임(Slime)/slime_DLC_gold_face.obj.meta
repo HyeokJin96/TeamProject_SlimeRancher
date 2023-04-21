@@ -3,7 +3,12 @@ guid: a155f7af093aa034ba4f2e81df0eb47a
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: slime_DLC_gold_face_0Mat
+    second: {fileID: 2100000, guid: f8514f0c3ba2bf449a9b508a23d61171, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
