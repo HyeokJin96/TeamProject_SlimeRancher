@@ -11,25 +11,25 @@ public class PlayerData
 
     public Vector3 GetPos()
     {
-        playerPos = GameObject.Find("Player").transform.position; // GameManager에서 받아올 것
+        playerPos = GameManager.Instance.playerPos;
         return playerPos;
     }
 
     public Quaternion GetRot()
     {
-        playerRot = GameObject.Find("Player").transform.rotation; // GameManager에서 받아올 것
+        playerRot = GameManager.Instance.playerRot;
         return playerRot;
     }
 
     public Vector3 SetPos()
     {
-        GameObject.Find("Player").transform.position = playerPos;
-        return GameObject.Find("Player").transform.position;
+        GameManager.Instance.playerPos = playerPos;
+        return GameManager.Instance.playerPos;
     }
 
     public Quaternion SetRot()
     {
-        GameObject.Find("Player").transform.rotation = playerRot;
-        return GameObject.Find("Player").transform.rotation;
+        GameManager.Instance.playerRot = playerRot;
+        return GameManager.Instance.playerRot;
     }
 }
