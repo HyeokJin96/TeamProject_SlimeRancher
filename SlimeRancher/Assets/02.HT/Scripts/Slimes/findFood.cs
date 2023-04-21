@@ -84,11 +84,33 @@ public class findFood : MonoBehaviour
         }
     }
 
+    public GameObject pounceTarget;
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            pounceTarget = other.gameObject;
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject == slimeBase.targetToEat)
         {
             slimeBase.targetToEat = null;
+        }
+        else
+        {
+
+        }
+
+        if (pounceTarget != null && other.gameObject == pounceTarget)
+        {
+            pounceTarget = null;
+        }
+        else
+        {
+
         }
     }
 }

@@ -44,4 +44,58 @@ public class TabbySlime : SlimeBase
     {
         base.Update();
     }
+    protected override void Jump(int jumpForce_, int delayTime_)
+    {
+        //base.Jump(jumpForce_, delayTime_);
+        if (!isJumpDelay)
+        {
+            int frequency_;
+            frequency_ = Random.Range(0, 5);
+            isJumpDelay = true;
+            if (frequency_ >= 0 && frequency_ < 3)
+            {
+                currentActionState = ActionState.Jump;
+                rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
+                StartCoroutine(JumpDelay(delayTime_));
+            }
+            else
+            {
+                if (currentMoodState != MoodState.Agitated)
+                {
+                    currentActionState = ActionState.Pounce;
+                }
+                else
+                {
+                    currentActionState = ActionState.Jump;
+                    rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
+                    StartCoroutine(JumpDelay(delayTime_));
+                }
+            }
+        }
+    }
+
+    public Transform pounceTarget;
+    public float speed = 10f;
+    public float gravity = 9.81f;
+
+    protected override void Pounce()
+    {
+        base.Pounce();
+        Debug.Log("pounce test");
+
+        // { if(target to eat != null)
+        Vector3 direction = pounceTarget.position - transform.position;
+        float distance = direction.magnitude;
+        if (distance <= 0f) return;
+        float height = direction.y;
+        float angle = 45f * Mathf.Deg2Rad; // 45도 각도로 발사
+        float velocity = Mathf.Sqrt(distance * gravity / (Mathf.Sin(2 * angle)));
+        Vector3 horizontalDirection = new Vector3(direction.x, 0f, direction.z);
+        float horizontalDistance = horizontalDirection.magnitude;
+        float time = horizontalDistance / (velocity * Mathf.Cos(angle));
+        float verticalVelocity = gravity * time / 2f;
+        Vector3 initialVelocity = (velocity * direction.normalized) + (Vector3.up * verticalVelocity);
+
+        rigid.velocity = initialVelocity;
+    }
 }

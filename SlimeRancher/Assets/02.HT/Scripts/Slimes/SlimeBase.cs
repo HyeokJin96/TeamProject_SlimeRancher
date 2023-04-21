@@ -83,7 +83,8 @@ public class SlimeBase : MonoBehaviour
         Eat,
         Jump,
         Wait,
-        RockFire
+        RockFire,
+        Pounce
 
     }
 
@@ -184,7 +185,9 @@ public class SlimeBase : MonoBehaviour
             case ActionState.RockFire:
                 anim.SetBool("isWindup", true);
                 break;
-
+            case ActionState.Pounce:
+                anim.SetBool("isPounce", true);
+                break;
             default:
                 break;
         }
@@ -204,13 +207,30 @@ public class SlimeBase : MonoBehaviour
         anim.SetBool("isRockRecover", true);
     }
 
+    protected void RecoverVelocityAndRotation()
+    {
+        rigid.velocity = Vector3.zero;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
     protected void RockAnimationEnd()
     {
         StartCoroutine(JumpDelay(jumpDelay));
         anim.SetBool("isRockRecover", false);
-        rigid.velocity = Vector3.zero;
         currentActionState = ActionState.Idle;
     }
+    protected virtual void Pounce()
+    {
+
+    }
+
+    protected void PounceEnd()
+    {
+        StartCoroutine(JumpDelay(jumpDelay));
+        anim.SetBool("isPounce", false);
+        currentActionState = ActionState.Idle;
+    }
+
+
     public IEnumerator DestroyTarr()
     {
         yield return new WaitForSeconds(10);
@@ -240,7 +260,19 @@ public class SlimeBase : MonoBehaviour
 
 
 
-    protected void Jump(int jumpForce_, int delayTime_)
+    protected virtual void Jump(int jumpForce_, int delayTime_)
+    {
+        if (!isJumpDelay)
+        {
+            isJumpDelay = true;
+            currentActionState = ActionState.Jump;
+            rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
+            StartCoroutine(JumpDelay(delayTime_));
+        }
+    }
+
+    // { jump method backup before modify
+    /* protected void Jump(int jumpForce_, int delayTime_)
     {
         if (!isJumpDelay)
         {
@@ -249,8 +281,7 @@ public class SlimeBase : MonoBehaviour
             isJumpDelay = true;
             if (slimeType1 == 2)
             {
-                //if (frequency_ >= 0 && frequency_ < 3)//origin
-                if (frequency_ >= 0 && frequency_ < 1)//test
+                if (frequency_ >= 0 && frequency_ < 3)
                 {
                     currentActionState = ActionState.Jump;
                     rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
@@ -268,7 +299,8 @@ public class SlimeBase : MonoBehaviour
                 StartCoroutine(JumpDelay(delayTime_));
             }
         }
-    }
+    } */
+    // } jump method backup before modify
 
     protected void Move(float targetDistanceValue1_, float targetDistanceValue2_)
     {
@@ -364,6 +396,7 @@ public class SlimeBase : MonoBehaviour
             angle = Random.Range(0f, 360f);
             radiusX = Random.Range(5, 10);
             radiusZ = Random.Range(5, 10);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             posX = transform.position.x + radiusX * Mathf.Cos(angle * Mathf.Deg2Rad);
             posZ = transform.position.z + radiusZ * Mathf.Sin(angle * Mathf.Deg2Rad);
             destinationDistance = Mathf.Sqrt(Mathf.Pow(posX - transform.position.x, 2f) + Mathf.Pow(posZ - transform.position.z, 2f));
@@ -481,7 +514,7 @@ public class SlimeBase : MonoBehaviour
         anim.SetBool("isBite", false);
     }
 
-    IEnumerator JumpDelay(int delayTime_)
+    protected IEnumerator JumpDelay(int delayTime_)
     {
         yield return new WaitForSeconds(delayTime_);
         isJumpDelay = false;
