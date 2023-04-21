@@ -54,4 +54,5 @@ public class LightCoreTest : MonoBehaviour
             alphaValue -= 1;
         }
     }
+    //merge test
 }
