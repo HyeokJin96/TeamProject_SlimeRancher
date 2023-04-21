@@ -4,51 +4,65 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = default;
-    [SerializeField] private float sprintSpeed = default;
-    [SerializeField] private float normalSpeed = default;
-    [SerializeField] private float jumpForce = default;
+    [SerializeField]
+    private float moveSpeed = default;
 
-    [SerializeField] private float groundCheckDistance = default;
-    [SerializeField] private LayerMask groundLayer = default;
+    [SerializeField]
+    private float sprintSpeed = default;
+
+    [SerializeField]
+    private float normalSpeed = default;
+
+    [SerializeField]
+    private float jumpForce = default;
+
+    [SerializeField]
+    private float groundCheckDistance = default;
+
+    [SerializeField]
+    private LayerMask groundLayer = default;
 
     private bool isGrounded = false;
     private bool isSprinting = false;
 
-
     private Rigidbody playerRigidbody = default;
 
-
     [Space(20f)]
-    [SerializeField] private GameObject vacpack = default;
-    [SerializeField] private GameObject playerBody = default;
-    [SerializeField] private GameObject vacpackPivot = default;
-    [SerializeField] private GameObject model_V3 = default;
+    [SerializeField]
+    private GameObject vacpack = default;
+
+    [SerializeField]
+    private GameObject playerBody = default;
+
+    [SerializeField]
+    private GameObject vacpackPivot = default;
+
+    [SerializeField]
+    private GameObject model_V3 = default;
 
     [Space(10f)]
-    [SerializeField] private Camera playerCamera = default;
+    [SerializeField]
+    private Camera playerCamera = default;
 
     [Space(10f)]
-    [SerializeField] private Animator vacpackAnimator = default;
-    [SerializeField] private CameraController cameraController = default;
+    [SerializeField]
+    private Animator vacpackAnimator = default;
+
+    [SerializeField]
+    private CameraController cameraController = default;
 
     [Space(10f)]
-    [SerializeField] private GameManager gameManager = default;
-
-
-
-
+    [SerializeField]
+    private GameManager gameManager = default;
 
     private float currentX;
     private float currentY;
-
 
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
 
         vacpack = transform.GetChild(0).gameObject;
         playerBody = transform.GetChild(1).gameObject;
@@ -76,6 +90,9 @@ public class PlayerController : MonoBehaviour
         Sprint();
         AnimationControll();
         RotatePlayer();
+
+        //
+        Debug.Log(transform.position);
     }
 
     private void RotatePlayer()
@@ -99,7 +116,9 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
 
-        Vector3 moveDirection = (horizontalInput * transform.right + verticalInput * transform.forward).normalized;
+        Vector3 moveDirection = (
+            horizontalInput * transform.right + verticalInput * transform.forward
+        ).normalized;
         Vector3 newPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
         playerRigidbody.MovePosition(newPosition);
     }
@@ -110,7 +129,12 @@ public class PlayerController : MonoBehaviour
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
+        isGrounded = Physics.Raycast(
+            transform.position,
+            Vector3.down,
+            groundCheckDistance,
+            groundLayer
+        );
     }
 
     private void Sprint()
@@ -160,5 +184,4 @@ public class PlayerController : MonoBehaviour
             vacpackAnimator.SetBool("isSprinting", false);
         }
     }
-
 }

@@ -63,11 +63,14 @@ public class UIController_ : MonoBehaviour
         UIManager.Instance.IGOptionExit_Key();
 
         Timer();
+
+        DataManager.Instance.GetPlayerData();
     }
 
     private void Set()
     {
         UIManager.Instance.Create();
+        GameManager.Instance.Create();
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -86,7 +89,7 @@ public class UIController_ : MonoBehaviour
             minute = 0;
         }
 
-        if(hour >= 24)
+        if (hour >= 24)
         {
             hour = 0;
             day++;
