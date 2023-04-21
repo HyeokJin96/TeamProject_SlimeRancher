@@ -195,7 +195,7 @@ public class SlimeBase : MonoBehaviour
         anim.SetBool("isWindup", false);
         anim.SetBool("isRockFire", true);
         //test
-        rigid.AddForce(transform.forward * 5, ForceMode.Impulse);
+        rigid.AddForce(transform.forward * 20, ForceMode.Impulse);
     }
 
     protected void RockRecover()
@@ -208,6 +208,7 @@ public class SlimeBase : MonoBehaviour
     {
         StartCoroutine(JumpDelay(jumpDelay));
         anim.SetBool("isRockRecover", false);
+        rigid.velocity = Vector3.zero;
         currentActionState = ActionState.Idle;
     }
     public IEnumerator DestroyTarr()
@@ -287,6 +288,8 @@ public class SlimeBase : MonoBehaviour
             else
             {
                 destination = Vector3.zero;
+                StopCoroutine(SetDestination());
+
             }
         }
         else
@@ -301,6 +304,7 @@ public class SlimeBase : MonoBehaviour
                 else
                 {
                     destination = Vector3.zero;
+                    StopCoroutine(SetDestination());
                 }
             }
             else
@@ -354,7 +358,7 @@ public class SlimeBase : MonoBehaviour
     IEnumerator SetDestination()
     {
         isSetDestination = true;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(7);
         if (destination == Vector3.zero)
         {
             angle = Random.Range(0f, 360f);
@@ -368,6 +372,11 @@ public class SlimeBase : MonoBehaviour
         destination = new Vector3(posX, transform.position.y, posZ);
 
         isSetDestination = false;
+
+        yield return new WaitForSeconds(7);
+        destination = Vector3.zero;
+        isSetDestination = false;
+
     }
 
     //Eat(): Legacy
