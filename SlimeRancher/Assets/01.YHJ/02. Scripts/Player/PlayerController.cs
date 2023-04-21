@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject playerBody = default;
     [SerializeField] private GameObject vacpackPivot = default;
     [SerializeField] private GameObject model_V3 = default;
+    [SerializeField] private GameObject muzzle = default;
+    [SerializeField] private GameObject cone = default;
 
     [Space(10f)]
     [SerializeField] private Camera playerCamera = default;
@@ -49,11 +51,12 @@ public class PlayerController : MonoBehaviour
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-
         vacpack = transform.GetChild(0).gameObject;
         playerBody = transform.GetChild(1).gameObject;
         vacpackPivot = vacpack.transform.GetChild(0).gameObject;
         model_V3 = vacpackPivot.transform.GetChild(1).gameObject;
+        muzzle = vacpackPivot.transform.GetChild(1).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0).gameObject;
+        cone = muzzle.transform.GetChild(0).gameObject;
         playerCamera = vacpackPivot.transform.GetChild(0).gameObject.GetComponent<Camera>();
 
         cameraController = playerCamera.GetComponent<CameraController>();
@@ -63,6 +66,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         normalSpeed = moveSpeed;
+        //cone.gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -76,6 +80,7 @@ public class PlayerController : MonoBehaviour
         Sprint();
         AnimationControll();
         RotatePlayer();
+        //Absorption();
     }
 
     private void RotatePlayer()
@@ -134,18 +139,12 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+            cone.gameObject.SetActive(true);
+        }
 
-            if (Physics.Raycast(ray, out hit))
-            {
-                Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-                if (rb != null)
-                {
-                    Vector3 direction = transform.position - hit.transform.position;
-                    rb.AddForce(direction.normalized * 10f);
-                }
-            }
+        if (Input.GetMouseButtonUp(1))
+        {
+            cone.gameObject.SetActive(false);
         }
     }
 

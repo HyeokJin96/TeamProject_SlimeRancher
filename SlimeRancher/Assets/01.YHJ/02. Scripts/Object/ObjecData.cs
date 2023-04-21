@@ -1,16 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
-public enum Type
+public class ObjecData : MonoBehaviour
 {
+    [SerializeField] public ObjectType objectType = default;
+    [SerializeField] public FoodType foodType = default;
+    [SerializeField] public FoodName foodName = default;
+}
+
+public enum ObjectType
+{
+    none,
     Slime,
     Food
 }
 
 public enum FoodType
 {
+    none,
     Vegetable,
     Fruit,
     Meat
@@ -18,6 +24,7 @@ public enum FoodType
 
 public enum FoodName
 {
+    none,
     Carrot,
     Heartbeet,
     OcaOca,

@@ -4,15 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Normal Slime
-  - Largo Slime
-  - Gordo Slime
-  - Feral Slime
-  - Tarr Slime
   - Facility
   - Food
   - Plort
   - Terrain
+  - Slime
   layers:
   - Default
   - TransparentFX
