@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class UIController_ : MonoBehaviour
 {
-    float minute = 0;
-    float minute_ = 0;
-    float hour = 0;
-    float hour_ = 0;
-    int day = 1;
+    public float minute = 0;
+    public float minute_ = 0;
+    public float hour = 0;
+    public float hour_ = 0;
+    public int day = 1;
 
     private void Start()
     {

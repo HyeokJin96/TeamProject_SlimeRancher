@@ -85,8 +85,8 @@ public class UIManager : KSingleton<UIManager>
     public GameObject btn_ScreenShot = default;
     public Button btn_ScreenShot_ = default;
 
-    public GameObject btn_SaveExit = default;
-    public Button btn_SaveExit_ = default;
+    public GameObject btn_SaveExit = default; //test
+    public Button btn_SaveExit_ = default; //test
 
     [Header("Open Check")]
     //Open Check Main
@@ -516,9 +516,9 @@ public class UIManager : KSingleton<UIManager>
     public void SaveExit_Btn()
     {
         //Save First
-        isInGameMenu_Open = false;
         Time.timeScale = 1;
-        DataManager.Instance.SaveData();
+        isInGameMenu_Open = false;
+        T_DataManager.Instance.SaveData_P();
         SceneManager_.Instance.GoTitleScene();
     }
     #endregion
