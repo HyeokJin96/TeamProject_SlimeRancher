@@ -74,7 +74,7 @@ public class TabbySlime : SlimeBase
         }
     }
 
-    public Transform pounceTarget;
+    //public Transform pounceTarget;
     public float speed = 10f;
     public float gravity = 9.81f;
 
@@ -97,5 +97,22 @@ public class TabbySlime : SlimeBase
         Vector3 initialVelocity = (velocity * direction.normalized) + (Vector3.up * verticalVelocity);
 
         rigid.velocity = initialVelocity;
+    }
+
+    protected void AfterPounce()
+    {
+        Debug.Log("af test");
+        if (pounceTarget.tag == "Player")
+        {
+            agitatedValue = 0;
+            pounceTarget = null;
+        }
+        else if (pounceTarget.tag == "Food")
+        {
+            pounceTarget.gameObject.SetActive(false);
+            hungerValue = 0;
+            agitatedValue = 0;
+            pounceTarget = null;
+        }
     }
 }

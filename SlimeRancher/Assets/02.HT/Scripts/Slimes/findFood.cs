@@ -90,6 +90,12 @@ public class findFood : MonoBehaviour
         if (other.tag == "Player")
         {
             pounceTarget = other.gameObject;
+            slimeBase.pounceTarget = pounceTarget.transform;
+        }
+        else if (pounceTarget == null && other.tag == "Food")
+        {
+            pounceTarget = other.gameObject;
+            slimeBase.pounceTarget = pounceTarget.transform;
         }
     }
 
@@ -107,6 +113,7 @@ public class findFood : MonoBehaviour
         if (pounceTarget != null && other.gameObject == pounceTarget)
         {
             pounceTarget = null;
+            slimeBase.pounceTarget = pounceTarget.transform;
         }
         else
         {

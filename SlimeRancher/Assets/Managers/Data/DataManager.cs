@@ -5,7 +5,7 @@ using System.IO;
 
 public class DataManager : KSingleton<DataManager>
 {
-    PlayerData playerData_ = new PlayerData();
+    public PlayerData playerData_ = new PlayerData();
     string path = default;
     string fileName = "p_Data.json";
 
@@ -41,6 +41,7 @@ public class DataManager : KSingleton<DataManager>
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Debug.Log("Save?");
             playerData_.GetPos();
             playerData_.GetRot();
         }

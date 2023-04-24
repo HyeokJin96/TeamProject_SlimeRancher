@@ -25,6 +25,7 @@ public class SlimeBase : MonoBehaviour
     protected float targetDistanceValue1;
     protected float targetDistanceValue2;
 
+    public Transform pounceTarget;
     //var for move
 
     float minRadius = 8;
@@ -84,7 +85,9 @@ public class SlimeBase : MonoBehaviour
         Jump,
         Wait,
         RockFire,
-        Pounce
+        Pounce,
+        Boom,
+        Stunned
 
     }
 
@@ -103,6 +106,7 @@ public class SlimeBase : MonoBehaviour
         slimeColor.Add(new Color32(30, 125, 200, 255));  //rock
         slimeColor.Add(new Color32(185, 185, 185, 255));  //tabby
         slimeColor.Add(new Color32(175, 175, 255, 200));  //phosphor
+        slimeColor.Add(new Color32(225, 60, 90, 255));  //boom(=pink)
         //slimeColor.Add(new Color32(95, 95, 185, 200));  //phosphor_Legacy
 
         targetDistanceValue1 = 5;
@@ -167,6 +171,7 @@ public class SlimeBase : MonoBehaviour
             case ActionState.Idle:
                 Move(targetDistanceValue1, targetDistanceValue2);
                 Jump(jumpForce, jumpDelay); //move 메서드 안으로 이동?
+                StopCoroutine(SetStun());
                 break;
             case ActionState.Eat:
                 Debug.Log(anim);
@@ -187,6 +192,12 @@ public class SlimeBase : MonoBehaviour
                 break;
             case ActionState.Pounce:
                 anim.SetBool("isPounce", true);
+                break;
+            case ActionState.Boom:
+                Boom();
+                break;
+            case ActionState.Stunned:
+                Stunned();
                 break;
             default:
                 break;
@@ -221,6 +232,26 @@ public class SlimeBase : MonoBehaviour
     protected virtual void Pounce()
     {
 
+    }
+
+    protected virtual void Boom()
+    {
+
+    }
+
+    protected virtual void Stunned()
+    {
+
+    }
+    public IEnumerator SetStun()
+    {
+        yield return new WaitForSeconds(1.5f);
+        currentActionState = ActionState.Idle;
+
+        defaultMaterial.color = slimeColor[5];
+        defaultLod1Material.color = slimeColor[5];
+        defaultLod2Material.color = slimeColor[5];
+        defaultLod3Material.color = slimeColor[5];
     }
 
     protected void PounceEnd()
