@@ -11,7 +11,8 @@ public enum ObjectType
 {
     none,
     Slime,
-    Food
+    Food,
+    Button
 }
 
 public enum FoodType

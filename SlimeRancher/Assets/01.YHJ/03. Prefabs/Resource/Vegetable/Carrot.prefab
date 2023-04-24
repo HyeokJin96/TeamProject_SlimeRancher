@@ -1844,7 +1844,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7869371516951400531}
   - component: {fileID: 7385427437452479208}
-  - component: {fileID: 2650384569686804280}
+  - component: {fileID: 1185871978147974374}
   m_Layer: 0
   m_Name: Carrot
   m_TagString: Untagged
@@ -1885,7 +1885,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2650384569686804280
+--- !u!114 &1185871978147974374
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1894,11 +1894,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7385427437452479209}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d25fce7a2f81904abea5d97dbcdc14c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6970d4c874dfa9b4b9d7e3e9b496d58d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodType: 0
-  foodName: 0
+  objectType: 2
+  foodType: 1
+  foodName: 1
 --- !u!1 &9061861595874218520
 GameObject:
   m_ObjectHideFlags: 0

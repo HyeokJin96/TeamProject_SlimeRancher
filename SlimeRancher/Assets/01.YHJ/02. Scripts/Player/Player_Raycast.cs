@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,8 @@ public class Player_Raycast : MonoBehaviour
 
     private bool canAbsorb = false;
 
+    [HideInInspector] public bool isAppearing = false;
+
     private void Awake()
     {
         mainCamera = Camera.main;
@@ -25,42 +28,48 @@ public class Player_Raycast : MonoBehaviour
         muzzle = transform.GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0).gameObject;
         crosshair = canvas_Ui.transform.GetChild(12).gameObject;
         crosshairImage = crosshair.transform.GetChild(0).GetComponent<Image>();
+
     }
 
     private void Update()
     {
-        Ray raycast = mainCamera.ScreenPointToRay(crosshair.transform.position);
 
-        if (Physics.Raycast(raycast, out objectType, raycastDistance))
+        Ray raycast = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
+        int layerMask = ~(1 << LayerMask.NameToLayer("Ignore Raycast"));
+
+        if (Physics.Raycast(raycast, out objectType, raycastDistance, layerMask))
         {
-            targetObject = objectType.collider.transform.parent.gameObject;
-            objectData = targetObject.GetComponentInParent<ObjecData>();
-
-            if (objectData != null)
-            {
-                Debug.DrawLine(muzzle.transform.position, objectType.point, Color.red);
-                crosshairImage.color = Color.green;
-                canAbsorb = true;
-            }
+            targetObject = objectType.collider.gameObject;
+            objectData = targetObject.transform.parent.GetComponentInParent<ObjecData>();
         }
         else
         {
             targetObject = null;
+            objectData = null;
+        }
+
+        Vector3 direction = mainCamera.transform.position + mainCamera.transform.forward * raycastDistance;
+        Debug.DrawLine(muzzle.transform.position, direction, Color.red);
+
+        if (objectData != null)
+        {
+            crosshairImage.color = Color.green;
+            canAbsorb = true;
+
+            if (objectData.objectType == ObjectType.Button && targetObject.transform.position.x - this.transform.position.x < 0.5)
+            {
+                isAppearing = true;
+            }
+            else
+            {
+                isAppearing = false;
+            }
+        }
+        else
+        {
             crosshairImage.color = Color.white;
             canAbsorb = false;
+            isAppearing = false;
         }
     }
 }
-
-//if (objectData != null)
-//{
-//    crosshairImage.color = Color.green;
-
-//    Debug.Log("Object Type: " + objectData.objectType);
-
-//    if (objectData.objectType == ObjectType.Food && objectData.foodType != FoodType.none)
-//    {
-//        Debug.Log("Food Type: " + objectData.foodType);
-//        Debug.Log("Food Name: " + objectData.foodName);
-//    }
-//}
