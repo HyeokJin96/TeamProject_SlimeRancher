@@ -188,8 +188,8 @@ public class UIManager : KSingleton<UIManager>
         btn_TestPlay = PlayMenu.transform.GetChild(5).gameObject;
         btn_TestPlay_ = btn_TestPlay.GetComponent<Button>();
 
-        btn_TestLoad = LoadMenu.transform.GetChild(5).gameObject;
-        btn_TestLoad_ = btn_TestLoad.GetComponent<Button>();
+        // btn_TestLoad = LoadMenu.transform.GetChild(5).gameObject;
+        // btn_TestLoad_ = btn_TestLoad.GetComponent<Button>();
         //Test Button
     }
 
@@ -199,6 +199,7 @@ public class UIManager : KSingleton<UIManager>
         PlayMenu.SetActive(true);
         buttons.SetActive(false);
         isPlayMenu_Open = true;
+        T_DataManager.Instance.isLoadOn = false;
     }
 
     public void Exit_PlayMenu()
@@ -246,8 +247,7 @@ public class UIManager : KSingleton<UIManager>
 
     public void LoadPlayerData_Btn()
     {
-        //DataManager.Instance.LoadData();
-        DataManager.Instance.isLoad = true;
+        T_DataManager.Instance.isLoadOn = true;
         SceneManager_.Instance.GoPlayScene();
     }
     #endregion
@@ -519,6 +519,8 @@ public class UIManager : KSingleton<UIManager>
         Time.timeScale = 1;
         isInGameMenu_Open = false;
         T_DataManager.Instance.SaveData_P();
+        T_DataManager.Instance.SaveData_T();
+        T_DataManager.Instance.SaveData_OG();
         SceneManager_.Instance.GoTitleScene();
     }
     #endregion

@@ -30,7 +30,7 @@ public class UIController : MonoBehaviour
 
         // test
         UIManager.Instance.btn_TestPlay_.onClick.AddListener(() => SceneManager_.Instance.GoPlayScene());
-        UIManager.Instance.btn_TestLoad_.onClick.AddListener(() => UIManager.Instance.LoadPlayerData_Btn());
+        //UIManager.Instance.btn_TestLoad_.onClick.AddListener(() => UIManager.Instance.LoadPlayerData_Btn());
         #endregion
     }
 

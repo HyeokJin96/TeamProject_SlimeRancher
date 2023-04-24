@@ -90,9 +90,6 @@ public class PlayerController : MonoBehaviour
         Sprint();
         AnimationControll();
         RotatePlayer();
-
-        //
-        Debug.Log(transform.position);
     }
 
     private void RotatePlayer()

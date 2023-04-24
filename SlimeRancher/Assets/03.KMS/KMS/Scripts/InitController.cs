@@ -6,7 +6,7 @@ public class InitController : MonoBehaviour
 {
     void Start()
     {
-        DataManager.Instance.Create();
+        T_DataManager.Instance.Create();
         SoundManager.Instance.Create();
         SceneManager_.Instance.Create();
         GraphicsManager.Instance.Create();

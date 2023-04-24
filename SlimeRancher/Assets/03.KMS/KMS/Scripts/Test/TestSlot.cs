@@ -6,7 +6,6 @@ using System.IO;
 
 public class TestSlot : MonoBehaviour
 {
-    public GameObject newGameMenu = default;
     public Text slotText = default;
 
     public bool saveFile = default;
@@ -14,10 +13,14 @@ public class TestSlot : MonoBehaviour
 
     void Start()
     {
-        if (File.Exists(T_DataManager.Instance.path))
+        if (File.Exists(T_DataManager.Instance.path_P)
+            && File.Exists(T_DataManager.Instance.path_T)
+            && File.Exists(T_DataManager.Instance.path_OG))
         {
             saveFile = true;
             T_DataManager.Instance.LoadData_P();
+            T_DataManager.Instance.LoadData_T();
+            T_DataManager.Instance.LoadData_OG();
             slotText.text = $"Play";
         }
         else
@@ -32,18 +35,15 @@ public class TestSlot : MonoBehaviour
         if (saveFile == true)
         {
             T_DataManager.Instance.LoadData_P();
+            T_DataManager.Instance.LoadData_T();
+            T_DataManager.Instance.LoadData_OG();
             T_DataManager.Instance.isLoadOn = true;
             GoPlayScene_();
         }
         else
         {
-            NewGame();
+            /*Do Nothing*/
         }
-    }
-
-    public void NewGame()
-    {
-        newGameMenu.SetActive(true);
     }
 
     public void GoPlayScene_()
@@ -51,6 +51,8 @@ public class TestSlot : MonoBehaviour
         if (saveFile == false)
         {
             T_DataManager.Instance.SaveData_P();
+            T_DataManager.Instance.SaveData_T();
+            T_DataManager.Instance.SaveData_OG();
         }
         SceneManager_.Instance.GoPlayScene();
     }
