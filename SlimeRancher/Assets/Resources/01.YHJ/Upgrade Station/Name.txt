@@ -1,0 +1,18 @@
+Slime Key
+Water Tank
+Jetpack
+Air Drive
+Dash Boots
+Ultra Dash Boots
+Pulse Wave
+Heart Module
+Heart Module Mk2
+Heart Module Mk3
+Heart Module Ultra
+Power Core
+Power Core Mk2
+Power Core Mk3
+Tank Booster
+Tank Booster Mk2
+Tank Booster Mk3
+Tank Booster Ultra
