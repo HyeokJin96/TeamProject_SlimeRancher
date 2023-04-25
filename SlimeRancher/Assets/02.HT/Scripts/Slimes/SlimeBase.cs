@@ -107,6 +107,8 @@ public class SlimeBase : MonoBehaviour
         slimeColor.Add(new Color32(185, 185, 185, 255));  //tabby
         slimeColor.Add(new Color32(175, 175, 255, 200));  //phosphor
         slimeColor.Add(new Color32(225, 60, 90, 255));  //boom(=pink)
+        slimeColor.Add(new Color32(25, 125, 25, 255));  //Rad
+
         //slimeColor.Add(new Color32(95, 95, 185, 200));  //phosphor_Legacy
 
         targetDistanceValue1 = 5;
@@ -245,7 +247,13 @@ public class SlimeBase : MonoBehaviour
     }
     public IEnumerator SetStun()
     {
-        yield return new WaitForSeconds(1.5f);
+        Debug.Log("start stun");
+        anim.SetBool("isStunned", true);
+        yield return new WaitForSeconds(3f);
+        anim.SetBool("isStunned", false);
+        Debug.Log("end stun");
+        StartCoroutine(JumpDelay(jumpDelay));
+
         currentActionState = ActionState.Idle;
 
         defaultMaterial.color = slimeColor[5];
@@ -335,12 +343,6 @@ public class SlimeBase : MonoBehaviour
 
     protected void Move(float targetDistanceValue1_, float targetDistanceValue2_)
     {
-        //Jump(jumpForce, jumpDelay); //move 메서드 안으로 이동?
-        /* if (!isSetDestination)
-        {
-            StartCoroutine(SetDestination());
-        } */
-
         if (currentMoodState == MoodState.Elated)
         {
             if (Vector3.Distance(transform.position, destination) > 0.3f && destination != Vector3.zero)
@@ -598,7 +600,7 @@ public class SlimeBase : MonoBehaviour
 
     protected void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Terrain")
+        if (other.gameObject.tag == "Terrain" && currentActionState != ActionState.Stunned)
         {
             currentActionState = ActionState.Idle;
         }

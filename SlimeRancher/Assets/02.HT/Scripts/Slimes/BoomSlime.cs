@@ -42,7 +42,6 @@ public class BoomSlime : SlimeBase
                 isSetExplosion = false;
                 particleCollider.radius = 0.1f;
                 explosionParticle.SetActive(false);
-                //currentActionState = ActionState.Idle;
                 currentActionState = ActionState.Stunned;
             }
         }

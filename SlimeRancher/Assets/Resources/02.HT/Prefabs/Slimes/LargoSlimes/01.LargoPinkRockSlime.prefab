@@ -842,6 +842,7 @@ Transform:
   m_Children:
   - {fileID: 7064773130803156432}
   - {fileID: 6609928532323352192}
+  - {fileID: 198498855541079576}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -897,6 +898,7 @@ MonoBehaviour:
   hungerValue: 0
   agitatedValue: 0
   targetToEat: {fileID: 0}
+  pounceTarget: {fileID: 0}
   destination: {x: 0, y: 0, z: 0}
   tarrSlime: {fileID: 0}
   isTarrSlime: 0
@@ -1256,6 +1258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b67c1eeeffbdd4a40915820be2d511c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pounceTarget: {fileID: 0}
 --- !u!1 &6609928532397945289
 GameObject:
   m_ObjectHideFlags: 0
@@ -1834,3 +1837,105 @@ Transform:
   m_Father: {fileID: 8547274824942735886}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &3667779350890851799
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6643257535310059062}
+    m_Modifications:
+    - target: {fileID: 3469922681024173007, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469922681024173007, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469922681024173007, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469922681024173007, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469922681024173007, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469922681024173007, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469922681024173007, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469922681024173007, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469922681024173007, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469922681024173007, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469922681024173007, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3471441974731956855, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: m_Name
+      value: FeralSlimeAura
+      objectReference: {fileID: 0}
+    - target: {fileID: 3669144063645047819, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3669144063645047819, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3669144063645047819, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxGradient.key1.g
+      value: 0.100676015
+      objectReference: {fileID: 0}
+    - target: {fileID: 3669144063645047819, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxGradient.key1.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3669144063645047819, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxGradient.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3669144063645047819, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxGradient.key0.g
+      value: 0.09362641
+      objectReference: {fileID: 0}
+    - target: {fileID: 3669144063645047819, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3669144063645047819, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3669144063645047819, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxGradient.key1.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3669144063645047819, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxGradient.key1.r
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+--- !u!4 &198498855541079576 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3469922681024173007, guid: bab7071e7091d4741a1c03e7b7d79528, type: 3}
+  m_PrefabInstance: {fileID: 3667779350890851799}
+  m_PrefabAsset: {fileID: 0}
