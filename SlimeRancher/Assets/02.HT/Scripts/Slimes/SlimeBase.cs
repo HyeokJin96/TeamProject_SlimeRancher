@@ -69,6 +69,9 @@ public class SlimeBase : MonoBehaviour
 
     protected Animator anim;
 
+    //var for LargoSlime
+    bool isFeral;
+
     public enum MoodState   // after test, delete public
     {
         Elated,

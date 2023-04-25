@@ -2,13 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TabbySlime : SlimeBase
+public class LargoPinkTabbySlime : SlimeBase
 {
     //[SimeSize] 0: normal, 1: largo 2: gordo
     //[SlimeType]  0: Default(White), 1: Pink, 2: Rock...
-
-    Material rockSpineLod0Mat;
-    Material rockSpineLod1Mat;
 
     Texture2D tabbyBodyTexture;
     Texture2D tabbyEarNTailTexture1;
@@ -17,13 +14,16 @@ public class TabbySlime : SlimeBase
     public override void Start()
     {
         base.Start();
-        slimeSize = 0;
-        slimeType1 = 3;
+        slimeSize = 1;
+        slimeType1 = 1;
+        slimeType2 = 3;
 
-        defaultMaterial.color = slimeColor[3];
-        defaultLod1Material.color = slimeColor[3];
-        defaultLod2Material.color = slimeColor[3];
-        defaultLod3Material.color = slimeColor[3];
+        defaultMaterial.color = slimeColor[1];
+        defaultLod1Material.color = slimeColor[1];
+        defaultLod2Material.color = slimeColor[1];
+        defaultLod3Material.color = slimeColor[1];
+        targetDistanceValue1 = 7;
+        targetDistanceValue2 = 5;
 
 
         tabbyBodyTexture = Resources.Load<Texture2D>("02.HT/Slimes/TabbySlime/TabbyBodyStripe");
@@ -36,6 +36,7 @@ public class TabbySlime : SlimeBase
         defaultLod3Material.SetTexture("_MainTex", tabbyBodyTexture);
 
         tabbyEarsAndTail = shadow.GetChild(6).gameObject;
+        tabbyEarsAndTail.transform.GetChild(0).GetComponent<MeshRenderer>().materials[0].color = slimeColor[1];
 
         tabbyEarsAndTail.SetActive(true);
     }
@@ -115,4 +116,5 @@ public class TabbySlime : SlimeBase
             pounceTarget = null;
         }
     }
+
 }

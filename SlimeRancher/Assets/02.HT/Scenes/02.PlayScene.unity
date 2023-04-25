@@ -12749,6 +12749,63 @@ Transform:
   m_Father: {fileID: 2245109096595432391}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1377634810698188990
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2461512906702438507, guid: b8a4f454cab48224fb9d59737d26d787, type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461512906702438507, guid: b8a4f454cab48224fb9d59737d26d787, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -168.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461512906702438507, guid: b8a4f454cab48224fb9d59737d26d787, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 415.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461512906702438507, guid: b8a4f454cab48224fb9d59737d26d787, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -491.36414
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461512906702438507, guid: b8a4f454cab48224fb9d59737d26d787, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461512906702438507, guid: b8a4f454cab48224fb9d59737d26d787, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461512906702438507, guid: b8a4f454cab48224fb9d59737d26d787, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461512906702438507, guid: b8a4f454cab48224fb9d59737d26d787, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461512906702438507, guid: b8a4f454cab48224fb9d59737d26d787, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461512906702438507, guid: b8a4f454cab48224fb9d59737d26d787, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461512906702438507, guid: b8a4f454cab48224fb9d59737d26d787, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982188203663530705, guid: b8a4f454cab48224fb9d59737d26d787, type: 3}
+      propertyPath: m_Name
+      value: 02.LargoPinkTabby
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b8a4f454cab48224fb9d59737d26d787, type: 3}
 --- !u!4 &1424109199896037886
 Transform:
   m_ObjectHideFlags: 0
