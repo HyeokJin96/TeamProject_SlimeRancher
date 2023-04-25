@@ -22,7 +22,7 @@ public class TimeController : KSingleton<TimeController>
 
     private void Timer()
     {
-        minute += Time.deltaTime * 12;
+        minute += Time.deltaTime;
 
         minute_ = Mathf.FloorToInt(minute % 60);
         hour_ = Mathf.FloorToInt(hour % 60);

@@ -30,7 +30,26 @@ public class UIController : MonoBehaviour
 
         // test
         UIManager.Instance.btn_TestPlay_.onClick.AddListener(() => SceneManager_.Instance.GoPlayScene());
-        //UIManager.Instance.btn_TestLoad_.onClick.AddListener(() => UIManager.Instance.LoadPlayerData_Btn());
+
+        //Graphics test
+        UIManager.Instance.btn_FullScreen_.onClick.AddListener(
+            () => UIManager.Instance.FullScreen_Btn()
+        );
+        UIManager.Instance.btn_Star_.onClick.AddListener(
+            () => UIManager.Instance.Star_Btn()
+        );
+        UIManager.Instance.btn_Cloud_.onClick.AddListener(
+            () => UIManager.Instance.Cloud_Btn()
+        );
+        UIManager.Instance.btn_Shadow_.onClick.AddListener(
+            () => UIManager.Instance.Shadow_Btn()
+        );
+        UIManager.Instance.btn_LightIMP_.onClick.AddListener(
+            () => UIManager.Instance.Light_IMP_Btn()
+        );
+        UIManager.Instance.btn_WaterIMP_.onClick.AddListener(
+            () => UIManager.Instance.Water_IMP_Btn()
+        );
         #endregion
     }
 

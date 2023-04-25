@@ -13,20 +13,20 @@ public class GameManager : KSingleton<GameManager>
     public GameObject star = default;
 
     public GameObject water = default;
-    private MeshRenderer water_ = default;
+    public MeshRenderer water_ = default;
 
     public GameObject sun = default;
-    private Light sun_ = default;
+    public Light sun_ = default;
 
     public int width = 1920;
     public int height = 1080;
 
+    public bool isFullScreenOn = true;
     public bool isCloudOn = true;
     public bool isStarOn = true;
     public bool isShadowOn = true;
-    public bool isWaterHigh = true;
     public bool isLightImprovement = true;
-    public bool isFullScreenOn = true;
+    public bool isWaterImprovement = true;
 
     [SerializeField]
     public float mouseSensitivity = default; //  ���콺 ����
@@ -39,84 +39,43 @@ public class GameManager : KSingleton<GameManager>
         sun_ = sun.GetComponent<Light>();
     }
 
-    public void CloudOn()
-    {
-        if (isCloudOn == false)
-        {
-            cloud.SetActive(false);
-        }
-        else
-        {
-            cloud.SetActive(true);
-        }
-    }
-
-    public void StarOn()
-    {
-        isStarOn = !isStarOn;
-
-        if (isStarOn == false)
-        {
-            star.SetActive(false);
-        }
-        else
-        {
-            star.SetActive(true);
-        }
-    }
-
-    public void WaterOn()
-    {
-        isWaterHigh = !isWaterHigh;
-
-        if (isWaterHigh == false)
-        {
-            water.SetActive(false);
-        }
-        else
-        {
-            water.SetActive(true);
-        }
-    }
-
-    public void ShadowOn()
-    {
-        isShadowOn = !isShadowOn;
-
-        if (isShadowOn == false)
-        {
-            sun_.shadows = LightShadows.None;
-        }
-        else
-        {
-            sun_.shadows = LightShadows.Soft;
-        }
-    }
-
-    public void LightQuality()
-    {
-        isLightImprovement = !isLightImprovement;
-
-        if (isLightImprovement == false)
-        {
-            QualitySettings.shadowResolution = ShadowResolution.Medium;
-        }
-        else
-        {
-            QualitySettings.shadowResolution = ShadowResolution.VeryHigh;
-        }
-    }
-
     public void FullScreenOn()
     {
         isFullScreenOn = !isFullScreenOn;
         if (isFullScreenOn == false)
         {
             Screen.SetResolution(width, height, false);
+            UIManager.Instance.Img_Check_F.SetActive(false);
         }
         else
         {
             Screen.SetResolution(width, height, true);
+            UIManager.Instance.Img_Check_F.SetActive(true);
         }
+    }
+
+    public void StarOn()
+    {
+        isStarOn = !isStarOn;
+    }
+
+    public void CloudOn()
+    {
+        isCloudOn = !isCloudOn;
+    }
+
+    public void ShadowOn()
+    {
+        isShadowOn = !isShadowOn;
+    }
+
+    public void LightQuality()
+    {
+        isLightImprovement = !isLightImprovement;
+    }
+
+    public void WaterOn()
+    {
+        isWaterImprovement = !isWaterImprovement;
     }
 }

@@ -799,7 +799,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 431b5500a7d4faa4b920d578f776c3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path: 
+  path_P: 
+  path_T: 
+  path_OG: 
   isLoadOn: 0
 --- !u!114 &3966512630871486577
 MonoBehaviour:

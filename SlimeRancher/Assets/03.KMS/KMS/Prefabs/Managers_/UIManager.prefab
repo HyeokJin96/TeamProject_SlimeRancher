@@ -1,0 +1,135 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2046334198734871834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2046334198734871833}
+  - component: {fileID: 2046334198734871832}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2046334198734871833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046334198734871834}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2046334198734871832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046334198734871834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 737fba2b43bac9846b1a4385de4a6955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UiObjs: {fileID: 0}
+  buttons: {fileID: 0}
+  map: {fileID: 0}
+  PlayMenu: {fileID: 0}
+  LoadMenu: {fileID: 0}
+  optionMenu: {fileID: 0}
+  bg_GraphicOption: {fileID: 0}
+  bg_SoundOption: {fileID: 0}
+  bg_GamePlayOption: {fileID: 0}
+  bg_GamePadOption: {fileID: 0}
+  bg_EtcOption: {fileID: 0}
+  inGameMenu: {fileID: 0}
+  playerUI: {fileID: 0}
+  inGameDay_Text: {fileID: 0}
+  inGameDay_Text_: {fileID: 0}
+  inGameTime_Text: {fileID: 0}
+  inGameTime_Text_: {fileID: 0}
+  btn_Play: {fileID: 0}
+  btn_Play_: {fileID: 0}
+  btn_Load: {fileID: 0}
+  btn_Load_: {fileID: 0}
+  btn_Option: {fileID: 0}
+  btn_Option_: {fileID: 0}
+  btn_Exit: {fileID: 0}
+  btn_Exit_: {fileID: 0}
+  btn_PlayExit: {fileID: 0}
+  btn_PlayExit_: {fileID: 0}
+  btn_TestPlay: {fileID: 0}
+  btn_TestPlay_: {fileID: 0}
+  btn_LoadExit: {fileID: 0}
+  btn_LoadExit_: {fileID: 0}
+  btn_TestLoad: {fileID: 0}
+  btn_TestLoad_: {fileID: 0}
+  btn_optionExit: {fileID: 0}
+  btn_optionExit_: {fileID: 0}
+  btn_GraphicOption: {fileID: 0}
+  btn_GraphicOption_: {fileID: 0}
+  btn_SoundOption: {fileID: 0}
+  btn_SoundOption_: {fileID: 0}
+  btn_GamePlayOption: {fileID: 0}
+  btn_GamePlayOption_: {fileID: 0}
+  btn_GamePadOption: {fileID: 0}
+  btn_GamePadOption_: {fileID: 0}
+  btn_EtcOption: {fileID: 0}
+  btn_EtcOption_: {fileID: 0}
+  text_FullScreen: {fileID: 0}
+  text_Star: {fileID: 0}
+  text_Cloud: {fileID: 0}
+  text_Shadow: {fileID: 0}
+  text_LightIMP: {fileID: 0}
+  text_WaterIMP: {fileID: 0}
+  btn_FullScreen: {fileID: 0}
+  btn_FullScreen_: {fileID: 0}
+  btn_Star: {fileID: 0}
+  btn_Star_: {fileID: 0}
+  btn_Cloud: {fileID: 0}
+  btn_Cloud_: {fileID: 0}
+  btn_Shadow: {fileID: 0}
+  btn_Shadow_: {fileID: 0}
+  btn_LightIMP: {fileID: 0}
+  btn_LightIMP_: {fileID: 0}
+  btn_WaterIMP: {fileID: 0}
+  btn_WaterIMP_: {fileID: 0}
+  Img_Check_F: {fileID: 0}
+  Img_Check_ST: {fileID: 0}
+  Img_Check_C: {fileID: 0}
+  Img_Check_SH: {fileID: 0}
+  Img_Check_L: {fileID: 0}
+  Img_Check_W: {fileID: 0}
+  btn_Resume: {fileID: 0}
+  btn_Resume_: {fileID: 0}
+  btn_IGOption: {fileID: 0}
+  btn_IGOption_: {fileID: 0}
+  btn_IGOptionExit: {fileID: 0}
+  btn_IGOptionExit_: {fileID: 0}
+  btn_ScreenShot: {fileID: 0}
+  btn_ScreenShot_: {fileID: 0}
+  btn_SaveExit: {fileID: 0}
+  btn_SaveExit_: {fileID: 0}
+  isOptionMenu_Open: 0
+  isLoadMenu_Open: 0
+  isPlayMenu_Open: 0
+  isGraphicOp_Open: 0
+  isSoundOp_Open: 0
+  isGamePlayOp_Open: 0
+  isGamePadOp_Open: 0
+  isEtcOp_Open: 0
+  isInGameMenu_Open: 0
+  isMapOpen: 0

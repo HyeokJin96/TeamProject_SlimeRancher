@@ -22,6 +22,20 @@ public class UIController_ : MonoBehaviour
             () => UIManager.Instance.IGOptionExit_Btn()
         );
 
+        //Graphics
+        UIManager.Instance.btn_FullScreen_.onClick.AddListener(
+            () => UIManager.Instance.FullScreen_Btn()
+        );
+        UIManager.Instance.btn_Star_.onClick.AddListener(() => UIManager.Instance.Star_Btn());
+        UIManager.Instance.btn_Cloud_.onClick.AddListener(() => UIManager.Instance.Cloud_Btn());
+        UIManager.Instance.btn_Shadow_.onClick.AddListener(() => UIManager.Instance.Shadow_Btn());
+        UIManager.Instance.btn_LightIMP_.onClick.AddListener(
+            () => UIManager.Instance.Light_IMP_Btn()
+        );
+        UIManager.Instance.btn_WaterIMP_.onClick.AddListener(
+            () => UIManager.Instance.Water_IMP_Btn()
+        );
+
         //ScreenShot
         UIManager.Instance.btn_ScreenShot_.onClick.AddListener(
             () => UIManager.Instance.ScreenShot_Btn()
@@ -50,6 +64,7 @@ public class UIController_ : MonoBehaviour
     {
         // InGame
         UIManager.Instance.InGameMenu();
+        UIManager.Instance.MapOpen();
 
         //Option
         UIManager.Instance.IGOptionExit_Key();
@@ -63,4 +78,6 @@ public class UIController_ : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
+
+    
 }

@@ -17,7 +17,6 @@ public class SunRotation : MonoBehaviour
         thisLight = gameObject.GetComponent<Light>();
 
         transform.localEulerAngles = new Vector3(180, 0, 0);
-
     }
 
     private void Update()
@@ -32,7 +31,7 @@ public class SunRotation : MonoBehaviour
 
     private void RotateSun()
     {
-        transform.Rotate(new Vector3(-0.25f, 0, 0) * Time.deltaTime * 12); //6
+        transform.Rotate(new Vector3(-0.25f, 0, 0) * Time.deltaTime);
 
         if (setTime_min == 12)
         {
@@ -59,13 +58,13 @@ public class SunRotation : MonoBehaviour
     {
         if (isDay == false)
         {
-            thisLight.intensity -= 0.05555f * Time.deltaTime * 12; //12
+            thisLight.intensity -= 0.05555f * Time.deltaTime;
         }
         else
         {
             if (thisLight.intensity < 1)
             {
-                thisLight.intensity += 0.05555f * Time.deltaTime * 12; //12
+                thisLight.intensity += 0.05555f * Time.deltaTime;
             }
         }
 

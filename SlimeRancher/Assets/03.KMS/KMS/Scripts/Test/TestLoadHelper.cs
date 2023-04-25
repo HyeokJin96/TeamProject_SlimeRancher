@@ -17,7 +17,7 @@ public class TestLoadHelper : KSingleton<TestLoadHelper>
     public bool isCloudOn_ = true;
     public bool isStarOn_ = true;
     public bool isShadowOn_ = true;
-    public bool isWaterHigh_ = true;
+    public bool isWaterImprovement_ = true;
     public bool isLightImprovement_ = true;
     public bool isFullScreenOn_ = true;
     public int width_ = 1920;
@@ -43,20 +43,26 @@ public class TestLoadHelper : KSingleton<TestLoadHelper>
             TimeController.Instance.hour = hour_;
             TimeController.Instance.day = day_;
 
-            //graphics
-            isCloudOn_ = T_DataManager.Instance.en_Data_.isCloudOn;
-            isStarOn_ = T_DataManager.Instance.en_Data_.isStarOn;
-            isShadowOn_ = T_DataManager.Instance.en_Data_.isShadowOn;
-            isWaterHigh_ = T_DataManager.Instance.en_Data_.isWaterHigh;
-            isLightImprovement_ = T_DataManager.Instance.en_Data_.isLightImprovement;
-            isFullScreenOn_ = T_DataManager.Instance.en_Data_.isFullScreenOn;
-            width_ = T_DataManager.Instance.en_Data_.width;
-            height_ = T_DataManager.Instance.en_Data_.height;
-
-            
-
             T_DataManager.Instance.isLoadOn = false;
         }
+        //graphics
+        isFullScreenOn_ = T_DataManager.Instance.en_Data_.isFullScreenOn;
+        isStarOn_ = T_DataManager.Instance.en_Data_.isStarOn;
+        isCloudOn_ = T_DataManager.Instance.en_Data_.isCloudOn;
+        isShadowOn_ = T_DataManager.Instance.en_Data_.isShadowOn;
+        isLightImprovement_ = T_DataManager.Instance.en_Data_.isLightImprovement;
+        isWaterImprovement_ = T_DataManager.Instance.en_Data_.isWaterImprovement;
+        width_ = T_DataManager.Instance.en_Data_.width;
+        height_ = T_DataManager.Instance.en_Data_.height;
+
+        GameManager.Instance.isFullScreenOn = isFullScreenOn_;
+        GameManager.Instance.isStarOn = isStarOn_;
+        GameManager.Instance.isCloudOn = isCloudOn_;
+        GameManager.Instance.isShadowOn = isShadowOn_;
+        GameManager.Instance.isLightImprovement = isLightImprovement_;
+        GameManager.Instance.isWaterImprovement = isWaterImprovement_;
+        GameManager.Instance.width = width_;
+        GameManager.Instance.height = height_;
     }
 
     new void Update()
@@ -77,9 +83,15 @@ public class TestLoadHelper : KSingleton<TestLoadHelper>
             T_DataManager.Instance.timedata_.minute = TimeController.Instance.minute;
             T_DataManager.Instance.timedata_.hour = TimeController.Instance.hour;
             T_DataManager.Instance.timedata_.day = TimeController.Instance.day;
-            Debug.Log(
-                $"{TimeController.Instance.day} . {TimeController.Instance.hour} : {TimeController.Instance.minute}"
-            );
+
+            T_DataManager.Instance.en_Data_.isFullScreenOn = GameManager.Instance.isFullScreenOn;
+            T_DataManager.Instance.en_Data_.isStarOn = GameManager.Instance.isStarOn;
+            T_DataManager.Instance.en_Data_.isCloudOn = GameManager.Instance.isCloudOn;
+            T_DataManager.Instance.en_Data_.isShadowOn = GameManager.Instance.isShadowOn;
+            T_DataManager.Instance.en_Data_.isLightImprovement = GameManager.Instance.isLightImprovement;
+            T_DataManager.Instance.en_Data_.isWaterImprovement = GameManager.Instance.isWaterImprovement;
+            T_DataManager.Instance.en_Data_.width = GameManager.Instance.width;
+            T_DataManager.Instance.en_Data_.height = GameManager.Instance.height;
         }
     }
 }
