@@ -8,12 +8,15 @@ public class T_DataManager : KSingleton<T_DataManager>
     public PlayerData_ playerdata_ = new PlayerData_();
     public TimeData_ timedata_ = new TimeData_();
     public EnvironmentData_ en_Data_ = new EnvironmentData_();
+    public Test_Rot trot = new Test_Rot();
 
     public string path_P = default;
     public string path_T = default;
     public string path_OG = default;
+    public string path_TR = default;
 
     public bool isLoadOn = false;
+    public bool isNewGame = false;
 
     public override void Awake()
     {
@@ -22,11 +25,14 @@ public class T_DataManager : KSingleton<T_DataManager>
         path_P = Application.persistentDataPath + "/p_Data.json";
         path_T = Application.persistentDataPath + "/t_Data.json";
         path_OG = Application.persistentDataPath + "/og_Data.json";
+        path_TR = Application.persistentDataPath + "/tr_Data.json";
     }
 
     public override void Start()
     {
         base.Start();
+        Debug.Log(path_TR);
+
     }
 
     //player
@@ -40,6 +46,17 @@ public class T_DataManager : KSingleton<T_DataManager>
     {
         string data = File.ReadAllText(path_P);
         playerdata_ = JsonUtility.FromJson<PlayerData_>(data);
+    }
+    public void SaveData_TR()
+    {
+        string data = JsonUtility.ToJson(trot);
+        File.WriteAllText(path_TR, data);
+    }
+
+    public void LoadData_TR()
+    {
+        string data = File.ReadAllText(path_TR);
+        trot = JsonUtility.FromJson<Test_Rot>(data);
     }
 
     //time

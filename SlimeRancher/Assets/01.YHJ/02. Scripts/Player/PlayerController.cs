@@ -55,8 +55,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameManager gameManager = default;
 
-    private float currentX;
-    private float currentY;
+    public static float currentX;
+    public static float currentY;
 
     private void Awake()
     {

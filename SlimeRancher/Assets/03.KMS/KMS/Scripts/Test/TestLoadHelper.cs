@@ -8,6 +8,9 @@ public class TestLoadHelper : KSingleton<TestLoadHelper>
     public Vector3 playerPos_ = default;
     public Quaternion playerRot_ = default;
 
+    public float currentX;
+    public float currentY;
+
     //time
     public float minute_ = 0;
     public float hour_ = 0;
@@ -33,6 +36,12 @@ public class TestLoadHelper : KSingleton<TestLoadHelper>
 
             GameManager.Instance.player.transform.position = playerPos_;
             GameManager.Instance.player.transform.rotation = playerRot_;
+
+            currentX = T_DataManager.Instance.trot.currentX;
+            currentY = T_DataManager.Instance.trot.currentY;
+
+            PlayerController.currentX = currentX;
+            PlayerController.currentY = currentY;
 
             //time
             minute_ = T_DataManager.Instance.timedata_.minute;
@@ -79,6 +88,9 @@ public class TestLoadHelper : KSingleton<TestLoadHelper>
                 .player
                 .transform
                 .rotation;
+
+            T_DataManager.Instance.trot.currentX = PlayerController.currentX;
+            T_DataManager.Instance.trot.currentY = PlayerController.currentY;
 
             T_DataManager.Instance.timedata_.minute = TimeController.Instance.minute;
             T_DataManager.Instance.timedata_.hour = TimeController.Instance.hour;

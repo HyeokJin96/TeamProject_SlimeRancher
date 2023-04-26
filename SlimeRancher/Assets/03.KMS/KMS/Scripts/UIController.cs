@@ -29,7 +29,7 @@ public class UIController : MonoBehaviour
         UIManager.Instance.btn_optionExit_.onClick.AddListener(() => UIManager.Instance.Exit_GameOption());
 
         // test
-        UIManager.Instance.btn_TestPlay_.onClick.AddListener(() => SceneManager_.Instance.GoPlayScene());
+        UIManager.Instance.btn_TestPlay_.onClick.AddListener(() => UIManager.Instance.NewGame());
 
         //Graphics test
         UIManager.Instance.btn_FullScreen_.onClick.AddListener(

@@ -15,12 +15,14 @@ public class TestSlot : MonoBehaviour
     {
         if (File.Exists(T_DataManager.Instance.path_P)
             && File.Exists(T_DataManager.Instance.path_T)
-            && File.Exists(T_DataManager.Instance.path_OG))
+            && File.Exists(T_DataManager.Instance.path_OG)
+            && File.Exists(T_DataManager.Instance.path_TR))
         {
             saveFile = true;
             T_DataManager.Instance.LoadData_P();
             T_DataManager.Instance.LoadData_T();
             T_DataManager.Instance.LoadData_OG();
+            T_DataManager.Instance.LoadData_TR();
             slotText.text = $"Play";
         }
         else
@@ -37,6 +39,7 @@ public class TestSlot : MonoBehaviour
             T_DataManager.Instance.LoadData_P();
             T_DataManager.Instance.LoadData_T();
             T_DataManager.Instance.LoadData_OG();
+            T_DataManager.Instance.LoadData_TR();
             T_DataManager.Instance.isLoadOn = true;
             GoPlayScene_();
         }
@@ -53,6 +56,7 @@ public class TestSlot : MonoBehaviour
             T_DataManager.Instance.SaveData_P();
             T_DataManager.Instance.SaveData_T();
             T_DataManager.Instance.SaveData_OG();
+            T_DataManager.Instance.SaveData_TR();
         }
         SceneManager_.Instance.GoPlayScene();
     }

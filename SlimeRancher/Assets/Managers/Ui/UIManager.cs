@@ -266,6 +266,12 @@ public class UIManager : KSingleton<UIManager>
         T_DataManager.Instance.isLoadOn = false;
     }
 
+    public void NewGame()
+    {
+        T_DataManager.Instance.isLoadOn = false;
+        SceneManager_.Instance.GoPlayScene();
+    }
+
     public void Exit_PlayMenu()
     {
         PlayMenu.SetActive(false);
@@ -309,11 +315,11 @@ public class UIManager : KSingleton<UIManager>
         }
     }
 
-    public void LoadPlayerData_Btn()
-    {
-        T_DataManager.Instance.isLoadOn = true;
-        SceneManager_.Instance.GoPlayScene();
-    }
+    // public void LoadPlayerData_Btn()
+    // {
+    //     T_DataManager.Instance.isLoadOn = true;
+    //     SceneManager_.Instance.GoPlayScene();
+    // }
     #endregion
 
     #region Option Button Function
@@ -653,7 +659,8 @@ public class UIManager : KSingleton<UIManager>
         T_DataManager.Instance.SaveData_P();
         T_DataManager.Instance.SaveData_T();
         T_DataManager.Instance.SaveData_OG();
-        SceneManager_.Instance.GoTitleScene();
+        T_DataManager.Instance.SaveData_TR();
+        GFunc.QuitThisGame();
     }
 
 
