@@ -10,33 +10,59 @@ public class Ui_UpgradeStation : MonoBehaviour
     private string resourcePath_Text = "01.YHJ/TextAsset/Name";
 
     [SerializeField] private Sprite[] loadedIcons = default;
-    [SerializeField] TextAsset textAsset = default;
+    [SerializeField] private TextAsset loadedText = default;
 
     [SerializeField] private GameObject upgradeList = default;
+    [SerializeField] private GameObject Information = default;
 
-    [SerializeField] private Image[] icons = default;
-    [SerializeField] private TMP_Text[] text = default;
+    [SerializeField] private Image[] itemIconImages = default;
+
+    [SerializeField] private TMP_Text[] itemNameTexts = default;
+    [SerializeField] private TMP_Text[] itemInformationTexts = default;
+    [SerializeField] private TMP_Text[] itemCostTexts = default;
+
     [SerializeField] private string[] lines = default;
 
+    [SerializeField] private string[] itemNameCandidates = default;
+    [SerializeField] private string[] itemInformationCandidates = default;
+    [SerializeField] private string[] itemCostCandidates = default;
+
+    [SerializeField] private Button[] listButton;
+    [SerializeField] private Sprite selected_Icon;
+    [SerializeField] private string selected_Name;
+    [SerializeField] private string selected_Information;
+    [SerializeField] private string selected_Cost;
 
     private void Awake()
     {
         loadedIcons = Resources.LoadAll<Sprite>(resourcePath_UpgradeStation);
-        textAsset = Resources.Load<TextAsset>(resourcePath_Text);
+        loadedText = Resources.Load<TextAsset>(resourcePath_Text);
 
-        upgradeList = transform.transform.GetChild(1).GetChild(0).GetChild(0).gameObject;
+        upgradeList = transform.GetChild(1).GetChild(0).GetChild(0).gameObject;
+        Information = transform.GetChild(1).GetChild(2).GetChild(0).gameObject;
 
-        icons = new Image[18];
-        text = new TMP_Text[18];
-        lines = textAsset.text.Split('\n');
+        itemIconImages = new Image[upgradeList.transform.childCount];
 
-        for (int i = 0; i < icons.Length; i++)
+        itemNameTexts = new TMP_Text[upgradeList.transform.childCount];
+        itemInformationTexts = new TMP_Text[upgradeList.transform.childCount];
+        itemCostTexts = new TMP_Text[upgradeList.transform.childCount];
+
+        listButton = new Button[upgradeList.transform.childCount];
+
+        itemNameCandidates = new string[upgradeList.transform.childCount];
+        itemInformationCandidates = new string[upgradeList.transform.childCount];
+        itemCostCandidates = new string[upgradeList.transform.childCount];
+
+        lines = loadedText.text.Split('\n');
+
+        for (int i = 0; i < itemIconImages.Length; i++)
         {
-            icons[i] = upgradeList.transform.GetChild(i).GetChild(0).GetComponent<Image>();
+            itemIconImages[i] = upgradeList.transform.GetChild(i).GetChild(0).GetComponent<Image>();
+            listButton[i] = upgradeList.transform.GetChild(i).GetComponent<Button>();
 
             if (i < loadedIcons.Length)
             {
-                icons[i].sprite = loadedIcons[i];
+                itemIconImages[i].sprite = loadedIcons[i];
             }
             else
             {
@@ -44,16 +70,37 @@ public class Ui_UpgradeStation : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < text.Length; i++)
+        for (int i = 0; i < itemNameTexts.Length; i++)
         {
-            text[i] = upgradeList.transform.GetChild(i).GetChild(1).GetComponent<TMP_Text>();
+            string[] index = lines[i].Trim().Split('/');
+            itemNameTexts[i] = upgradeList.transform.GetChild(i).GetChild(1).GetComponent<TMP_Text>();
 
-            if (i < lines.Length)
+            itemNameCandidates[i] = index[0].Trim();
+            itemInformationCandidates[i] = index[1].Trim();
+            itemCostCandidates[i] = index[2].Trim();
+
+            itemNameTexts[i].text = itemNameCandidates[i];
+        }
+    }
+
+    public void OnButtonClicked(Button clickedButton_)
+    {
+        for (int i = 0; i < listButton.Length; i++)
+        {
+            if (listButton[i] == clickedButton_)
             {
-                text[i].text = lines[i].Trim();
+                selected_Icon = listButton[i].transform.GetChild(0).GetComponent<Image>().sprite;
+
+                selected_Name = itemNameCandidates[i];
+                selected_Information = itemInformationCandidates[i];
+                selected_Cost = itemCostCandidates[i];
+
+                Information.transform.GetChild(0).GetComponent<Image>().sprite = selected_Icon;
+                Information.transform.GetChild(1).GetComponent<TMP_Text>().text = selected_Name;
+                Information.transform.GetChild(2).GetComponent<TMP_Text>().text = selected_Information;
+                Information.transform.GetChild(3).GetComponent<TMP_Text>().text = "Cost :\t" + selected_Cost;
             }
         }
-
-
     }
+
 }
