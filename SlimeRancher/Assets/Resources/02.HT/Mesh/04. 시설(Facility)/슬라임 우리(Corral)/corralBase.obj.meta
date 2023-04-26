@@ -3,7 +3,12 @@ guid: cd4e315bd58a05447a5a8ebd0b0cff22
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: corralBase_0Mat
+    second: {fileID: 2100000, guid: f9837b6f192c89c4f9dcd97c81121f5f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
