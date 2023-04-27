@@ -6,7 +6,8 @@ public class Player_Raycast : MonoBehaviour
 {
     [SerializeField] private Canvas canvas_Ui = default;
     [SerializeField] private Camera mainCamera = default;
-    [SerializeField] private GameObject muzzle = default;
+    [SerializeField] private GameObject vac_Muzzle = default;
+
     [SerializeField] private GameObject crosshair = default;
     [SerializeField] private ObjecData objectData = default;
     [SerializeField] private GameObject targetObject = default;
@@ -25,7 +26,8 @@ public class Player_Raycast : MonoBehaviour
     {
         mainCamera = Camera.main;
         canvas_Ui = FindAnyObjectByType<Canvas>();
-        muzzle = transform.GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0).gameObject;
+
+        vac_Muzzle = transform.GetChild(0).GetChild(1).GetChild(3).gameObject;
         crosshair = canvas_Ui.transform.GetChild(12).gameObject;
         crosshairImage = crosshair.transform.GetChild(0).GetComponent<Image>();
 
@@ -49,7 +51,7 @@ public class Player_Raycast : MonoBehaviour
         }
 
         Vector3 direction = mainCamera.transform.position + mainCamera.transform.forward * raycastDistance;
-        Debug.DrawLine(muzzle.transform.position, direction, Color.red);
+        Debug.DrawLine(vac_Muzzle.transform.position, direction, Color.red);
 
         if (objectData != null)
         {
