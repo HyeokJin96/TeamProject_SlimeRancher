@@ -105,6 +105,11 @@ public class UIManager : KSingleton<UIManager>
     public bool isInGameMenu_Open = false;
     #endregion
 
+    // [HT] TestUI
+    public GameObject interactionTextUI;
+    public GameObject corralText;
+    // [HT] TestUI
+
     public override void Init()
     {
         //Caching
@@ -191,6 +196,10 @@ public class UIManager : KSingleton<UIManager>
         btn_TestLoad = LoadMenu.transform.GetChild(5).gameObject;
         btn_TestLoad_ = btn_TestLoad.GetComponent<Button>();
         //Test Button
+
+        // [HT] TestUI
+        interactionTextUI = UiObjs.transform.GetChild(8).gameObject;
+        corralText = interactionTextUI.transform.GetChild(0).gameObject;
     }
 
     #region Play Button Function

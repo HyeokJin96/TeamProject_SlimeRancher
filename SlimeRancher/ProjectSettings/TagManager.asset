@@ -13,6 +13,7 @@ TagManager:
   - Food
   - Plort
   - Terrain
+  - Button
   layers:
   - Default
   - TransparentFX

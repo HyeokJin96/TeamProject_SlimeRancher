@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
         RotatePlayer();
 
         //
-        Debug.Log(transform.position);
+        //Debug.Log(transform.position);
     }
 
     private void RotatePlayer()
