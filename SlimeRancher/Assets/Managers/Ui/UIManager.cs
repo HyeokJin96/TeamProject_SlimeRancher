@@ -679,12 +679,10 @@ public class UIManager : KSingleton<UIManager>
         if (isMapOpen == true)
         {
             map.SetActive(true);
-            Time.timeScale = 0;
         }
         else
         {
             map.SetActive(false);
-            Time.timeScale = 1;
         }
     }
     #endregion

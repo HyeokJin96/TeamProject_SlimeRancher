@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class TimeController : KSingleton<TimeController>
 {
@@ -10,6 +11,8 @@ public class TimeController : KSingleton<TimeController>
     public float hour_ = 0;
     public int day = 1;
 
+    public int nTimesFaster = 1;
+
     private new void Awake()
     {
         hour = 6;
@@ -18,6 +21,11 @@ public class TimeController : KSingleton<TimeController>
     private new void Update()
     {
         Timer();
+    }
+
+    private void NTimesFaster()
+    {
+        nTimesFaster = 20;
     }
 
     private void Timer()

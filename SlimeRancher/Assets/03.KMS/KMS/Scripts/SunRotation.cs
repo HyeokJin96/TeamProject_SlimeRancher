@@ -16,22 +16,39 @@ public class SunRotation : MonoBehaviour
         isDay = true;
         thisLight = gameObject.GetComponent<Light>();
 
-        transform.localEulerAngles = new Vector3(180, 0, 0);
+        transform.localEulerAngles = new Vector3(
+            270 + (-0.25f * (TimeController.Instance.minute + (TimeController.Instance.hour * 60))),
+            0,
+            0
+        );
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
+        if (Time.timeScale == 1)
+        {
+            timer += Time.deltaTime;
 
-        RotateSun();
-        SunColor();
+            RotateSun();
+            SunColor();
 
-        TimeChecker();
+            TimeChecker();
+        }
     }
 
     private void RotateSun()
     {
-        transform.Rotate(new Vector3(-0.25f, 0, 0) * Time.deltaTime);
+        transform.Rotate(new Vector3(-0.25f, 0, 0) * Time.deltaTime 
+        * TimeController.Instance.nTimesFaster);
+    }
+
+    private void TimeChecker()
+    {
+        if (timer >= setTime_sec)
+        {
+            setTime_min++;
+            timer = 0;
+        }
 
         if (setTime_min == 12)
         {
@@ -42,15 +59,6 @@ public class SunRotation : MonoBehaviour
         {
             isDay = true;
             setTime_min = 0;
-        }
-    }
-
-    private void TimeChecker()
-    {
-        if (timer >= setTime_sec)
-        {
-            setTime_min++;
-            timer = 0;
         }
     }
 
