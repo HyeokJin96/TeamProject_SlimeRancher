@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
         Sprint();
         RotatePlayer();
 
-        //AnimationControll();
+        AnimationControll();
         //Absorption();
     }
 
