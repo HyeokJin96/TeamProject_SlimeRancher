@@ -38,8 +38,8 @@ public class PlayerController : MonoBehaviour
 
 
 
-    private float currentX;
-    private float currentY;
+    public static float currentX;
+    public static float currentY;
 
 
     private void Awake()

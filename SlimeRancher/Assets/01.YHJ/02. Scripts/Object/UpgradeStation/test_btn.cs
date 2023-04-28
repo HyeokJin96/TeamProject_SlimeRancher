@@ -19,7 +19,7 @@ public class test_btn : MonoBehaviour
         text = transform.GetChild(0).GetComponent<TMP_Text>();
 
         canvas = transform.parent.parent.GetComponent<Canvas>();
-        ui_UpgradeStation = canvas.transform.GetChild(14).gameObject;
+        ui_UpgradeStation = canvas.transform.GetChild(10).gameObject;
     }
 
     private void Start()

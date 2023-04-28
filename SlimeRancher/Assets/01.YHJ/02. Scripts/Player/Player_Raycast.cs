@@ -7,6 +7,7 @@ public class Player_Raycast : MonoBehaviour
     [SerializeField] private Canvas canvas_Ui = default;
     [SerializeField] private Camera mainCamera = default;
     [SerializeField] private GameObject vac_Muzzle = default;
+    [SerializeField] private GameObject player_Ui = default;
 
     [SerializeField] private GameObject crosshair = default;
     [SerializeField] private ObjecData objectData = default;
@@ -26,9 +27,10 @@ public class Player_Raycast : MonoBehaviour
     {
         mainCamera = Camera.main;
         canvas_Ui = FindAnyObjectByType<Canvas>();
+        player_Ui = canvas_Ui.transform.GetChild(0).gameObject;
 
         vac_Muzzle = transform.GetChild(0).GetChild(1).GetChild(3).gameObject;
-        crosshair = canvas_Ui.transform.GetChild(12).gameObject;
+        crosshair = player_Ui.transform.GetChild(4).gameObject;
         crosshairImage = crosshair.transform.GetChild(0).GetComponent<Image>();
 
     }

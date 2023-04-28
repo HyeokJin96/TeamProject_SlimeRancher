@@ -6,21 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/00.TitleScene.unity
-    guid: 860d709543fd4784ca57bb6e756759d2
-  - enabled: 0
-    path: Assets/Scenes/01.InitScene.unity
-    guid: 41725a33713792d40b0079c998d920a0
-  - enabled: 0
-    path: Assets/Scenes/02.PlayScene.unity
-    guid: 6c78f8d506c4b6948aaa469be6547ede
-  - enabled: 1
     path: Assets/03.KMS/KMS/Scenes/TestInitScene.unity
     guid: d0b7a62a1b3d7ba4e93adebf536d10ef
-  - enabled: 1
+  - enabled: 0
     path: Assets/03.KMS/KMS/Scenes/TestTitleScene.unity
     guid: 9dd4b8493439fe345a45eb99b615b1c6
-  - enabled: 1
+  - enabled: 0
     path: Assets/03.KMS/KMS/Scenes/TestScene.unity
     guid: e67eeb467dd56534a9840c4ecfee9575
+  - enabled: 1
+    path: Assets/Project.SlimeRancher/00.InitScene.unity
+    guid: 6e84538fc63476e47ace4388378fb6ca
+  - enabled: 1
+    path: Assets/Project.SlimeRancher/01.TitleScene.unity
+    guid: ba8f33e09f273e64a8ad00f3d4edba90
+  - enabled: 1
+    path: Assets/Project.SlimeRancher/02.PlayScene.unity
+    guid: 2d9be4681952c7747a0714fe597943ef
   m_configObjects: {}
