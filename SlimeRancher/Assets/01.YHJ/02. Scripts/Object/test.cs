@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class test : MonoBehaviour
 {
-    [SerializeField] public FoodType foodType;
-    [SerializeField] public FoodName foodName;
+    // [SerializeField] public FoodType foodType;
+    // [SerializeField] public FoodName foodName;
 
-    private void OnGUI()
-    {
-        foodType = (FoodType)EditorGUILayout.EnumPopup("Food Type", foodType);
-        foodName = (FoodName)EditorGUILayout.EnumPopup("Food Name", foodName);
-    }
+    // private void OnGUI()
+    // {
+    //     foodType = (FoodType)EditorGUILayout.EnumPopup("Food Type", foodType);
+    //     foodName = (FoodName)EditorGUILayout.EnumPopup("Food Name", foodName);
+    // }
 }
 

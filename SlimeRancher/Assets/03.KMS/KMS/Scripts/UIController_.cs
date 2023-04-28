@@ -72,6 +72,7 @@ public class UIController_ : MonoBehaviour
 
     private void Set()
     {
+        // InGame Setting
         UIManager.Instance.Create();
         GameManager.Instance.Create();
 

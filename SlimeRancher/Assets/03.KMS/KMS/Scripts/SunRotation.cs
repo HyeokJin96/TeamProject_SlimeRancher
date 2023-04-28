@@ -7,15 +7,12 @@ public class SunRotation : MonoBehaviour
     private Light thisLight = default;
     public static bool isDay = false;
 
-    float timer = 0;
-    float setTime_sec = 5f;
-    int setTime_min = 0;
-
     private void Start()
     {
-        isDay = true;
         thisLight = gameObject.GetComponent<Light>();
 
+        // Set Morning
+        isDay = true;
         transform.localEulerAngles = new Vector3(
             270 + (-0.25f * (TimeController.Instance.minute + (TimeController.Instance.hour * 60))),
             0,
@@ -27,43 +24,31 @@ public class SunRotation : MonoBehaviour
     {
         if (Time.timeScale == 1)
         {
-            timer += Time.deltaTime;
-
             RotateSun();
             SunColor();
-
-            TimeChecker();
         }
     }
 
     private void RotateSun()
     {
+        // Sun Rotation
         transform.Rotate(new Vector3(-0.25f, 0, 0) * Time.deltaTime 
         * TimeController.Instance.nTimesFaster);
     }
 
-    private void TimeChecker()
+    private void SunColor()
     {
-        if (timer >= setTime_sec)
+        // Sun Bright
+        if(TimeController.Instance.hour == 6)
         {
-            setTime_min++;
-            timer = 0;
+            isDay = true;
         }
 
-        if (setTime_min == 12)
+        if(TimeController.Instance.hour == 18)
         {
             isDay = false;
         }
 
-        if (setTime_min == 24)
-        {
-            isDay = true;
-            setTime_min = 0;
-        }
-    }
-
-    private void SunColor()
-    {
         if (isDay == false)
         {
             thisLight.intensity -= 0.05555f * Time.deltaTime;

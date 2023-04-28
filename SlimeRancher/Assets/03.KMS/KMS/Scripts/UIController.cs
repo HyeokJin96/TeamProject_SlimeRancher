@@ -31,7 +31,7 @@ public class UIController : MonoBehaviour
         // test
         UIManager.Instance.btn_TestPlay_.onClick.AddListener(() => UIManager.Instance.NewGame());
 
-        //Graphics test
+        //Graphics
         UIManager.Instance.btn_FullScreen_.onClick.AddListener(
             () => UIManager.Instance.FullScreen_Btn()
         );
@@ -72,6 +72,7 @@ public class UIController : MonoBehaviour
 
     private void Set()
     {
+        // Title Setting
         UIManager.Instance.Create();
 
         Cursor.visible = true;

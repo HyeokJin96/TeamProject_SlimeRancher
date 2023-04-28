@@ -76,6 +76,7 @@ public class TestLoadHelper : KSingleton<TestLoadHelper>
 
     new void Update()
     {
+        // Take Current Set
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             T_DataManager.Instance.playerdata_.playerPos_ = GameManager

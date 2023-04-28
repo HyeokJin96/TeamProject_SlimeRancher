@@ -11,6 +11,7 @@ public class En_Controller : MonoBehaviour
 
     public void EnvironmentSetting()
     {
+        // Graphic Option Function
         if (GameManager.Instance.isStarOn == false)
         {
             GameManager.Instance.star.SetActive(false);
