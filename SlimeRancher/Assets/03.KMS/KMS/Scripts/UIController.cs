@@ -29,8 +29,27 @@ public class UIController : MonoBehaviour
         UIManager.Instance.btn_optionExit_.onClick.AddListener(() => UIManager.Instance.Exit_GameOption());
 
         // test
-        UIManager.Instance.btn_TestPlay_.onClick.AddListener(() => SceneManager_.Instance.GoPlayScene());
-        UIManager.Instance.btn_TestLoad_.onClick.AddListener(() => UIManager.Instance.LoadPlayerData_Btn());
+        UIManager.Instance.btn_TestPlay_.onClick.AddListener(() => UIManager.Instance.NewGame());
+
+        //Graphics
+        UIManager.Instance.btn_FullScreen_.onClick.AddListener(
+            () => UIManager.Instance.FullScreen_Btn()
+        );
+        UIManager.Instance.btn_Star_.onClick.AddListener(
+            () => UIManager.Instance.Star_Btn()
+        );
+        UIManager.Instance.btn_Cloud_.onClick.AddListener(
+            () => UIManager.Instance.Cloud_Btn()
+        );
+        UIManager.Instance.btn_Shadow_.onClick.AddListener(
+            () => UIManager.Instance.Shadow_Btn()
+        );
+        UIManager.Instance.btn_LightIMP_.onClick.AddListener(
+            () => UIManager.Instance.Light_IMP_Btn()
+        );
+        UIManager.Instance.btn_WaterIMP_.onClick.AddListener(
+            () => UIManager.Instance.Water_IMP_Btn()
+        );
         #endregion
     }
 
@@ -53,6 +72,7 @@ public class UIController : MonoBehaviour
 
     private void Set()
     {
+        // Title Setting
         UIManager.Instance.Create();
 
         Cursor.visible = true;

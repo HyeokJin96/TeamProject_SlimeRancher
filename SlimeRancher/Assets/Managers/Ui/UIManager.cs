@@ -10,6 +10,7 @@ public class UIManager : KSingleton<UIManager>
     //UiObjects
     public GameObject UiObjs = default;
     public GameObject buttons = default;
+    public GameObject map = default;
 
     //Play
     public GameObject PlayMenu = default;
@@ -73,6 +74,34 @@ public class UIManager : KSingleton<UIManager>
     public GameObject btn_EtcOption = default;
     public Button btn_EtcOption_ = default;
 
+    //Option Graphics
+    public GameObject text_FullScreen = default;
+    public GameObject text_Star = default;
+    public GameObject text_Cloud = default;
+    public GameObject text_Shadow = default;
+    public GameObject text_LightIMP = default;
+    public GameObject text_WaterIMP = default;
+
+    public GameObject btn_FullScreen = default;
+    public Button btn_FullScreen_ = default;
+    public GameObject btn_Star = default;
+    public Button btn_Star_ = default;
+    public GameObject btn_Cloud = default;
+    public Button btn_Cloud_ = default;
+    public GameObject btn_Shadow = default;
+    public Button btn_Shadow_ = default;
+    public GameObject btn_LightIMP = default;
+    public Button btn_LightIMP_ = default;
+    public GameObject btn_WaterIMP = default;
+    public Button btn_WaterIMP_ = default;
+
+    public GameObject Img_Check_F = default;
+    public GameObject Img_Check_ST = default;
+    public GameObject Img_Check_C = default;
+    public GameObject Img_Check_SH = default;
+    public GameObject Img_Check_L = default;
+    public GameObject Img_Check_W = default;
+
     //InGame Button
     public GameObject btn_Resume = default;
     public Button btn_Resume_ = default;
@@ -85,8 +114,8 @@ public class UIManager : KSingleton<UIManager>
     public GameObject btn_ScreenShot = default;
     public Button btn_ScreenShot_ = default;
 
-    public GameObject btn_SaveExit = default;
-    public Button btn_SaveExit_ = default;
+    public GameObject btn_SaveExit = default; //test
+    public Button btn_SaveExit_ = default; //test
 
     [Header("Open Check")]
     //Open Check Main
@@ -103,6 +132,7 @@ public class UIManager : KSingleton<UIManager>
 
     //Open Check InGame
     public bool isInGameMenu_Open = false;
+    public bool isMapOpen = false;
     #endregion
 
     // [HT] TestUI
@@ -114,12 +144,12 @@ public class UIManager : KSingleton<UIManager>
     {
         //Caching
         UiObjs = GameObject.Find("UiObjs").gameObject;
-        buttons = UiObjs.transform.GetChild(1).gameObject;
+        buttons = UiObjs.transform.GetChild(2).gameObject;
 
         #region Main Objects
-        PlayMenu = UiObjs.transform.GetChild(4).gameObject;
-        LoadMenu = UiObjs.transform.GetChild(3).gameObject;
-        optionMenu = UiObjs.transform.GetChild(2).gameObject;
+        PlayMenu = UiObjs.transform.GetChild(5).gameObject;
+        LoadMenu = UiObjs.transform.GetChild(4).gameObject;
+        optionMenu = UiObjs.transform.GetChild(3).gameObject;
 
         btn_Play = buttons.transform.GetChild(0).gameObject;
         btn_Play_ = btn_Play.GetComponent<Button>();
@@ -148,8 +178,41 @@ public class UIManager : KSingleton<UIManager>
         bg_GamePadOption = optionMenu.transform.GetChild(10).gameObject;
         bg_EtcOption = optionMenu.transform.GetChild(12).gameObject;
 
+        //Graphics
         btn_GraphicOption = optionMenu.transform.GetChild(3).gameObject;
         btn_GraphicOption_ = btn_GraphicOption.GetComponent<Button>();
+
+        text_FullScreen = bg_GraphicOption.transform.GetChild(3).gameObject;
+        Img_Check_F = text_FullScreen.transform.GetChild(1).gameObject;
+        btn_FullScreen = text_FullScreen.transform.GetChild(2).gameObject;
+        btn_FullScreen_ = btn_FullScreen.GetComponent<Button>();
+
+        text_Star = bg_GraphicOption.transform.GetChild(4).gameObject;
+        Img_Check_ST = text_Star.transform.GetChild(1).gameObject;
+        btn_Star = text_Star.transform.GetChild(2).gameObject;
+        btn_Star_ = btn_Star.GetComponent<Button>();
+
+        text_Cloud = bg_GraphicOption.transform.GetChild(5).gameObject;
+        Img_Check_C = text_Cloud.transform.GetChild(1).gameObject;
+        btn_Cloud = text_Cloud.transform.GetChild(2).gameObject;
+        btn_Cloud_ = btn_Cloud.GetComponent<Button>();
+
+        text_Shadow = bg_GraphicOption.transform.GetChild(6).gameObject;
+        Img_Check_SH = text_Shadow.transform.GetChild(1).gameObject;
+        btn_Shadow = text_Shadow.transform.GetChild(2).gameObject;
+        btn_Shadow_ = btn_Shadow.GetComponent<Button>();
+
+        text_LightIMP = bg_GraphicOption.transform.GetChild(7).gameObject;
+        Img_Check_L = text_LightIMP.transform.GetChild(1).gameObject;
+        btn_LightIMP = text_LightIMP.transform.GetChild(2).gameObject;
+        btn_LightIMP_ = btn_LightIMP.GetComponent<Button>();
+
+        text_WaterIMP = bg_GraphicOption.transform.GetChild(8).gameObject;
+        Img_Check_W = text_WaterIMP.transform.GetChild(1).gameObject;
+        btn_WaterIMP = text_WaterIMP.transform.GetChild(2).gameObject;
+        btn_WaterIMP_ = btn_WaterIMP.GetComponent<Button>();
+
+        //Sounds
         btn_SoundOption = optionMenu.transform.GetChild(5).gameObject;
         btn_SoundOption_ = btn_SoundOption.GetComponent<Button>();
         btn_GamePlayOption = optionMenu.transform.GetChild(7).gameObject;
@@ -163,7 +226,10 @@ public class UIManager : KSingleton<UIManager>
         #endregion
 
         #region InGameMenu Objects
-        inGameMenu = UiObjs.transform.GetChild(5).gameObject;
+        inGameMenu = UiObjs.transform.GetChild(6).gameObject;
+        playerUI = UiObjs.transform.GetChild(0).gameObject;
+        map = UiObjs.transform.GetChild(8).gameObject;
+
         btn_Resume = inGameMenu.transform.GetChild(0).gameObject;
         btn_Resume_ = btn_Resume.GetComponent<Button>();
 
@@ -180,21 +246,19 @@ public class UIManager : KSingleton<UIManager>
         #endregion
 
         #region InGameTime Texts
-        inGameDay_Text = UiObjs.transform.GetChild(6).gameObject;
+        inGameDay_Text = UiObjs.transform.GetChild(7).gameObject;
         inGameDay_Text_ = inGameDay_Text.GetComponent<Text>();
 
         inGameTime_Text = inGameDay_Text.transform.GetChild(0).gameObject;
         inGameTime_Text_ = inGameTime_Text.GetComponent<Text>();
-
-        playerUI = UiObjs.transform.GetChild(7).gameObject;
         #endregion
 
         //Test Button
         btn_TestPlay = PlayMenu.transform.GetChild(5).gameObject;
         btn_TestPlay_ = btn_TestPlay.GetComponent<Button>();
 
-        btn_TestLoad = LoadMenu.transform.GetChild(5).gameObject;
-        btn_TestLoad_ = btn_TestLoad.GetComponent<Button>();
+        // btn_TestLoad = LoadMenu.transform.GetChild(5).gameObject;
+        // btn_TestLoad_ = btn_TestLoad.GetComponent<Button>();
         //Test Button
 
         // [HT] TestUI
@@ -208,6 +272,13 @@ public class UIManager : KSingleton<UIManager>
         PlayMenu.SetActive(true);
         buttons.SetActive(false);
         isPlayMenu_Open = true;
+        T_DataManager.Instance.isLoadOn = false;
+    }
+
+    public void NewGame()
+    {
+        T_DataManager.Instance.isLoadOn = false;
+        SceneManager_.Instance.GoPlayScene();
     }
 
     public void Exit_PlayMenu()
@@ -253,12 +324,11 @@ public class UIManager : KSingleton<UIManager>
         }
     }
 
-    public void LoadPlayerData_Btn()
-    {
-        //DataManager.Instance.LoadData();
-        DataManager.Instance.isLoad = true;
-        SceneManager_.Instance.GoPlayScene();
-    }
+    // public void LoadPlayerData_Btn()
+    // {
+    //     T_DataManager.Instance.isLoadOn = true;
+    //     SceneManager_.Instance.GoPlayScene();
+    // }
     #endregion
 
     #region Option Button Function
@@ -287,6 +357,18 @@ public class UIManager : KSingleton<UIManager>
         isGamePadOp_Open = false;
         isEtcOp_Open = false;
 
+        T_DataManager.Instance.en_Data_.isFullScreenOn = GameManager.Instance.isFullScreenOn;
+        T_DataManager.Instance.en_Data_.isStarOn = GameManager.Instance.isStarOn;
+        T_DataManager.Instance.en_Data_.isCloudOn = GameManager.Instance.isCloudOn;
+        T_DataManager.Instance.en_Data_.isShadowOn = GameManager.Instance.isShadowOn;
+        T_DataManager.Instance.en_Data_.isLightImprovement = GameManager
+            .Instance
+            .isLightImprovement;
+        T_DataManager.Instance.en_Data_.isWaterImprovement = GameManager
+            .Instance
+            .isWaterImprovement;
+        T_DataManager.Instance.SaveData_OG();
+
         isOptionMenu_Open = false;
     }
 
@@ -310,10 +392,23 @@ public class UIManager : KSingleton<UIManager>
             isGamePadOp_Open = false;
             isEtcOp_Open = false;
 
+            T_DataManager.Instance.en_Data_.isFullScreenOn = GameManager.Instance.isFullScreenOn;
+            T_DataManager.Instance.en_Data_.isStarOn = GameManager.Instance.isStarOn;
+            T_DataManager.Instance.en_Data_.isCloudOn = GameManager.Instance.isCloudOn;
+            T_DataManager.Instance.en_Data_.isShadowOn = GameManager.Instance.isShadowOn;
+            T_DataManager.Instance.en_Data_.isLightImprovement = GameManager
+                .Instance
+                .isLightImprovement;
+            T_DataManager.Instance.en_Data_.isWaterImprovement = GameManager
+                .Instance
+                .isWaterImprovement;
+            T_DataManager.Instance.SaveData_OG();
+
             isOptionMenu_Open = false;
         }
     }
 
+    //Graphics
     public void GraphicOption_Btn()
     {
         bg_GraphicOption.SetActive(true);
@@ -333,6 +428,49 @@ public class UIManager : KSingleton<UIManager>
         isEtcOp_Open = false;
     }
 
+    public void FullScreen_Btn()
+    {
+        GameManager.Instance.FullScreenOn();
+        T_DataManager.Instance.en_Data_.isFullScreenOn = GameManager.Instance.isFullScreenOn;
+        // T_DataManager.Instance.SaveData_OG();
+    }
+
+    public void Star_Btn()
+    {
+        GameManager.Instance.StarOn();
+        T_DataManager.Instance.en_Data_.isStarOn = GameManager.Instance.isStarOn;
+        // T_DataManager.Instance.SaveData_OG();
+    }
+
+    public void Cloud_Btn()
+    {
+        GameManager.Instance.CloudOn();
+        T_DataManager.Instance.en_Data_.isCloudOn = GameManager.Instance.isCloudOn;
+        // T_DataManager.Instance.SaveData_OG();
+    }
+
+    public void Shadow_Btn()
+    {
+        GameManager.Instance.ShadowOn();
+        T_DataManager.Instance.en_Data_.isShadowOn = GameManager.Instance.isShadowOn;
+        // T_DataManager.Instance.SaveData_OG();
+    }
+
+    public void Light_IMP_Btn()
+    {
+        GameManager.Instance.LightQuality();
+        T_DataManager.Instance.en_Data_.isLightImprovement = GameManager.Instance.isLightImprovement;
+        // T_DataManager.Instance.SaveData_OG();
+    }
+
+    public void Water_IMP_Btn()
+    {
+        GameManager.Instance.WaterOn();
+        T_DataManager.Instance.en_Data_.isWaterImprovement = GameManager.Instance.isWaterImprovement;
+        // T_DataManager.Instance.SaveData_OG();
+    }
+
+    //Sounds
     public void SoundOption_Btn()
     {
         bg_SoundOption.SetActive(true);
@@ -423,7 +561,7 @@ public class UIManager : KSingleton<UIManager>
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             isInGameMenu_Open = !isInGameMenu_Open;
-            if (isInGameMenu_Open == true)
+            if (isInGameMenu_Open == true && isMapOpen == false)
             {
                 inGameMenu.SetActive(true);
                 Time.timeScale = 1; //test
@@ -525,10 +663,36 @@ public class UIManager : KSingleton<UIManager>
     public void SaveExit_Btn()
     {
         //Save First
-        isInGameMenu_Open = false;
         Time.timeScale = 1;
-        DataManager.Instance.SaveData();
-        SceneManager_.Instance.GoTitleScene();
+        isInGameMenu_Open = false;
+        T_DataManager.Instance.SaveData_P();
+        T_DataManager.Instance.SaveData_T();
+        T_DataManager.Instance.SaveData_OG();
+        T_DataManager.Instance.SaveData_TR();
+        GFunc.QuitThisGame();
+    }
+
+
+    public void MapOpen()
+    {
+        if (Input.GetKeyDown(KeyCode.M) && isInGameMenu_Open == false)
+        {
+            isMapOpen = !isMapOpen;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            isMapOpen = false;
+        }
+
+        if (isMapOpen == true)
+        {
+            map.SetActive(true);
+        }
+        else
+        {
+            map.SetActive(false);
+        }
     }
     #endregion
 }

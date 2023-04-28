@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class UIController_ : MonoBehaviour
 {
-    float minute = 0;
-    float minute_ = 0;
-    float hour = 0;
-    float hour_ = 0;
-    int day = 1;
-
     private void Start()
     {
         Set();
@@ -26,6 +20,20 @@ public class UIController_ : MonoBehaviour
         );
         UIManager.Instance.btn_IGOptionExit_.onClick.AddListener(
             () => UIManager.Instance.IGOptionExit_Btn()
+        );
+
+        //Graphics
+        UIManager.Instance.btn_FullScreen_.onClick.AddListener(
+            () => UIManager.Instance.FullScreen_Btn()
+        );
+        UIManager.Instance.btn_Star_.onClick.AddListener(() => UIManager.Instance.Star_Btn());
+        UIManager.Instance.btn_Cloud_.onClick.AddListener(() => UIManager.Instance.Cloud_Btn());
+        UIManager.Instance.btn_Shadow_.onClick.AddListener(() => UIManager.Instance.Shadow_Btn());
+        UIManager.Instance.btn_LightIMP_.onClick.AddListener(
+            () => UIManager.Instance.Light_IMP_Btn()
+        );
+        UIManager.Instance.btn_WaterIMP_.onClick.AddListener(
+            () => UIManager.Instance.Water_IMP_Btn()
         );
 
         //ScreenShot
@@ -50,25 +58,21 @@ public class UIController_ : MonoBehaviour
             () => UIManager.Instance.EtcOption_Btn()
         );
         #endregion
-
-        hour = 6;
     }
 
     private void Update()
     {
         // InGame
         UIManager.Instance.InGameMenu();
+        UIManager.Instance.MapOpen();
 
         //Option
         UIManager.Instance.IGOptionExit_Key();
-
-        Timer();
-
-        DataManager.Instance.GetPlayerData();
     }
 
     private void Set()
     {
+        // InGame Setting
         UIManager.Instance.Create();
         GameManager.Instance.Create();
 
@@ -76,30 +80,5 @@ public class UIController_ : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void Timer()
-    {
-        minute += Time.deltaTime * 12;
-
-        minute_ = Mathf.FloorToInt(minute % 60);
-        hour_ = Mathf.FloorToInt(hour % 60);
-
-        if (minute >= 60)
-        {
-            hour += 1;
-            minute = 0;
-        }
-
-        if (hour >= 24)
-        {
-            hour = 0;
-            day++;
-        }
-
-        // 초를 00, 01, 02와 같은 형태로 표시합니다.
-        string minute_S = minute_.ToString("00");
-        string hour_S = hour.ToString("00");
-
-        UIManager.Instance.inGameTime_Text_.text = "  " + hour_S + " : " + minute_S;
-        UIManager.Instance.inGameDay_Text_.text = "  Day : " + day;
-    }
+    
 }

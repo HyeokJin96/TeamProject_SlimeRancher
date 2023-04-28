@@ -7,65 +7,57 @@ public class SunRotation : MonoBehaviour
     private Light thisLight = default;
     public static bool isDay = false;
 
-    float timer = 0;
-    float setTime_sec = 5f;
-    int setTime_min = 0;
-
     private void Start()
     {
-        isDay = true;
         thisLight = gameObject.GetComponent<Light>();
 
-        transform.localEulerAngles = new Vector3(180, 0, 0);
-
+        // Set Morning
+        isDay = true;
+        transform.localEulerAngles = new Vector3(
+            270 + (-0.25f * (TimeController.Instance.minute + (TimeController.Instance.hour * 60))),
+            0,
+            0
+        );
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
-
-        RotateSun();
-        SunColor();
-
-        TimeChecker();
+        if (Time.timeScale == 1)
+        {
+            RotateSun();
+            SunColor();
+        }
     }
 
     private void RotateSun()
     {
-        transform.Rotate(new Vector3(-0.25f, 0, 0) * Time.deltaTime * 12); //6
-
-        if (setTime_min == 12)
-        {
-            isDay = false;
-        }
-
-        if (setTime_min == 24)
-        {
-            isDay = true;
-            setTime_min = 0;
-        }
-    }
-
-    private void TimeChecker()
-    {
-        if (timer >= setTime_sec)
-        {
-            setTime_min++;
-            timer = 0;
-        }
+        // Sun Rotation
+        transform.Rotate(new Vector3(-0.25f, 0, 0) * Time.deltaTime 
+        * TimeController.Instance.nTimesFaster);
     }
 
     private void SunColor()
     {
+        // Sun Bright
+        if(TimeController.Instance.hour == 6)
+        {
+            isDay = true;
+        }
+
+        if(TimeController.Instance.hour == 18)
+        {
+            isDay = false;
+        }
+
         if (isDay == false)
         {
-            thisLight.intensity -= 0.05555f * Time.deltaTime * 12; //12
+            thisLight.intensity -= 0.05555f * Time.deltaTime;
         }
         else
         {
             if (thisLight.intensity < 1)
             {
-                thisLight.intensity += 0.05555f * Time.deltaTime * 12; //12
+                thisLight.intensity += 0.05555f * Time.deltaTime;
             }
         }
 

@@ -14,6 +14,7 @@ public class Scroll : MonoBehaviour
 
     void Update()
     {
+        // Scroll Texture
         float newOffsetY = myMat.mainTextureOffset.y - scrollSpeed * Time.deltaTime;
         Vector2 newOffset = new Vector2(0, newOffsetY);
 

@@ -33,7 +33,7 @@ public class Test_Ray : MonoBehaviour
                 testScript = targetObject.GetComponentInParent<test>();
                 if (testScript != null)
                 {
-                    Debug.Log("Food type: " + testScript.foodType);
+                    // Debug.Log("Food type: " + testScript.foodType);
                 }
                 Debug.DrawLine(muzzle.transform.position, objectType.point, Color.red);
             }
