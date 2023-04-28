@@ -528,7 +528,7 @@ Transform:
   m_GameObject: {fileID: 2851520346971933306}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1016.22, y: 941.29, z: -709.6166}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1361204422840357670}
@@ -562,7 +562,7 @@ Animator:
   m_GameObject: {fileID: 2851520346971933306}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b02d82dece3dde0429d69d32e1f7d17d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 63f9c4b5748d324439f1462dd80c328a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -588,6 +588,7 @@ MonoBehaviour:
   hungerValue: 0
   agitatedValue: 0
   targetToEat: {fileID: 0}
+  pounceTarget: {fileID: 0}
   destination: {x: 0, y: 0, z: 0}
   tarrSlime: {fileID: 0}
   isTarrSlime: 0
@@ -601,6 +602,9 @@ MonoBehaviour:
   defaultLod3Material: {fileID: 0}
   currentMoodState: 0
   currentActionState: 0
+  isDestOn: 0
+  speed: 10
+  gravity: 9.81
 --- !u!1 &2943324126256498082
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,6 +951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b67c1eeeffbdd4a40915820be2d511c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pounceTarget: {fileID: 0}
 --- !u!1 &3122062666230412028
 GameObject:
   m_ObjectHideFlags: 0

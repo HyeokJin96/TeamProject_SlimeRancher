@@ -91,10 +91,16 @@ public class SlimeBase : MonoBehaviour
         Pounce,
         Boom,
         Stunned
+    }
+    public ActionState currentActionState;
 
+    public enum CommonState
+    {
+        Idle,
+        InCorral,
+        Launched
     }
 
-    public ActionState currentActionState;
 
     private void Awake()
     {
@@ -141,16 +147,56 @@ public class SlimeBase : MonoBehaviour
         anim = GetComponent<Animator>();
 
         StartCoroutine(IncreaseHunger(1, increaseHungerValue)); // test value 1: after test, change to 60
+
+        //test
+        StartCoroutine(DestOnOffTest());
+        //test
     }
+
+    //test
+    public bool isDestOn;
+    IEnumerator DestOnOffTest()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(5);
+            isDestOn = true;
+        }
+    }
+
+    void DestTestMethod()
+    {
+        Debug.Log("!!!!!!!!");
+        isDestOn = false;
+        angle = Random.Range(0f, 360f);
+        radiusX = Random.Range(5, 10);
+        radiusZ = Random.Range(5, 10);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        posX = transform.position.x + radiusX * Mathf.Cos(angle * Mathf.Deg2Rad);
+        posZ = transform.position.z + radiusZ * Mathf.Sin(angle * Mathf.Deg2Rad);
+        destination = new Vector3(posX, transform.position.y, posZ);
+    }
+    //
 
     public virtual void Update()
     {
+        //test
+        if (isDestOn)
+        {
+            DestTestMethod();
+        }
+        //test
+
         SetHungerValue();
         SetMoodState();
-        if (!isSetDestination)
-        {
-            StartCoroutine(SetDestination());
-        }
+
+        //test
+        //if (!isSetDestination)
+        //{
+        //    StartCoroutine(SetDestination());
+        //}
+        //test
+
 
         switch (currentMoodState)
         {
@@ -627,12 +673,20 @@ public class SlimeBase : MonoBehaviour
 
                 if (slimeType1 > slimeType2 && i == slimeType2 && j == slimeType1)
                 {
+                    Debug.Log("t1>t2");
+                    Debug.Log(slimeType1);
+                    Debug.Log(slimeType2);
+                    Debug.Log(largoSlimeIndex_);
                     Instantiate(largoSlimeArray[largoSlimeIndex_], transform.position, transform.rotation);
                     gameObject.SetActive(false);
 
                 }
                 else if (slimeType1 < slimeType2 && i == slimeType1 && j == slimeType2)
                 {
+                    Debug.Log("t2>t1");
+                    Debug.Log(slimeType1);
+                    Debug.Log(slimeType2);
+                    Debug.Log(largoSlimeIndex_);
                     Instantiate(largoSlimeArray[largoSlimeIndex_], transform.position, transform.rotation);
                     gameObject.SetActive(false);
                 }

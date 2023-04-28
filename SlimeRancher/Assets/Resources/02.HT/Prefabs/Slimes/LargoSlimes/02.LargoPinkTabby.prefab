@@ -1110,6 +1110,9 @@ MonoBehaviour:
   defaultLod3Material: {fileID: 0}
   currentMoodState: 0
   currentActionState: 0
+  isDestOn: 0
+  speed: 10
+  gravity: 9.81
 --- !u!1 &3119407577173217086
 GameObject:
   m_ObjectHideFlags: 0

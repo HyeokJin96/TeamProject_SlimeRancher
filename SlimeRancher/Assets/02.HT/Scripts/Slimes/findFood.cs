@@ -113,7 +113,8 @@ public class findFood : MonoBehaviour
         if (pounceTarget != null && other.gameObject == pounceTarget)
         {
             pounceTarget = null;
-            slimeBase.pounceTarget = pounceTarget.transform;
+            slimeBase.pounceTarget = null;
+            //pounceTarget.transform;
         }
         else
         {
