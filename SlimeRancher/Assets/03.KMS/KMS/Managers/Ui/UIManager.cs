@@ -564,7 +564,7 @@ public class UIManager : KSingleton<UIManager>
             if (isInGameMenu_Open == true && isMapOpen == false)
             {
                 inGameMenu.SetActive(true);
-                Time.timeScale = 1; //test
+                Time.timeScale = 0;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
             }
