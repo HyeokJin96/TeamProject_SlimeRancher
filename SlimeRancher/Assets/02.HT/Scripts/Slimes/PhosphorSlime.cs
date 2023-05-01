@@ -17,6 +17,10 @@ public class PhosphorSlime : SlimeBase
         defaultLod1Material.color = slimeColor[4];
         defaultLod2Material.color = slimeColor[4];
         defaultLod3Material.color = slimeColor[4];
+        defaultMaterial.SetFloat("_Mode", 3);
+        defaultLod1Material.SetFloat("_Mode", 3);
+        defaultLod2Material.SetFloat("_Mode", 3);
+        defaultLod3Material.SetFloat("_Mode", 3);
     }
 
     public override void Update()

@@ -8,6 +8,8 @@ public class LightCoreTest2 : MonoBehaviour
     bool checkpoint1;
     bool checkpoint2;
     float lightRangeValue;
+
+    public float maxLightRange;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +29,7 @@ public class LightCoreTest2 : MonoBehaviour
             checkpoint2 = false;
         }
 
-        if (lightRangeValue >= 2.5)
+        if (lightRangeValue >= maxLightRange)
         {
             checkpoint1 = false;
             checkpoint2 = true;

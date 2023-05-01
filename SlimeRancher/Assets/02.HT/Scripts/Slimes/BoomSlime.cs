@@ -36,6 +36,7 @@ public class BoomSlime : SlimeBase
             {
                 particleCollider.radius += Time.deltaTime * 2f;
             }
+
             else
             {
                 //isJumpDelay = false;
@@ -64,6 +65,7 @@ public class BoomSlime : SlimeBase
             {
                 if (currentMoodState == MoodState.Agitated | currentMoodState == MoodState.Hungry)
                 {
+                    Debug.Log("boom1?");
                     currentActionState = ActionState.Boom;
                 }
                 else
@@ -78,13 +80,15 @@ public class BoomSlime : SlimeBase
 
     protected override void Boom()
     {
-        currentActionState = ActionState.Wait;
+        Debug.Log("boom2?");
         explosionParticle.SetActive(true);
+        currentActionState = ActionState.Stunned;
         isSetExplosion = true;
     }
 
     protected override void Stunned()
     {
+        Debug.Log("stunned??");
         defaultMaterial.color = new Color32(95, 30, 30, 255);
         defaultLod1Material.color = new Color32(95, 30, 30, 255);
         defaultLod2Material.color = new Color32(95, 30, 30, 255);

@@ -7,7 +7,7 @@ public class SlimeBase : MonoBehaviour
     protected Rigidbody rigid;
 
     protected bool isGrounded;
-    protected bool isJumpDelay;
+    public bool isJumpDelay;
 
     int jumpDelay = 5;
     int jumpForce = 5;
@@ -60,7 +60,7 @@ public class SlimeBase : MonoBehaviour
     protected Transform shadow;
     MeshRenderer defaultMeshRenderer;
     public Material defaultMaterial;
-    MeshRenderer defaultLod1MeshRenderer;
+    protected MeshRenderer defaultLod1MeshRenderer;
     public Material defaultLod1Material;
     MeshRenderer defaultLod2MeshRenderer;
     public Material defaultLod2Material;
@@ -111,12 +111,13 @@ public class SlimeBase : MonoBehaviour
 
         slimeColor = new List<Color32>();
         slimeColor.Add(new Color32(255, 255, 255, 255));
-        slimeColor.Add(new Color32(225, 60, 90, 255));
+        slimeColor.Add(new Color32(225, 60, 90, 255));  //pink
         slimeColor.Add(new Color32(30, 125, 200, 255));  //rock
         slimeColor.Add(new Color32(185, 185, 185, 255));  //tabby
         slimeColor.Add(new Color32(175, 175, 255, 200));  //phosphor
-        slimeColor.Add(new Color32(225, 60, 90, 255));  //boom(=pink)
+        slimeColor.Add(new Color32(255, 30, 0, 255));  //boom
         slimeColor.Add(new Color32(25, 125, 25, 255));  //Rad
+        slimeColor.Add(new Color32(225, 60, 90, 200));  //pinkPhospor
 
         //slimeColor.Add(new Color32(95, 95, 185, 200));  //phosphor_Legacy
 
@@ -248,6 +249,7 @@ public class SlimeBase : MonoBehaviour
                 Boom();
                 break;
             case ActionState.Stunned:
+                Debug.Log("stunned?!?!?!?");
                 Stunned();
                 break;
             default:
@@ -580,6 +582,7 @@ public class SlimeBase : MonoBehaviour
             }
             else if (slimeSize == 1)
             {
+                Debug.Log("?????????");
                 clone_.GetComponent<PlortBase>().plortType = slimeType1;
                 Instantiate(clone_, transform.position, transform.rotation);
                 clone_.GetComponent<PlortBase>().plortType = slimeType2;
@@ -599,6 +602,7 @@ public class SlimeBase : MonoBehaviour
     protected IEnumerator JumpDelay(int delayTime_)
     {
         yield return new WaitForSeconds(delayTime_);
+        Debug.Log("ResetJumpDelay!!!"); ;
         isJumpDelay = false;
     }
 
