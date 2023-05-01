@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class Ui_UpgradeStation : MonoBehaviour
 {
-    private string resourcePath_UpgradeStation = "01.YHJ/Upgrade Station";
-    private string resourcePath_Text = "01.YHJ/TextAsset/Ui_UpgradeStation";
+    private string resourcePath_Sprite = "01.YHJ/Upgrade Station";
+    private string resourcePath_TextAsset = "01.YHJ/TextAsset/Ui_UpgradeStation";
+
+    [SerializeField] private Canvas canvs = default;
 
     [SerializeField] private Sprite[] loadedIcons = default;
     [SerializeField] private TextAsset loadedText = default;
@@ -23,20 +26,28 @@ public class Ui_UpgradeStation : MonoBehaviour
 
     [SerializeField] private string[] lines = default;
 
-    [SerializeField] private string[] itemNameCandidates = default;
-    [SerializeField] private string[] itemInformationCandidates = default;
-    [SerializeField] private string[] itemCostCandidates = default;
+    [SerializeField] public string[] itemNameCandidates = default;
+    [SerializeField] public string[] itemInformationCandidates = default;
+    [SerializeField] public string[] itemCostCandidates = default;
 
-    [SerializeField] private Button[] listButton;
+    [SerializeField] public Button[] listButton;
     [SerializeField] private Sprite selected_Icon;
     [SerializeField] private string selected_Name;
     [SerializeField] private string selected_Information;
     [SerializeField] private string selected_Cost;
 
+    [SerializeField] private GameObject player = default;
+    [SerializeField] private Player_Raycast player_Raycast = default;
+
     private void Awake()
     {
-        loadedIcons = Resources.LoadAll<Sprite>(resourcePath_UpgradeStation);
-        loadedText = Resources.Load<TextAsset>(resourcePath_Text);
+        loadedIcons = Resources.LoadAll<Sprite>(resourcePath_Sprite);
+        loadedText = Resources.Load<TextAsset>(resourcePath_TextAsset);
+
+        canvs = transform.parent.GetComponent<Canvas>();
+
+        player = GameObject.FindWithTag("Player");
+        player_Raycast = player.GetComponent<Player_Raycast>();
 
         upgradeList = transform.GetChild(1).GetChild(0).GetChild(0).gameObject;
         Information = transform.GetChild(1).GetChild(2).GetChild(0).gameObject;
@@ -81,11 +92,9 @@ public class Ui_UpgradeStation : MonoBehaviour
 
             itemNameTexts[i].text = itemNameCandidates[i];
         }
-    }
 
-    private void Start()
-    {
-        gameObject.SetActive(false);
+        listButton[0].Select();
+        listButton[0].onClick.Invoke();
     }
 
     public void OnButtonClicked(Button clickedButton_)
@@ -107,5 +116,4 @@ public class Ui_UpgradeStation : MonoBehaviour
             }
         }
     }
-
 }

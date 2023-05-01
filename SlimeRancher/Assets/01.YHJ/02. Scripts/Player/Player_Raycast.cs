@@ -21,7 +21,8 @@ public class Player_Raycast : MonoBehaviour
 
     private bool canAbsorb = false;
 
-    [HideInInspector] public bool isAppearing = false;
+    [HideInInspector] public bool isAppearing_UpgradeStation = false;
+    [HideInInspector] public bool isAppearing_Facility = false;
 
     private void Awake()
     {
@@ -37,7 +38,6 @@ public class Player_Raycast : MonoBehaviour
 
     private void Update()
     {
-
         Ray raycast = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
         int layerMask = ~(1 << LayerMask.NameToLayer("Ignore Raycast"));
 
@@ -60,20 +60,32 @@ public class Player_Raycast : MonoBehaviour
             crosshairImage.color = Color.green;
             canAbsorb = true;
 
-            if (objectData.objectType == ObjectType.Button && targetObject.transform.position.x - this.transform.position.x < 0.5)
+            if (objectData.objectType == ObjectType.Button && Vector3.Distance(targetObject.transform.position, this.transform.position) < 2f)
             {
-                isAppearing = true;
+                switch (objectData.buttonType)
+                {
+                    case ButtonType.UpgradeStation:
+                        isAppearing_UpgradeStation = true;
+                        break;
+                    case ButtonType.Facility:
+                        isAppearing_Facility = true;
+                        break;
+                    default:
+                        break;
+                }
             }
             else
             {
-                isAppearing = false;
+                isAppearing_UpgradeStation = false;
+                isAppearing_Facility = false;
             }
         }
         else
         {
             crosshairImage.color = Color.white;
             canAbsorb = false;
-            isAppearing = false;
+            isAppearing_UpgradeStation = false;
+            isAppearing_Facility = false;
         }
     }
 }

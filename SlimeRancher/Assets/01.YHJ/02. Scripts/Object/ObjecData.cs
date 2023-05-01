@@ -3,6 +3,7 @@ using UnityEngine;
 public class ObjecData : MonoBehaviour
 {
     [SerializeField] public ObjectType objectType = default;
+    [SerializeField] public ButtonType buttonType = default;
     [SerializeField] public FoodType foodType = default;
     [SerializeField] public FoodName foodName = default;
 }
@@ -13,6 +14,12 @@ public enum ObjectType
     Slime,
     Food,
     Button
+}
+
+public enum ButtonType
+{
+    UpgradeStation,
+    Facility
 }
 
 public enum FoodType

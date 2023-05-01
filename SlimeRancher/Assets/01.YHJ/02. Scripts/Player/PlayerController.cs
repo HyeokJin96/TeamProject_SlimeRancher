@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -35,12 +36,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameManager gameManager = default;
 
 
-
+    private Player_Raycast player_Raycast = default;
 
 
     public static float currentX;
     public static float currentY;
 
+    public bool canMove = false;
 
     private void Awake()
     {
@@ -56,29 +58,36 @@ public class PlayerController : MonoBehaviour
         playerBody = transform.GetChild(1).gameObject;
 
 
+        player_Raycast = GetComponent<Player_Raycast>();
 
         cameraController = playerCamera.GetComponent<CameraController>();
     }
 
     private void Start()
     {
+        canMove = true;
         normalSpeed = moveSpeed;
-        //cone.gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
     {
-        Movement();
+        if (canMove)
+        {
+            Movement();
+        }
     }
 
     private void Update()
     {
-        Jump();
-        Sprint();
-        RotatePlayer();
+        if (canMove)
+        {
+            Jump();
+            Sprint();
+            RotatePlayer();
 
-        AnimationControll();
-        //Absorption();
+            AnimationControll();
+            //Absorption();
+        }
     }
 
     #region RotatePlayer
@@ -165,5 +174,4 @@ public class PlayerController : MonoBehaviour
             playerAnimator.SetBool("isSprinting", false);
         }
     }
-
 }
