@@ -90,7 +90,8 @@ public class SlimeBase : MonoBehaviour
         RockFire,
         Pounce,
         Boom,
-        Stunned
+        Stunned,
+        VacuumTarget
     }
     public ActionState currentActionState;
 
@@ -251,6 +252,9 @@ public class SlimeBase : MonoBehaviour
             case ActionState.Stunned:
                 Debug.Log("stunned?!?!?!?");
                 Stunned();
+                break;
+            case ActionState.VacuumTarget:
+                Debug.Log("흡수중");
                 break;
             default:
                 break;

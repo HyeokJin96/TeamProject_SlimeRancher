@@ -9,6 +9,9 @@ TagManager:
   - Plort
   - Terrain
   - Slime
+  - Button
+  - Normal Slime
+  - Star
   layers:
   - Default
   - TransparentFX
