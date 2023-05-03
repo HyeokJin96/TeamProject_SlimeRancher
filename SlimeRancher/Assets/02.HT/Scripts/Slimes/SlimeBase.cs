@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class SlimeBase : MonoBehaviour
 {
+    //test
+    public string slimeName;
+    //test
+
+    public Sprite slimeIcon;
+
     protected Rigidbody rigid;
 
     protected bool isGrounded;

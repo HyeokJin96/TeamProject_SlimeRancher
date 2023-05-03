@@ -25,13 +25,13 @@ public class TestRay : MonoBehaviour
             raycolor = Color.green;
 
             //Debug.Log(Vector3.Distance(transform.position, hit.transform.position));
-            UIManager.Instance.corralText.SetActive(true);
+            //UIManager.Instance.corralText.SetActive(true);
         }
 
         if (hit.collider == null)
         {
             raycolor = Color.red;
-            UIManager.Instance.corralText.SetActive(false);
+            //UIManager.Instance.corralText.SetActive(false);
         }
     }
 }

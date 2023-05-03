@@ -135,10 +135,13 @@ public class UIManager : KSingleton<UIManager>
     public bool isMapOpen = false;
     #endregion
 
-    // [HT] TestUI
-    public GameObject interactionTextUI;
-    public GameObject corralText;
-    // [HT] TestUI
+    // [HT]
+    public GameObject quickSlot;
+    public GameObject quickSlot1;
+    public GameObject quickSlot2;
+    public GameObject quickSlot3;
+    public GameObject quickSlot4;
+    // [HT]
 
     public override void Init()
     {
@@ -262,8 +265,11 @@ public class UIManager : KSingleton<UIManager>
         //Test Button
 
         // [HT] TestUI
-        interactionTextUI = UiObjs.transform.GetChild(8).gameObject;
-        corralText = interactionTextUI.transform.GetChild(0).gameObject;
+        quickSlot = playerUI.transform.GetChild(3).gameObject;
+        quickSlot1 = quickSlot.transform.GetChild(0).gameObject;
+        quickSlot2 = quickSlot.transform.GetChild(1).gameObject;
+        quickSlot3 = quickSlot.transform.GetChild(2).gameObject;
+        quickSlot4 = quickSlot.transform.GetChild(3).gameObject;
     }
 
     #region Play Button Function
@@ -680,7 +686,7 @@ public class UIManager : KSingleton<UIManager>
             isMapOpen = !isMapOpen;
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             isMapOpen = false;
         }

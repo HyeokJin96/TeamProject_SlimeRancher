@@ -17,6 +17,12 @@ public class pinkSlime : SlimeBase
         defaultLod1Material.color = slimeColor[1];
         defaultLod2Material.color = slimeColor[1];
         defaultLod3Material.color = slimeColor[1];
+
+        //test
+        slimeName = "Pink Slime";
+        slimeIcon = Resources.Load<Sprite>("02.HT/Slimes/PinkSlime/iconSlimePink");
+        //test
+
     }
 
     public override void Update()
