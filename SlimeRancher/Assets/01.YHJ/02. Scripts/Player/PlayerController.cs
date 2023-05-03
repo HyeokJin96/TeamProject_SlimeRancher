@@ -5,10 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = default;
-    [SerializeField] private float sprintSpeed = default;
-    [SerializeField] private float normalSpeed = default;
-    [SerializeField] private float jumpForce = default;
+    [SerializeField] private PlayerManager playerManager = default;
 
     [SerializeField] private float groundCheckDistance = default;
     [SerializeField] private LayerMask groundLayer = default;
@@ -44,8 +41,17 @@ public class PlayerController : MonoBehaviour
 
     public bool canMove = false;
 
+    private float maxHealth;
+    private float currentHealth;
+    private float maxEnergy;
+    private float currentEnergy;
+    private float coin;
+
+
     private void Awake()
     {
+        playerManager = this.GetComponent<PlayerManager>();
+
         playerAnimator = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
 
@@ -65,8 +71,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        playerManager.playerSpeed = playerManager.playerMoveSpeed;
         canMove = true;
-        normalSpeed = moveSpeed;
     }
 
     private void FixedUpdate()
@@ -115,7 +121,7 @@ public class PlayerController : MonoBehaviour
         float verticalInput = Input.GetAxisRaw("Vertical");
 
         Vector3 moveDirection = (horizontalInput * transform.right + verticalInput * transform.forward).normalized;
-        Vector3 newPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
+        Vector3 newPosition = transform.position + moveDirection * playerManager.playerSpeed * Time.deltaTime;
         playerRigidbody.MovePosition(newPosition);
     }   //  Movement()
     #endregion
@@ -125,11 +131,16 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            playerRigidbody.AddForce(Vector3.up * playerManager.playerJumpForce, ForceMode.Impulse);
         }
         isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
     }   //  Jump()
     #endregion
+
+    private void JetPack()
+    {
+
+    }
 
     #region Sprint
     private void Sprint()
@@ -139,29 +150,17 @@ public class PlayerController : MonoBehaviour
             if (!isSprinting)
             {
                 isSprinting = true;
-                moveSpeed = sprintSpeed;
+                playerManager.playerSpeed = playerManager.playerSprintSpeed;
+                playerManager.playerCurrentPower -= 10 * (int)Time.deltaTime;
             }
             else
             {
                 isSprinting = false;
-                moveSpeed = normalSpeed;
+                playerManager.playerSpeed = playerManager.playerMoveSpeed;
             }
         }
     }   //  Sprint()
     #endregion
-
-    //private void Absorption()
-    //{
-    //    if (Input.GetMouseButton(1))
-    //    {
-    //        cone.gameObject.SetActive(true);
-    //    }
-
-    //    if (Input.GetMouseButtonUp(1))
-    //    {
-    //        cone.gameObject.SetActive(false);
-    //    }
-    //}
 
     private void AnimationControll()
     {

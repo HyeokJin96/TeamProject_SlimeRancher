@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
+using System;
+using System.Linq;
 
 public class Ui_UpgradeStation : MonoBehaviour
 {
@@ -39,6 +40,19 @@ public class Ui_UpgradeStation : MonoBehaviour
     [SerializeField] private GameObject player = default;
     [SerializeField] private Player_Raycast player_Raycast = default;
 
+    [SerializeField] private GameObject ButtonList_Selected = default;
+    [SerializeField] private Button[] button_Purchase = default;
+    [SerializeField] private TMP_Text[] text_Purchase = default;
+
+    private bool isSold;
+
+    [SerializeField] private PlayerManager playerManager = default;
+
+    private void OnEnable()
+    {
+        listButton[0].Select();
+    }
+
     private void Awake()
     {
         loadedIcons = Resources.LoadAll<Sprite>(resourcePath_Sprite);
@@ -63,6 +77,12 @@ public class Ui_UpgradeStation : MonoBehaviour
         itemNameCandidates = new string[upgradeList.transform.childCount];
         itemInformationCandidates = new string[upgradeList.transform.childCount];
         itemCostCandidates = new string[upgradeList.transform.childCount];
+
+        ButtonList_Selected = transform.GetChild(1).GetChild(2).GetChild(1).gameObject;
+        button_Purchase = new Button[ButtonList_Selected.transform.childCount];
+        text_Purchase = new TMP_Text[ButtonList_Selected.transform.childCount];
+
+        playerManager = player.GetComponent<PlayerManager>();
 
         lines = loadedText.text.Split('\n');
 
@@ -93,8 +113,40 @@ public class Ui_UpgradeStation : MonoBehaviour
             itemNameTexts[i].text = itemNameCandidates[i];
         }
 
-        listButton[0].Select();
+        for (int i = 0; i < button_Purchase.Length; i++)
+        {
+            button_Purchase[i] = ButtonList_Selected.transform.GetChild(i).GetComponent<Button>();
+            text_Purchase[i] = button_Purchase[i].transform.GetChild(0).GetComponent<TMP_Text>();
+
+            button_Purchase[i].gameObject.SetActive(false);
+            text_Purchase[i].text = "Purchase";
+        }
+
+        listButton[5].gameObject.SetActive(false);
+
+        listButton[8].gameObject.SetActive(false);
+        listButton[9].gameObject.SetActive(false);
+        listButton[10].gameObject.SetActive(false);
+
+        listButton[12].gameObject.SetActive(false);
+        listButton[13].gameObject.SetActive(false);
+
+        listButton[15].gameObject.SetActive(false);
+        listButton[16].gameObject.SetActive(false);
+        listButton[17].gameObject.SetActive(false);
+
+
+
         listButton[0].onClick.Invoke();
+    }
+
+    private void Start()
+    {
+
+    }
+
+    private void Update()
+    {
     }
 
     public void OnButtonClicked(Button clickedButton_)
@@ -113,6 +165,111 @@ public class Ui_UpgradeStation : MonoBehaviour
                 Information.transform.GetChild(1).GetComponent<TMP_Text>().text = selected_Name;
                 Information.transform.GetChild(2).GetComponent<TMP_Text>().text = selected_Information;
                 Information.transform.GetChild(3).GetComponent<TMP_Text>().text = "Cost :\t" + selected_Cost;
+
+                button_Purchase[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                button_Purchase[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void onClicked(Button clickedButton_)
+    {
+        for (int i = 0; i < text_Purchase.Length; i++)
+        {
+            if (button_Purchase[i] == clickedButton_)
+            {
+                if (playerManager.playerNewbucksCoin >= int.Parse(selected_Cost))
+                {
+                    switch (selected_Name)
+                    {
+                        case "Slime Key":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            break;
+                        case "Water Tank":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            break;
+                        case "Jetpack":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            break;
+                        case "Air Drive":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            break;
+                        case "Dash Boots":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            listButton[5].gameObject.SetActive(true);
+                            break;
+                        case "Ultra Dash Boots":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            break;
+                        case "Pulse Wave":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            break;
+                        case "Heart Module":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            playerManager.playerMaxHeart += 50;
+                            listButton[8].gameObject.SetActive(true);
+                            break;
+                        case "Heart Module Mk2":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            playerManager.playerMaxHeart += 50;
+                            listButton[9].gameObject.SetActive(true);
+                            break;
+                        case "Heart Module Mk3":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            playerManager.playerMaxHeart += 50;
+                            listButton[10].gameObject.SetActive(true);
+                            break;
+                        case "Heart Module Ultra":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            playerManager.playerMaxHeart += 50;
+                            break;
+                        case "Power Core":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            playerManager.playerMaxPower += 50;
+                            listButton[12].gameObject.SetActive(true);
+                            break;
+                        case "Power Core Mk2":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            playerManager.playerMaxPower += 50;
+                            listButton[13].gameObject.SetActive(true);
+                            break;
+                        case "Power Core Mk3":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            playerManager.playerMaxPower += 50;
+                            break;
+                        case "Tank Booster":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            playerManager.playerStorageSpace += 10;
+                            listButton[15].gameObject.SetActive(true);
+                            break;
+                        case "Tank Booster Mk2":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            playerManager.playerStorageSpace += 10;
+                            listButton[16].gameObject.SetActive(true);
+                            break;
+                        case "Tank Booster Mk3":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            playerManager.playerStorageSpace += 10;
+                            listButton[17].gameObject.SetActive(true);
+                            break;
+                        case "Tank Booster Ultra":
+                            playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            playerManager.playerStorageSpace += 100;
+                            break;
+                    }
+                    clickedButton_.interactable = false;
+                    text_Purchase[i].text = "Sold Out";
+                }
+                else
+                {
+                    Debug.Log("거지다 거지");
+                }
+
+
+
             }
         }
     }

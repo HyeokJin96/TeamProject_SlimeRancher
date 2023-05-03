@@ -140,6 +140,10 @@ public class UIManager : KSingleton<UIManager>
     public GameObject corralText;
     // [HT] TestUI
 
+    // [YHJ] Add InGameMenu Button COndition
+    public bool hasUiOpen = false;
+    // [YHJ] Add InGameMenu Button COndition
+
     public override void Init()
     {
         //Caching
@@ -558,7 +562,7 @@ public class UIManager : KSingleton<UIManager>
     #region InGameMenu Button Function
     public void InGameMenu()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !hasUiOpen)
         {
             isInGameMenu_Open = !isInGameMenu_Open;
             if (isInGameMenu_Open == true && isMapOpen == false)

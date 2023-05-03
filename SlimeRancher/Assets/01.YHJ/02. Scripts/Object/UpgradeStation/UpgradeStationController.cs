@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeStationController : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class UpgradeStationController : MonoBehaviour
     [SerializeField] private Canvas canvas = default;
 
     [SerializeField] private GameObject interaction_GameObject = default;
-    [SerializeField] private GameObject Button_UpgradeStation = default;
+    [SerializeField] private GameObject button_UpgradeStation = default;
     [SerializeField] private GameObject ui_UpgradeStation = default;
 
     private void Awake()
@@ -20,7 +20,7 @@ public class UpgradeStationController : MonoBehaviour
         player_Raycast = player.GetComponent<Player_Raycast>();
         playerController = player.GetComponent<PlayerController>();
         interaction_GameObject = canvas.transform.GetChild(9).gameObject;
-        Button_UpgradeStation = interaction_GameObject.transform.GetChild(0).gameObject;
+        button_UpgradeStation = interaction_GameObject.transform.GetChild(0).gameObject;
         ui_UpgradeStation = canvas.transform.GetChild(10).gameObject;
     }
 
@@ -28,10 +28,11 @@ public class UpgradeStationController : MonoBehaviour
     {
         if (player_Raycast.isAppearing_UpgradeStation)
         {
-            Button_UpgradeStation.SetActive(true);
+            button_UpgradeStation.SetActive(true);
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                UIManager.Instance.hasUiOpen = true;
                 playerController.canMove = false;
                 ui_UpgradeStation.SetActive(true);
 
@@ -41,7 +42,7 @@ public class UpgradeStationController : MonoBehaviour
         }
         else
         {
-            Button_UpgradeStation.SetActive(false);
+            button_UpgradeStation.SetActive(false);
             ui_UpgradeStation.SetActive(false);
         }
 
