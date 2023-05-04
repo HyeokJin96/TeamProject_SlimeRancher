@@ -24,6 +24,10 @@ public class BoomSlime : SlimeBase
 
         explosionParticle = transform.GetChild(2).gameObject;
         particleCollider = explosionParticle.GetComponent<SphereCollider>();
+
+        slimeName = slimeNameList[slimeType1];
+        slimeIcon = slimeIconList[slimeType1];
+
     }
 
     public override void Update()

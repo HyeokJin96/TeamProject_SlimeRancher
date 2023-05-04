@@ -8,7 +8,7 @@ public class VacSlimeTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        rootSlime = transform.parent.parent.parent.parent.parent.parent.parent.parent.gameObject;
     }
 
     // Update is called once per frame

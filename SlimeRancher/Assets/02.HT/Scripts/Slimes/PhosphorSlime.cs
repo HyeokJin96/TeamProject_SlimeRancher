@@ -21,6 +21,9 @@ public class PhosphorSlime : SlimeBase
         defaultLod1Material.SetFloat("_Mode", 3);
         defaultLod2Material.SetFloat("_Mode", 3);
         defaultLod3Material.SetFloat("_Mode", 3);
+
+        slimeName = slimeNameList[slimeType1];
+        slimeIcon = slimeIconList[slimeType1];
     }
 
     public override void Update()

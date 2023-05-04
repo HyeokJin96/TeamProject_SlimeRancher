@@ -81,7 +81,8 @@ public class TarrSlime : SlimeBase
             {
                 //다른 슬라임을 먹었을때
                 Debug.Log("eat slime");
-                targetToEat.transform.root.gameObject.SetActive(false);   //먹은 슬라임 false
+                //targetToEat.transform.root.transform.gameObject.SetActive(false);   //먹은 슬라임 false
+                targetToEat.GetComponent<VacSlimeTest>().rootSlime.SetActive(false);
                 hungerValue = 0;
                 agitatedValue = 0;
                 targetToEat = null;

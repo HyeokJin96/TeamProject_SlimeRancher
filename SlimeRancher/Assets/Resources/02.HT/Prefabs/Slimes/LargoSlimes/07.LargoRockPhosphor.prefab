@@ -6200,6 +6200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc22ffe173cde174aaabd443ddac0dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slimeName: 
+  slimeNameList: []
+  slimeIconList: []
+  slimeIcon: {fileID: 0}
+  isJumpDelay: 0
   hungerValue: 0
   agitatedValue: 0
   targetToEat: {fileID: 0}
@@ -6837,6 +6842,7 @@ GameObject:
   - component: {fileID: 5437141426471559100}
   - component: {fileID: 5437141426471559101}
   - component: {fileID: 5437141426471559103}
+  - component: {fileID: 2559475023075298865}
   m_Layer: 0
   m_Name: slime_default_LOD1_0
   m_TagString: Normal Slime
@@ -6923,6 +6929,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6059560954858476677, guid: dd66263daaacd1f44804016c3c5ea2d4, type: 3}
+--- !u!114 &2559475023075298865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5437141426471559091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e5323fcb6255844a70df6eabe2c30c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootSlime: {fileID: 0}
 --- !u!1 &5569517203823392341
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,14 +13,14 @@ public class pinkSlime : SlimeBase
         slimeSize = 0;
         slimeType1 = 1;
 
-        defaultMaterial.color = slimeColor[1];
-        defaultLod1Material.color = slimeColor[1];
-        defaultLod2Material.color = slimeColor[1];
-        defaultLod3Material.color = slimeColor[1];
+        defaultMaterial.color = slimeColor[slimeType1];
+        defaultLod1Material.color = slimeColor[slimeType1];
+        defaultLod2Material.color = slimeColor[slimeType1];
+        defaultLod3Material.color = slimeColor[slimeType1];
 
         //test
-        slimeName = "Pink Slime";
-        slimeIcon = Resources.Load<Sprite>("02.HT/Slimes/PinkSlime/iconSlimePink");
+        slimeName = slimeNameList[slimeType1];
+        slimeIcon = slimeIconList[slimeType1];
         //test
 
     }

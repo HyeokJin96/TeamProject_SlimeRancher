@@ -6,9 +6,11 @@ public class SlimeBase : MonoBehaviour
 {
     //test
     public string slimeName;
+    public List<string> slimeNameList;
+    public Sprite[] slimeIconList;
+    public Sprite slimeIcon;
     //test
 
-    public Sprite slimeIcon;
 
     protected Rigidbody rigid;
 
@@ -126,6 +128,18 @@ public class SlimeBase : MonoBehaviour
         slimeColor.Add(new Color32(25, 125, 25, 255));  //Rad
         slimeColor.Add(new Color32(225, 60, 90, 200));  //pinkPhospor
 
+        slimeNameList = new List<string>();
+        slimeNameList.Add("Empty");
+        slimeNameList.Add("Pink Slime");
+        slimeNameList.Add("Rock Slime");
+        slimeNameList.Add("Tabby Slime");
+        slimeNameList.Add("Phosphor Slime");
+        slimeNameList.Add("Boom Slime");
+        slimeNameList.Add("Rad Slime");
+
+        slimeIconList = Resources.LoadAll<Sprite>("02.HT/Slimes/SlimeIcon");
+
+
         //slimeColor.Add(new Color32(95, 95, 185, 200));  //phosphor_Legacy
 
         targetDistanceValue1 = 5;
@@ -155,10 +169,17 @@ public class SlimeBase : MonoBehaviour
         anim = GetComponent<Animator>();
 
         StartCoroutine(IncreaseHunger(1, increaseHungerValue)); // test value 1: after test, change to 60
-
-        //test
         StartCoroutine(DestOnOffTest());
-        //test
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(IncreaseHunger(1, increaseHungerValue)); // test value 1: after test, change to 60
+        StartCoroutine(DestOnOffTest());
+    }
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     //test

@@ -38,6 +38,12 @@ public class RockSlime : SlimeBase
         rockSpineLod1.transform.GetChild(0).GetComponent<MeshRenderer>().materials[0].color = new Color32(125, 180, 245, 255);
 
         anim = GetComponent<Animator>();
+
+
+        //test
+        slimeName = slimeNameList[slimeType1];
+        slimeIcon = slimeIconList[slimeType1];
+        //test
     }
 
     public override void Update()

@@ -51,10 +51,12 @@ public class InventoryManager : GSingleton<InventoryManager>
     public int QuickSlotCheck(GameObject obj_)
     {
         int index_ = FindObjectIndex(obj_);
+        Debug.Log("point3 &" + index_);
 
         //퀵슬롯에 해당 오브젝트 존재할 경우
         if (index_ != -1)
         {
+            Debug.Log("point1");
             return index_;
         }
 
@@ -65,6 +67,7 @@ public class InventoryManager : GSingleton<InventoryManager>
             {
                 if (quickSlotObject[i] == null)
                 {
+                    Debug.Log("point2");
                     return i;
                 }
             }

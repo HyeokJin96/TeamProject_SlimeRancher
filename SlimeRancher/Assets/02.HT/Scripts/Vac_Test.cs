@@ -39,6 +39,9 @@ public class Vac_Test : MonoBehaviour
     public GameObject muzzle;
 
     public GameObject defaultSlimePool;
+    public GameObject fireDirTarget;
+    public GameObject inventory;
+    GameObject firedObj_;
 
     private void Start()
     {
@@ -51,6 +54,66 @@ public class Vac_Test : MonoBehaviour
         jointArray = new GameObject[] { joint1, joint2, joint3, joint4, joint5, joint6 };
         vacuumedList = new List<GameObject>();
     }
+
+    void FireObject(GameObject obj_)
+    {
+        InventoryManager.Instance.quickSlotArray[selctedSlotNumber].Remove(obj_);
+        InventoryManager.Instance.quickSlotCount[selctedSlotNumber]--;
+
+        if (InventoryManager.Instance.quickSlotCount[selctedSlotNumber] == 0)
+        {
+            InventoryManager.Instance.quickSlotObject[selctedSlotNumber] = null;
+        }
+
+        obj_.transform.SetParent(defaultSlimePool.transform);
+        obj_.transform.rotation = Quaternion.identity;
+        if (obj_.tag == "Normal Slime")
+        {
+            obj_.transform.localScale = new Vector3(2, 2, 2);
+
+        }
+        else
+        {
+            obj_.transform.localScale = Vector3.one;
+        }
+
+        obj_.SetActive(true);
+        Vector3 fireDir_ = (fireDirTarget.transform.position - inventory.transform.position).normalized;
+        obj_.GetComponent<Rigidbody>().AddForce(fireDir_ * 50, ForceMode.Impulse);
+
+        /* if (InventoryManager.Instance.quickSlotArray[selctedSlotNumber].Count != 0)
+        {
+            firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
+        } */
+    }
+    public bool fireDelayEnd;
+
+    IEnumerator FireDelay()
+    {
+        Fire();
+        fireDelayEnd = true;
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("코루틴체크");
+        fireDelayEnd = false;
+    }
+
+    void Fire()
+    {
+        if (!fireDelayEnd && InventoryManager.Instance.quickSlotArray[selctedSlotNumber].Count != 0)
+        {
+            switch (selctedSlotNumber)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    firedObj_ = (InventoryManager.Instance.quickSlotArray[selctedSlotNumber])[0];
+                    break;
+            }
+            FireObject(firedObj_);
+        }
+    }
+    public bool isLeftClick_;
 
     private void Update()
     {
@@ -71,36 +134,150 @@ public class Vac_Test : MonoBehaviour
             selctedSlotNumber = 3;
         }
 
+        /* if (isFire)
+        {
+            StartCoroutine(FireDelay());
+        } */
+        if (Input.GetMouseButton(0))
+        {
+            if (isLeftClick_)
+            {
+                if (fireDelayEnd == false)
+                {
+                    StartCoroutine(FireDelay());
+                }
+            }
+        }
+
+        /* if (!fireDelayEnd)
+        {
+            if (InventoryManager.Instance.quickSlotArray[selctedSlotNumber].Count != 0)
+            {
+                switch (selctedSlotNumber)
+                {
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                        firedObj_ = (InventoryManager.Instance.quickSlotArray[selctedSlotNumber])[0];
+                        break;
+                }
+                FireObject(firedObj_);
+            }
+        } */
+
 
         if (Input.GetMouseButtonDown(0))
         {
-            blackhole.SetActive(true);
-            switch (selctedSlotNumber)
+            isLeftClick_ = true;
+
+            //blackhole.SetActive(true);
+            //GameObject firedObj_;
+
+            // if (InventoryManager.Instance.quickSlotArray[selctedSlotNumber].Count == 0)
+            // {
+            //     Debug.Log("null");
+            // }
+            // else
+            // {
+            //     switch (selctedSlotNumber)
+            //     {
+            //         case 0:
+            //             firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
+            //             //FireObject(firedObj_);
+            //             /* firedObj_.transform.SetParent(defaultSlimePool.transform);
+            //             firedObj_.transform.localScale = Vector3.one;
+            //             firedObj_.SetActive(true);
+            //             Vector3 fireDir_ = -(fireDirTarget.transform.position - firedObj_.transform.position).normalized;
+            //             firedObj_.GetComponent<Rigidbody>().AddForce(fireDir_ * 50, ForceMode.Impulse); */
+
+            //             //[0503]
+            //             //InventoryManager.Instance.quickSlot1_.transform.GetChild(0).gameObject.SetActive(true);
+            //             //InventoryManager.Instance.quickSlot1_.transform.GetChild(0).gameObject.GetComponent<Rigidbody>().AddForce(muzzle.transform.up * 10, ForceMode.Impulse);
+            //             break;
+            //         case 1:
+            //             firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
+            //             //FireObject(firedObj_);
+            //             break;
+            //         case 2:
+            //             firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
+            //             //FireObject(firedObj_);
+            //             break;
+            //         case 3:
+            //             firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
+            //             //FireObject(firedObj_);
+            //             break;
+            //     }
+            //     FireObject(firedObj_);
+            // }
+
+            //while (InventoryManager.Instance.quickSlotArray[selctedSlotNumber].Count != 0)
+            //{
+            //    StartCoroutine(FireDelay());
+            //}
+            /* while (InventoryManager.Instance.quickSlotArray[selctedSlotNumber].Count != 0)
             {
-                case 0:
-                    InventoryManager.Instance.quickSlot1_.transform.GetChild(0).SetParent(defaultSlimePool.transform);
-                    InventoryManager.Instance.quickSlot1_.transform.GetChild(0).localScale = Vector3.one;
-                    //[0503]
-                    //InventoryManager.Instance.quickSlot1_.transform.GetChild(0).gameObject.SetActive(true);
-                    //InventoryManager.Instance.quickSlot1_.transform.GetChild(0).gameObject.GetComponent<Rigidbody>().AddForce(muzzle.transform.up * 10, ForceMode.Impulse);
-                    break;
-                case 1:
-                    InventoryManager.Instance.quickSlot2_.transform.GetChild(0).gameObject.SetActive(true);
-                    break;
-                case 2:
-                    InventoryManager.Instance.quickSlot3_.transform.GetChild(0).gameObject.SetActive(true);
-                    break;
-                case 3:
-                    InventoryManager.Instance.quickSlot4_.transform.GetChild(0).gameObject.SetActive(true);
-                    break;
+                switch (selctedSlotNumber)
+                {
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                        //firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
+                        firedObj_ = (InventoryManager.Instance.quickSlotArray[selctedSlotNumber])[objIndex];
+                        break;
+                }
+                FireObject(firedObj_);
             }
-            if (InventoryManager.Instance.quickSlot[selctedSlotNumber] != null)
-            {
-            }
+             */
+
+
+
+
+
+
+
+
+            // while (InventoryManager.Instance.quickSlotArray[selctedSlotNumber].Count != 0)
+            // {
+            //     switch (selctedSlotNumber)
+            //     {
+            //         case 0:
+            //             firedObj_ = (InventoryManager.Instance.quickSlotArray[0])[0];
+            //             //firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
+
+            //             //FireObject(firedObj_);
+            //             /* firedObj_.transform.SetParent(defaultSlimePool.transform);
+            //             firedObj_.transform.localScale = Vector3.one;
+            //             firedObj_.SetActive(true);
+            //             Vector3 fireDir_ = -(fireDirTarget.transform.position - firedObj_.transform.position).normalized;
+            //             firedObj_.GetComponent<Rigidbody>().AddForce(fireDir_ * 50, ForceMode.Impulse); */
+
+            //             //[0503]
+            //             //InventoryManager.Instance.quickSlot1_.transform.GetChild(0).gameObject.SetActive(true);
+            //             //InventoryManager.Instance.quickSlot1_.transform.GetChild(0).gameObject.GetComponent<Rigidbody>().AddForce(muzzle.transform.up * 10, ForceMode.Impulse);
+            //             break;
+            //         case 1:
+            //             firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
+            //             //FireObject(firedObj_);
+            //             break;
+            //         case 2:
+            //             firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
+            //             //FireObject(firedObj_);
+            //             break;
+            //         case 3:
+            //             firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
+            //             //FireObject(firedObj_);
+            //             break;
+            //     }
+            //     FireObject(firedObj_);
+            // }
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            blackhole.SetActive(false);
+            //blackhole.SetActive(false);
+            isLeftClick_ = false;
+            StopCoroutine(FireDelay());
         }
 
         if (Input.GetMouseButtonDown(1))
@@ -119,13 +296,13 @@ public class Vac_Test : MonoBehaviour
             fuckU = false;
             isCheckEnd = false;
 
-            int trigerCheckCount_ = 0;
+            int triggerCheckCount_ = 0;
             for (int i = 0; i < vacuumedList.Count; i++)
             {
                 vacuumedList[i].GetComponent<MeshCollider>().isTrigger = false;
-                trigerCheckCount_++;
+                triggerCheckCount_++;
             }
-            if (trigerCheckCount_ == vacuumedList.Count)
+            if (triggerCheckCount_ == vacuumedList.Count)
             {
                 vacuumedList.Clear();
             }
@@ -182,11 +359,20 @@ public class Vac_Test : MonoBehaviour
         }
     }
 
+    public List<GameObject> eeee = new List<GameObject>();
+
     private void OnTriggerStay(Collider other)
     {
         if (fuckU)
         {
-            if (other.tag == "Normal Slime" || other.tag == "Food" || other.tag == "Plort") //slime Tag 통일(Normal Slime, Largo Slime, Tarr Slime => Slime)
+            if (eeee.Contains(other.gameObject))
+            {
+                //Vector3 fireDir_ = (fireDirTarget.transform.position - inventory.transform.position).normalized;
+                other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<Rigidbody>().AddForce(inventory.transform.up * 10, ForceMode.Impulse);
+                //eeee.Remove(other.gameObject);
+            }
+
+            if ((other.tag == "Normal Slime" || other.tag == "Food" || other.tag == "Plort") && !eeee.Contains(other.gameObject)) //slime Tag 통일(Normal Slime, Largo Slime, Tarr Slime => Slime)
             {
 
                 // 대상 오브젝트들을 리스트에 추가
@@ -213,9 +399,8 @@ public class Vac_Test : MonoBehaviour
                 // 대상 오브젝트의 시작 scale 저장
                 //Vector3 defaultScale = other.GetComponent<VacSlimeTest>().rootSlime.transform.localScale;
 
-
                 // 대상 오브젝트에 속력 부여
-                if (other.tag == "Normal Slime")
+                if (other.tag == "Normal Slime" && vacuumedList.Contains(other.gameObject))
                 {
                     dir = jointArray[nearestIndex].transform.position - other.GetComponent<VacSlimeTest>().rootSlime.transform.position;
                     other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<Rigidbody>().velocity = dir * 10f;
@@ -234,6 +419,15 @@ public class Vac_Test : MonoBehaviour
                         if (quickSlotCheck_ != -1)
                         {
                             other.GetComponent<VacSlimeTest>().rootSlime.transform.localScale *= 0.9f;
+                        }
+                        else
+                        {
+                            other.GetComponent<VacSlimeTest>().rootSlime.transform.localScale = new Vector3(2, 2, 2);
+                            vacuumedList.Remove(other.gameObject);
+                            if (!eeee.Contains(other.gameObject))
+                            {
+                                eeee.Add(other.gameObject);
+                            }
                         }
 
 
@@ -268,6 +462,7 @@ public class Vac_Test : MonoBehaviour
                             InventoryManager.Instance.quickSlotCount[quickSlotCheck_]++;
 
                             other.GetComponent<VacSlimeTest>().rootSlime.transform.SetParent(InventoryManager.Instance.quickSlot[quickSlotCheck_].transform);
+                            other.GetComponent<VacSlimeTest>().rootSlime.transform.rotation = Quaternion.identity;
                             other.GetComponent<VacSlimeTest>().rootSlime.SetActive(false);
                             //nearestIndex = 0;
                         }
@@ -328,8 +523,9 @@ public class Vac_Test : MonoBehaviour
                             InventoryManager.Instance.quickSlotCount[quickSlotCheck_]++;
 
                             other.transform.SetParent(InventoryManager.Instance.quickSlot[quickSlotCheck_].transform);
-
+                            other.transform.rotation = Quaternion.identity;
                             other.gameObject.SetActive(false);
+
                             //nearestIndex = 0;
                         }
                     }
@@ -430,8 +626,15 @@ public class Vac_Test : MonoBehaviour
         if (other.tag == "Normal Slime")
         {
             other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().currentActionState = SlimeBase.ActionState.Idle;
+
+            other.GetComponent<VacSlimeTest>().rootSlime.transform.localScale = new Vector3(2, 2, 2);
+
+            other.GetComponent<MeshCollider>().isTrigger = false;
         }
-        other.GetComponent<MeshCollider>().isTrigger = false;
+        else if (other.tag == "Food" || other.tag == "Plort")
+        {
+            other.GetComponent<MeshCollider>().isTrigger = false;
+        }
         vacuumedList.Remove(other.gameObject);
         /* 
                 foreach (GameObject star in stars)
