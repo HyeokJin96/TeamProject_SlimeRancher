@@ -31,7 +31,6 @@ public class T_DataManager : KSingleton<T_DataManager>
     public override void Start()
     {
         base.Start();
-        Debug.Log(path_TR);
 
     }
 

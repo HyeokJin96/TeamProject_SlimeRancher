@@ -195,7 +195,6 @@ public class SlimeBase : MonoBehaviour
 
     void DestTestMethod()
     {
-        Debug.Log("!!!!!!!!");
         isDestOn = false;
         angle = Random.Range(0f, 360f);
         radiusX = Random.Range(5, 10);

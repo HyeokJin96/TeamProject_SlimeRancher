@@ -89,9 +89,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-
-        Debug.Log(pressedTime);
-
         PlayerPosCheck();
 
         if (canMove)

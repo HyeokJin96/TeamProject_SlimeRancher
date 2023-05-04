@@ -402,6 +402,8 @@ public class Vac_Test : MonoBehaviour
                 // 대상 오브젝트에 속력 부여
                 if (other.tag == "Normal Slime" && vacuumedList.Contains(other.gameObject))
                 {
+                    Debug.Log(Vector3.Distance(jointArray[nearestIndex].transform.position, other.GetComponent<VacSlimeTest>().rootSlime.transform.position));
+                    
                     dir = jointArray[nearestIndex].transform.position - other.GetComponent<VacSlimeTest>().rootSlime.transform.position;
                     other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<Rigidbody>().velocity = dir * 10f;
 

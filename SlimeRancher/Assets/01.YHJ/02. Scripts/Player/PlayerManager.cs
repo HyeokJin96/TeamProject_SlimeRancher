@@ -167,12 +167,12 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Water"))
-        {
-            /* Die */
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Water"))
+    //    {
+    //        /* Die */
+    //    }
+    //}
 
 }
