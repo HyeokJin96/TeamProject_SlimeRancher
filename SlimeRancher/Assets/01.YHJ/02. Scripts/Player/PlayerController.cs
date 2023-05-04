@@ -1,19 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = default;
-    [SerializeField] private float sprintSpeed = default;
-    [SerializeField] private float normalSpeed = default;
-    [SerializeField] private float jumpForce = default;
+    [SerializeField] private PlayerManager playerManager = default;
 
     [SerializeField] private float groundCheckDistance = default;
     [SerializeField] private LayerMask groundLayer = default;
 
     private bool isGrounded = false;
-    private bool isSprinting = false;
+    public bool isSprinting = false;
+    public bool isInAction = false;
 
 
     private Rigidbody playerRigidbody = default;
@@ -35,15 +34,28 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameManager gameManager = default;
 
 
-
+    private Player_Raycast player_Raycast = default;
 
 
     public static float currentX;
     public static float currentY;
 
+    public bool canMove = false;
+    public bool isFlying = false;
+
+    private float maxHealth;
+    private float currentHealth;
+    private float maxEnergy;
+    private float currentEnergy;
+    private float coin;
+
+    private Vector3 playerPos = default;
+    private float pressedTime = default;
 
     private void Awake()
     {
+        playerManager = this.GetComponent<PlayerManager>();
+
         playerAnimator = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
 
@@ -56,29 +68,42 @@ public class PlayerController : MonoBehaviour
         playerBody = transform.GetChild(1).gameObject;
 
 
+        player_Raycast = GetComponent<Player_Raycast>();
 
         cameraController = playerCamera.GetComponent<CameraController>();
     }
 
     private void Start()
     {
-        normalSpeed = moveSpeed;
-        //cone.gameObject.SetActive(false);
+        playerManager.playerSpeed = playerManager.playerMoveSpeed;
+        canMove = true;
     }
 
     private void FixedUpdate()
     {
-        Movement();
+        if (canMove)
+        {
+            Movement();
+        }
     }
 
     private void Update()
     {
-        Jump();
-        Sprint();
-        RotatePlayer();
 
-        AnimationControll();
-        //Absorption();
+        Debug.Log(pressedTime);
+
+        PlayerPosCheck();
+
+        if (canMove)
+        {
+            Jump();
+            JetPack();
+            Sprint();
+            RotatePlayer();
+
+            AnimationControll();
+            //Absorption();
+        }
     }
 
     #region RotatePlayer
@@ -106,7 +131,7 @@ public class PlayerController : MonoBehaviour
         float verticalInput = Input.GetAxisRaw("Vertical");
 
         Vector3 moveDirection = (horizontalInput * transform.right + verticalInput * transform.forward).normalized;
-        Vector3 newPosition = transform.position + moveDirection * moveSpeed * Time.deltaTime;
+        Vector3 newPosition = transform.position + moveDirection * playerManager.playerSpeed * Time.deltaTime;
         playerRigidbody.MovePosition(newPosition);
     }   //  Movement()
     #endregion
@@ -114,45 +139,74 @@ public class PlayerController : MonoBehaviour
     #region Jump
     private void Jump()
     {
+
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            playerRigidbody.AddForce(Vector3.up * playerManager.playerJumpForce, ForceMode.Impulse);
         }
+
         isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
+
     }   //  Jump()
     #endregion
+
+    private void JetPack()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            pressedTime += Time.deltaTime;
+        }
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            isFlying = false;
+
+            if (isGrounded)
+            {
+                pressedTime = 0;
+            }
+        }
+
+        if (Input.GetKey(KeyCode.Space) && playerManager.hasJetpack)
+        {
+            if (pressedTime >= 0.5f)
+            {
+                if (transform.position.y < playerPos.y + 10f)
+                {
+                    playerRigidbody.AddForce(Vector3.up * playerManager.playerJetPackForce, ForceMode.Force);
+                }
+                else
+                {
+                    playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, 0, playerRigidbody.velocity.z);
+                }
+
+                isFlying = true;
+            }
+        }
+    }
+
+
+
+    private void PlayerPosCheck()
+    {
+        if (!isFlying)
+        {
+            playerPos = transform.position;
+        }
+        else
+        {
+            return;
+        }
+    }
 
     #region Sprint
     private void Sprint()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift) && isGrounded)
         {
-            if (!isSprinting)
-            {
-                isSprinting = true;
-                moveSpeed = sprintSpeed;
-            }
-            else
-            {
-                isSprinting = false;
-                moveSpeed = normalSpeed;
-            }
+            isSprinting = !isSprinting;
         }
     }   //  Sprint()
     #endregion
-
-    //private void Absorption()
-    //{
-    //    if (Input.GetMouseButton(1))
-    //    {
-    //        cone.gameObject.SetActive(true);
-    //    }
-
-    //    if (Input.GetMouseButtonUp(1))
-    //    {
-    //        cone.gameObject.SetActive(false);
-    //    }
-    //}
 
     private void AnimationControll()
     {
@@ -165,5 +219,4 @@ public class PlayerController : MonoBehaviour
             playerAnimator.SetBool("isSprinting", false);
         }
     }
-
 }
