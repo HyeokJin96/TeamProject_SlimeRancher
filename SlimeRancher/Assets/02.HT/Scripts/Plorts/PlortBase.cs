@@ -10,6 +10,9 @@ public class PlortBase : MonoBehaviour
     //[PlortType] 0: Default(White), 1: Pink...
     public int plortType;
     public List<Color32> plortColor;    //test public
+
+    public List<string> plortName;
+    public Sprite[] plortIcon;
     // Start is called before the first frame update
 
     private void Awake()
@@ -19,6 +22,20 @@ public class PlortBase : MonoBehaviour
         plortColor.Add(new Color32(225, 60, 90, 255));  //pink
         plortColor.Add(new Color32(30, 125, 200, 255));  //rock
         plortColor.Add(new Color32(75, 75, 75, 255));  //tabby
+        plortColor.Add(new Color32(175, 175, 255, 200));  //phosphor
+        plortColor.Add(new Color32(225, 60, 90, 255));  //boom(=pink)
+        plortColor.Add(new Color32(25, 125, 25, 255));  //Rad
+
+        plortName = new List<string>();
+        plortName.Add("Empty");
+        plortName.Add("Pink Plort");
+        plortName.Add("Rock Plort");
+        plortName.Add("Tabby Plort");
+        plortName.Add("Phosphor Plort");
+        plortName.Add("Boom Plort");
+        plortName.Add("Rad plort");
+        //ing
+        plortIcon = Resources.LoadAll<Sprite>("02.HT/QuickSlotIcon/Plorts");
     }
     void Start()
     {

@@ -24,6 +24,9 @@ public class RadSlime : SlimeBase
         radField = shadow.GetChild(4).GetComponent<MeshRenderer>().materials[0];
         defaultRadFieldValue = 0.9f;
         currentRadFieldValue = defaultRadFieldValue;
+
+        slimeName = slimeNameList[slimeType1];
+        slimeIcon = slimeIconList[slimeType1];
     }
 
     public override void Update()

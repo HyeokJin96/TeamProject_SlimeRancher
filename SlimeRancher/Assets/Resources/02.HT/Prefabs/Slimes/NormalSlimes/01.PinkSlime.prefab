@@ -299,7 +299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2442447490498328934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1035.3065, y: 941, z: -732.6527}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -322,7 +322,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 2
 --- !u!95 &2442447490498328935
 Animator:
@@ -357,6 +357,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df1dda2d9ac00dd4a945218e6c9648b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slimeName: 
+  slimeIcon: {fileID: 0}
+  isJumpDelay: 0
   hungerValue: 0
   agitatedValue: 0
   targetToEat: {fileID: 0}
@@ -1027,6 +1030,7 @@ GameObject:
   - component: {fileID: 3252787351766656081}
   - component: {fileID: 3252787351766656080}
   - component: {fileID: 3252787351766656082}
+  - component: {fileID: 4652439608829404363}
   m_Layer: 0
   m_Name: slime_default_LOD1_0
   m_TagString: Normal Slime
@@ -1113,6 +1117,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6059560954858476677, guid: dd66263daaacd1f44804016c3c5ea2d4, type: 3}
+--- !u!114 &4652439608829404363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3252787351766656094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e5323fcb6255844a70df6eabe2c30c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootSlime: {fileID: 0}
 --- !u!1 &3252787352244809828
 GameObject:
   m_ObjectHideFlags: 0

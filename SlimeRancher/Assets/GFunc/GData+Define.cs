@@ -4,10 +4,10 @@ using UnityEngine;
 public static partial class GData
 {
     // Scene Name
-    public const string SCENENAME_INIT = "01.InitScene";
-    public const string SCENENAME_TITLE = "TestTitleScene";
+    public const string SCENENAME_INIT = "0.InitScene";
+    public const string SCENENAME_TITLE = "1.TitleScene";
     public const string SCENENAME_LOADING = "LoadingScene";
-    public const string SCENENAME_PLAY = "TestScene";
+    public const string SCENENAME_PLAY = "2.PlayScene";
 }
 
 //! 지형의 속성을 정의하기 위한 타입

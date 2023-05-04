@@ -36,6 +36,9 @@ public class TabbySlime : SlimeBase
         defaultLod3Material.SetTexture("_MainTex", tabbyBodyTexture);
 
         tabbyEarsAndTail = shadow.GetChild(6).gameObject;
+        
+        slimeName = slimeNameList[slimeType1];
+        slimeIcon = slimeIconList[slimeType1];
 
         tabbyEarsAndTail.SetActive(true);
     }

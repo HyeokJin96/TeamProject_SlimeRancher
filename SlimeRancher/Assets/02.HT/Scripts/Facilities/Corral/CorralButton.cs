@@ -31,18 +31,18 @@ public class CorralButton : MonoBehaviour
 
     void activate()
     {
-        if (UIManager.Instance.corralText.activeSelf == true && Input.GetKeyDown(KeyCode.E))
-        {
-            Debug.Log("activate");
-            if (level != 3)
-            {
-                level++;
-            }
-            else
-            {
-                level = 1;
-            }
-        }
+        // if (UIManager.Instance.corralText.activeSelf == true && Input.GetKeyDown(KeyCode.E))
+        // {
+        //     Debug.Log("activate");
+        //     if (level != 3)
+        //     {
+        //         level++;
+        //     }
+        //     else
+        //     {
+        //         level = 1;
+        //     }
+        // }
     }
 
     void imageChange()
