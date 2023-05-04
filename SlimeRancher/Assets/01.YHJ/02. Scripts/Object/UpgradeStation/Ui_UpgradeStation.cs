@@ -193,52 +193,59 @@ public class Ui_UpgradeStation : MonoBehaviour
                             break;
                         case "Jetpack":
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            playerManager.hasJetpack = true;
                             break;
                         case "Air Drive":
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            playerManager.playerJetpackConsumption *= 0.8f;
                             break;
                         case "Dash Boots":
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            playerManager.playerPowerConsumption *= 0.8f;
                             listButton[5].gameObject.SetActive(true);
                             break;
                         case "Ultra Dash Boots":
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            playerManager.playerPowerConsumption *= 0.8f;
                             break;
                         case "Pulse Wave":
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             break;
                         case "Heart Module":
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
-                            playerManager.playerMaxHeart += 50;
+                            playerManager.playerMaxHealth += 50;
                             listButton[8].gameObject.SetActive(true);
                             break;
                         case "Heart Module Mk2":
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
-                            playerManager.playerMaxHeart += 50;
+                            playerManager.playerMaxHealth += 50;
                             listButton[9].gameObject.SetActive(true);
                             break;
                         case "Heart Module Mk3":
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
-                            playerManager.playerMaxHeart += 50;
+                            playerManager.playerMaxHealth += 50;
                             listButton[10].gameObject.SetActive(true);
                             break;
                         case "Heart Module Ultra":
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
-                            playerManager.playerMaxHeart += 50;
+                            playerManager.playerMaxHealth += 50;
                             break;
                         case "Power Core":
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
-                            playerManager.playerMaxPower += 50;
+                            playerManager.playerMaxEnergy += 50;
+                            playerManager.playerEnergyincrease *= 1.5f;
                             listButton[12].gameObject.SetActive(true);
                             break;
                         case "Power Core Mk2":
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
-                            playerManager.playerMaxPower += 50;
+                            playerManager.playerMaxEnergy += 50;
+                            playerManager.playerEnergyincrease *= 1.5f;
                             listButton[13].gameObject.SetActive(true);
                             break;
                         case "Power Core Mk3":
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
-                            playerManager.playerMaxPower += 50;
+                            playerManager.playerMaxEnergy += 50;
+                            playerManager.playerEnergyincrease *= 1.5f;
                             break;
                         case "Tank Booster":
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
