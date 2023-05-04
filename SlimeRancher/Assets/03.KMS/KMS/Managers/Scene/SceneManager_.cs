@@ -15,4 +15,6 @@ public class SceneManager_ : KSingleton<SceneManager_>
         UIManager.Instance.isPlayMenu_Open = false;
         GFunc.LoadScene(GData.SCENENAME_PLAY);
     }
+
+    
 }

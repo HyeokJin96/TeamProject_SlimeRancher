@@ -15,7 +15,6 @@ public class TimeController : KSingleton<TimeController>
 
     private new void Awake()
     {
-
         // Set Morning
         hour = 6;
     }
@@ -25,15 +24,20 @@ public class TimeController : KSingleton<TimeController>
         Timer();
     }
 
-    private void NTimesFaster()
+    private void NTimesFaster20()
     {
         nTimesFaster = 20;
+    }
+
+    private void NTimesFaster0()
+    {
+        nTimesFaster = 0;
     }
 
     private void Timer()
     {
         // Day, Hour : minute
-        minute += Time.deltaTime;
+        minute += Time.deltaTime * nTimesFaster;
 
         minute_ = Mathf.FloorToInt(minute % 60);
         hour_ = Mathf.FloorToInt(hour % 60);
