@@ -17,7 +17,7 @@ public class SlimeBase : MonoBehaviour
     protected bool isGrounded;
     public bool isJumpDelay;
 
-    int jumpDelay = 5;
+    protected int jumpDelay = 5;
     int jumpForce = 5;
 
     public float hungerValue;   // after test, delete public 
@@ -127,6 +127,7 @@ public class SlimeBase : MonoBehaviour
         slimeColor.Add(new Color32(255, 30, 0, 255));  //boom
         slimeColor.Add(new Color32(25, 125, 25, 255));  //Rad
         slimeColor.Add(new Color32(225, 60, 90, 200));  //pinkPhospor
+        slimeColor.Add(new Color32(255, 30, 0, 200));  //phosporBoom
 
         slimeNameList = new List<string>();
         slimeNameList.Add("Empty");
@@ -326,7 +327,7 @@ public class SlimeBase : MonoBehaviour
     {
 
     }
-    public IEnumerator SetStun()
+    public virtual IEnumerator SetStun()
     {
         Debug.Log("start stun");
         anim.SetBool("isStunned", true);
