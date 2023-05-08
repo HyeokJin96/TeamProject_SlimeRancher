@@ -12,12 +12,16 @@ public class LargoPinkRockSlime : SlimeBase
 
     Material rockSpineLod0Mat;
     Material rockSpineLod1Mat;
+
+
     public override void Start()
     {
         base.Start();
         slimeSize = 1;
         slimeType1 = 1;
         slimeType2 = 2;
+
+        defaultColor = slimeColor[1];
 
         defaultMaterial.color = slimeColor[1];
         defaultLod1Material.color = slimeColor[1];

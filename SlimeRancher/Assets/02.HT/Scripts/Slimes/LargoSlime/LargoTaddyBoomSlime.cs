@@ -45,6 +45,7 @@ public class LargoTaddyBoomSlime : SlimeBase
         tabbyEarsAndTail.transform.GetChild(0).GetComponent<MeshRenderer>().materials[0].color = slimeColor[5];
 
         tabbyEarsAndTail.SetActive(true);
+        defaultColor = slimeColor[5];
     }
 
     public override void Update()

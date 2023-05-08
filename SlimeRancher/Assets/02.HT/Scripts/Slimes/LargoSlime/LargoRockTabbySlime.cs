@@ -61,6 +61,7 @@ public class LargoRockTabbySlime : SlimeBase
         rockSpineLod1.transform.GetChild(0).GetComponent<MeshRenderer>().materials[0].color = new Color32(125, 180, 245, 255);
 
         anim = GetComponent<Animator>();
+        defaultColor = slimeColor[2];
     }
 
     public override void Update()

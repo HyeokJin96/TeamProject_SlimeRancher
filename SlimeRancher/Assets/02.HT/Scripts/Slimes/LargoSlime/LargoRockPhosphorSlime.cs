@@ -37,6 +37,8 @@ public class LargoRockPhosphorSlime : SlimeBase
         rockAttachment.transform.GetChild(0).GetComponent<MeshRenderer>().materials[0].color = slimeColor[4];
         rockSpineLod0.transform.GetChild(0).GetComponent<MeshRenderer>().materials[0].color = slimeColor[4];
         rockSpineLod1.transform.GetChild(0).GetComponent<MeshRenderer>().materials[0].color = slimeColor[4];
+        
+        defaultColor = slimeColor[4];
     }
 
     public override void Update()

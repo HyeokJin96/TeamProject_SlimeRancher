@@ -18,6 +18,8 @@ public class LargoPinkBoomSlime : SlimeBase
         slimeType1 = 1;
         slimeType1 = 5;
 
+        defaultColor = slimeColor[5];
+
         defaultMaterial.color = slimeColor[5];
         defaultLod1Material.color = slimeColor[5];
         defaultLod2Material.color = slimeColor[5];

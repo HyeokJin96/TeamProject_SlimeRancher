@@ -54,6 +54,8 @@ public class LargoRockRadSlime : SlimeBase
         radField = transform.GetChild(3).GetComponent<MeshRenderer>().materials[0];
         defaultRadFieldValue = 0.9f;
         currentRadFieldValue = defaultRadFieldValue;
+    
+        defaultColor = slimeColor[6];
     }
 
     public override void Update()

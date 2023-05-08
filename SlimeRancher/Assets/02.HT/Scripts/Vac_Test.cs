@@ -39,9 +39,15 @@ public class Vac_Test : MonoBehaviour
     public GameObject muzzle;
 
     public GameObject defaultSlimePool;
+    public GameObject defaultFoodPool;
+    public GameObject defaultPlortPool;
     public GameObject fireDirTarget;
     public GameObject inventory;
     GameObject firedObj_;
+
+    bool isPickUpLargo;
+    GameObject pickupLargoSlime;
+    MeshCollider pickupLargoCollider;
 
     private void Start()
     {
@@ -65,15 +71,25 @@ public class Vac_Test : MonoBehaviour
             InventoryManager.Instance.quickSlotObject[selctedSlotNumber] = null;
         }
 
-        obj_.transform.SetParent(defaultSlimePool.transform);
-        obj_.transform.rotation = Quaternion.identity;
+        //obj_.transform.rotation = Quaternion.identity;
         if (obj_.tag == "Normal Slime")
         {
+            obj_.transform.SetParent(defaultSlimePool.transform);
+            obj_.transform.rotation = Quaternion.identity;
             obj_.transform.localScale = new Vector3(2, 2, 2);
+
+        }
+        else if (obj_.tag == "Food")
+        {
+            obj_.transform.SetParent(defaultFoodPool.transform);
+            obj_.transform.rotation = Quaternion.identity;
+            obj_.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
 
         }
         else
         {
+            obj_.transform.SetParent(defaultPlortPool.transform);
+            obj_.transform.rotation = Quaternion.identity;
             obj_.transform.localScale = Vector3.one;
         }
 
@@ -99,7 +115,20 @@ public class Vac_Test : MonoBehaviour
 
     void Fire()
     {
-        if (!fireDelayEnd && InventoryManager.Instance.quickSlotArray[selctedSlotNumber].Count != 0)
+        if (isPickUpLargo)
+        {
+            isPickUpLargo = false;
+            pickupLargoSlime.transform.SetParent(defaultSlimePool.transform);
+            pickupLargoSlime.transform.rotation = Quaternion.identity;
+            pickupLargoSlime.transform.localScale = new Vector3(3, 3, 3);
+
+            Vector3 fireDir_ = (fireDirTarget.transform.position - inventory.transform.position).normalized;
+            pickupLargoSlime.GetComponent<Rigidbody>().AddForce(fireDir_ * 50, ForceMode.Impulse);
+
+            pickupLargoSlime.GetComponent<SlimeBase>().isPickup = false;
+            pickupLargoCollider.isTrigger = false;
+        }
+        else if (!fireDelayEnd && InventoryManager.Instance.quickSlotArray[selctedSlotNumber].Count != 0)
         {
             switch (selctedSlotNumber)
             {
@@ -117,6 +146,15 @@ public class Vac_Test : MonoBehaviour
 
     private void Update()
     {
+        if (isPickUpLargo)
+        {
+            blackhole.SetActive(false);
+
+            pickupLargoSlime.transform.position = jointArray[1].transform.position;
+            pickupLargoSlime.GetComponent<SlimeBase>().isPickup = true;
+            pickupLargoCollider.isTrigger = true;
+        }
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             selctedSlotNumber = 0;
@@ -283,6 +321,7 @@ public class Vac_Test : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             blackhole.SetActive(true);
+
             joint2DefaultPos = joint2.transform.position;
             joint3DefaultPos = joint3.transform.position;
             joint4DefaultPos = joint4.transform.position;
@@ -306,6 +345,18 @@ public class Vac_Test : MonoBehaviour
             {
                 vacuumedList.Clear();
             }
+
+            joint2DefaultPos = joint2_OriginPos.transform.position;
+            joint3DefaultPos = joint3_OriginPos.transform.position;
+            joint4DefaultPos = joint4_OriginPos.transform.position;
+            joint5DefaultPos = joint5_OriginPos.transform.position;
+            joint6DefaultPos = joint6_OriginPos.transform.position;
+
+            joint2.transform.position = joint2_OriginPos.transform.position;
+            joint3.transform.position = joint3_OriginPos.transform.position;
+            joint4.transform.position = joint4_OriginPos.transform.position;
+            joint5.transform.position = joint5_OriginPos.transform.position;
+            joint6.transform.position = joint6_OriginPos.transform.position;
         }
 
         time += Time.deltaTime;
@@ -363,7 +414,7 @@ public class Vac_Test : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (fuckU)
+        if (fuckU && !isPickUpLargo)
         {
             if (eeee.Contains(other.gameObject))
             {
@@ -402,8 +453,8 @@ public class Vac_Test : MonoBehaviour
                 // 대상 오브젝트에 속력 부여
                 if (other.tag == "Normal Slime" && vacuumedList.Contains(other.gameObject))
                 {
-                    Debug.Log(Vector3.Distance(jointArray[nearestIndex].transform.position, other.GetComponent<VacSlimeTest>().rootSlime.transform.position));
-                    
+                    //Debug.Log(Vector3.Distance(jointArray[nearestIndex].transform.position, other.GetComponent<VacSlimeTest>().rootSlime.transform.position));
+
                     dir = jointArray[nearestIndex].transform.position - other.GetComponent<VacSlimeTest>().rootSlime.transform.position;
                     other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<Rigidbody>().velocity = dir * 10f;
 
@@ -416,62 +467,133 @@ public class Vac_Test : MonoBehaviour
                     // 마지막 joint로 옮겨졌을때, 대상 오브젝트의 scale 축소
                     if (nearestIndex == 1)
                     {
-                        //if() : quick slot에 빈 칸이 있으면 scale을 축소, else : 빈칸이 없으면 축소하지 않음
-                        int quickSlotCheck_ = InventoryManager.Instance.QuickSlotCheck(other.GetComponent<VacSlimeTest>().rootSlime);
-                        if (quickSlotCheck_ != -1)
+                        if (other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeSize == 0)
                         {
-                            other.GetComponent<VacSlimeTest>().rootSlime.transform.localScale *= 0.9f;
+                            //if() : quick slot에 빈 칸이 있으면 scale을 축소, else : 빈칸이 없으면 축소하지 않음
+                            int quickSlotCheck_ = InventoryManager.Instance.QuickSlotCheck(other.GetComponent<VacSlimeTest>().rootSlime);
+                            if (quickSlotCheck_ != -1)
+                            {
+                                other.GetComponent<VacSlimeTest>().rootSlime.transform.localScale *= 0.9f;
+                            }
+                            else
+                            {
+                                other.GetComponent<VacSlimeTest>().rootSlime.transform.localScale = new Vector3(2, 2, 2);
+                                vacuumedList.Remove(other.gameObject);
+                                if (!eeee.Contains(other.gameObject))
+                                {
+                                    eeee.Add(other.gameObject);
+                                }
+                            }
+
+
+                            // 대상 오브젝트의 scale이 0.5보다 작아지면 'quickslot'으로 이동, 해당 오브젝트 off
+                            if (other.GetComponent<VacSlimeTest>().rootSlime.transform.localScale.x < 0.5f)
+                            {
+                                InventoryManager.Instance.quickSlotObject[quickSlotCheck_] = other.GetComponent<VacSlimeTest>().rootSlime;
+                                InventoryManager.Instance.quickSlotArray[quickSlotCheck_].Add(other.GetComponent<VacSlimeTest>().rootSlime);
+
+                                if (quickSlotCheck_ == 0)
+                                {
+                                    InventoryManager.Instance.slot1_ObjName = other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeName;
+                                    InventoryManager.Instance.slot1_Obj_Sprite = other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeIcon;
+                                }
+                                else if (quickSlotCheck_ == 1)
+                                {
+                                    InventoryManager.Instance.slot2_ObjName = other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeName;
+                                    InventoryManager.Instance.slot2_Obj_Sprite = other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeIcon;
+                                }
+                                else if (quickSlotCheck_ == 2)
+                                {
+                                    InventoryManager.Instance.slot3_ObjName = other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeName;
+                                    InventoryManager.Instance.slot3_Obj_Sprite = other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeIcon;
+                                }
+                                else if (quickSlotCheck_ == 3)
+                                {
+                                    InventoryManager.Instance.slot4_ObjName = other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeName;
+                                    InventoryManager.Instance.slot4_Obj_Sprite = other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeIcon;
+                                }
+
+
+                                InventoryManager.Instance.quickSlotCount[quickSlotCheck_]++;
+
+                                other.GetComponent<VacSlimeTest>().rootSlime.transform.SetParent(InventoryManager.Instance.quickSlot[quickSlotCheck_].transform);
+                                other.GetComponent<VacSlimeTest>().rootSlime.transform.rotation = Quaternion.identity;
+                                other.GetComponent<VacSlimeTest>().rootSlime.SetActive(false);
+                                //nearestIndex = 0;
+                            }
                         }
-                        else
+                        else if (other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeSize == 1 || other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().isTarrSlime)
                         {
-                            other.GetComponent<VacSlimeTest>().rootSlime.transform.localScale = new Vector3(2, 2, 2);
-                            vacuumedList.Remove(other.gameObject);
-                            if (!eeee.Contains(other.gameObject))
-                            {
-                                eeee.Add(other.gameObject);
-                            }
-                        }
-
-
-                        // 대상 오브젝트의 scale이 0.5보다 작아지면 'quickslot'으로 이동, 해당 오브젝트 off
-                        if (other.GetComponent<VacSlimeTest>().rootSlime.transform.localScale.x < 0.5f)
-                        {
-                            InventoryManager.Instance.quickSlotObject[quickSlotCheck_] = other.GetComponent<VacSlimeTest>().rootSlime;
-                            InventoryManager.Instance.quickSlotArray[quickSlotCheck_].Add(other.GetComponent<VacSlimeTest>().rootSlime);
-
-                            if (quickSlotCheck_ == 0)
-                            {
-                                InventoryManager.Instance.slot1_ObjName = other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeName;
-                                InventoryManager.Instance.slot1_Obj_Sprite = other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeIcon;
-                            }
-                            else if (quickSlotCheck_ == 1)
-                            {
-                                InventoryManager.Instance.slot2_ObjName = other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeName;
-                                InventoryManager.Instance.slot2_Obj_Sprite = other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeIcon;
-                            }
-                            else if (quickSlotCheck_ == 2)
-                            {
-                                InventoryManager.Instance.slot3_ObjName = other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeName;
-                                InventoryManager.Instance.slot3_Obj_Sprite = other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeIcon;
-                            }
-                            else if (quickSlotCheck_ == 3)
-                            {
-                                InventoryManager.Instance.slot4_ObjName = other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeName;
-                                InventoryManager.Instance.slot4_Obj_Sprite = other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().slimeIcon;
-                            }
-
-
-                            InventoryManager.Instance.quickSlotCount[quickSlotCheck_]++;
-
-                            other.GetComponent<VacSlimeTest>().rootSlime.transform.SetParent(InventoryManager.Instance.quickSlot[quickSlotCheck_].transform);
-                            other.GetComponent<VacSlimeTest>().rootSlime.transform.rotation = Quaternion.identity;
-                            other.GetComponent<VacSlimeTest>().rootSlime.SetActive(false);
-                            //nearestIndex = 0;
+                            isPickUpLargo = true;
+                            pickupLargoSlime = other.GetComponent<VacSlimeTest>().rootSlime;
+                            pickupLargoCollider = other.GetComponent<MeshCollider>();
+                            Debug.Log("largopickup");
                         }
                     }
                 }
 
                 //savepoint
+
+                else if (other.tag == "Food" && vacuumedList.Contains(other.gameObject))
+                {
+                    dir = jointArray[nearestIndex].transform.position - other.transform.parent.position;
+                    other.transform.parent.GetComponent<Rigidbody>().velocity = dir * 10f;
+
+                    // 대상 오브젝트와 joint 간의 거리가 0.1f보다 작아지면 다음 joint로 변경
+                    if (Vector3.Distance(jointArray[nearestIndex].transform.position, other.transform.parent.position) < 0.1f && nearestIndex > 0)
+                    {
+                        nearestIndex--;
+                    }
+
+                    if (nearestIndex == 1)
+                    {
+                        //if() : quick slot에 빈 칸이 있으면 scale을 축소, else : 빈칸이 없으면 축소하지 않음
+                        int quickSlotCheck_ = InventoryManager.Instance.QuickSlotCheck(other.transform.parent.gameObject);
+                        if (quickSlotCheck_ != -1)
+                        {
+                            other.transform.parent.localScale *= 0.9f;
+                        }
+
+                        // 대상 오브젝트의 scale이 0.5보다 작아지면 'quickslot'으로 이동, 해당 오브젝트 off
+                        if (other.transform.parent.localScale.x < 0.15f)
+                        {
+                            InventoryManager.Instance.quickSlotObject[quickSlotCheck_] = other.transform.parent.gameObject;
+                            InventoryManager.Instance.quickSlotArray[quickSlotCheck_].Add(other.transform.parent.gameObject);
+
+
+                            if (quickSlotCheck_ == 0)
+                            {
+                                InventoryManager.Instance.slot1_ObjName = other.transform.parent.GetComponent<ObjecData>().foodName.ToString();
+                                InventoryManager.Instance.slot1_Obj_Sprite = other.transform.parent.GetComponent<ObjecData>().foodIcon;
+                            }
+                            else if (quickSlotCheck_ == 1)
+                            {
+                                InventoryManager.Instance.slot2_ObjName = other.transform.parent.GetComponent<ObjecData>().foodName.ToString();
+                                InventoryManager.Instance.slot2_Obj_Sprite = other.transform.parent.GetComponent<ObjecData>().foodIcon;
+                            }
+                            else if (quickSlotCheck_ == 2)
+                            {
+                                InventoryManager.Instance.slot3_ObjName = other.transform.parent.GetComponent<ObjecData>().foodName.ToString();
+                                InventoryManager.Instance.slot3_Obj_Sprite = other.transform.parent.GetComponent<ObjecData>().foodIcon;
+                            }
+                            else if (quickSlotCheck_ == 3)
+                            {
+                                InventoryManager.Instance.slot4_ObjName = other.transform.parent.GetComponent<ObjecData>().foodName.ToString();
+                                InventoryManager.Instance.slot4_Obj_Sprite = other.transform.parent.GetComponent<ObjecData>().foodIcon;
+                            }
+
+
+                            InventoryManager.Instance.quickSlotCount[quickSlotCheck_]++;
+
+                            other.transform.parent.SetParent(InventoryManager.Instance.quickSlot[quickSlotCheck_].transform);
+                            other.transform.parent.rotation = Quaternion.identity;
+                            other.transform.parent.gameObject.SetActive(false);
+
+                            //nearestIndex = 0;
+                        }
+                    }
+                }
+
 
                 else
                 {

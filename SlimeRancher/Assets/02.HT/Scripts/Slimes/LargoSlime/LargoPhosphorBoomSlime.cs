@@ -24,6 +24,8 @@ public class LargoPhosphorBoomSlime : SlimeBase
         slimeSize = 1;
         slimeType1 = 4;
         slimeType1 = 5;
+        
+        defaultColor = slimeColor[8];
 
         defaultMaterial.color = slimeColor[8];
         defaultLod1Material.color = slimeColor[8];

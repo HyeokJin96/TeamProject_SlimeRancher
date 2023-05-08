@@ -24,6 +24,8 @@ public class LargoPinkPhosphor : SlimeBase
 
         targetDistanceValue1 = 7;
         targetDistanceValue2 = 5;
+
+        defaultColor = slimeColor[7];
     }
 
     public override void Update()

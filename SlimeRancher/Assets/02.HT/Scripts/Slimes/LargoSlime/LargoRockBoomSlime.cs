@@ -43,6 +43,7 @@ public class LargoRockBoomSlime : SlimeBase
         rockAttachment.transform.GetChild(0).GetComponent<MeshRenderer>().materials[0].color = slimeColor[5];
         rockSpineLod0.transform.GetChild(0).GetComponent<MeshRenderer>().materials[0].color = slimeColor[5];
         rockSpineLod1.transform.GetChild(0).GetComponent<MeshRenderer>().materials[0].color = slimeColor[5];
+        defaultColor = slimeColor[5];
     }
 
     public override void Update()

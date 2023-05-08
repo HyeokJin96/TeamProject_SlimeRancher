@@ -6,6 +6,9 @@ public class ObjecData : MonoBehaviour
     [SerializeField] public ButtonType buttonType = default;
     [SerializeField] public FoodType foodType = default;
     [SerializeField] public FoodName foodName = default;
+
+    //[HT] add Var
+    [SerializeField] public Sprite foodIcon = default;
 }
 
 public enum ObjectType

@@ -61,6 +61,7 @@ public class LargoTabbyRadSlime : SlimeBase
         radField = shadow.GetChild(7).GetComponent<MeshRenderer>().materials[0];
         defaultRadFieldValue = 0.9f;
         currentRadFieldValue = defaultRadFieldValue;
+        defaultColor = slimeColor[6];
     }
 
     public override void Update()

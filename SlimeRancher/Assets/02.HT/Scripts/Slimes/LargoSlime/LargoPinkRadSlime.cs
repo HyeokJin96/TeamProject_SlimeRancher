@@ -27,6 +27,7 @@ public class LargoPinkRadSlime : SlimeBase
         defaultLod2Material.SetColor("_EmissionColor", slimeColor[1]);
         defaultLod3Material.SetColor("_EmissionColor", slimeColor[1]);
 
+        defaultColor = slimeColor[1];
 
         radField = shadow.GetChild(4).GetComponent<MeshRenderer>().materials[0];
         defaultRadFieldValue = 0.9f;

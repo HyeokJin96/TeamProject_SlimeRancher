@@ -15,8 +15,8 @@ public class LargoTabbyPhosphor : SlimeBase
     {
         base.Start();
         slimeSize = 1;
-        slimeType1 = 1;
-        slimeType2 = 3;
+        slimeType1 = 3;
+        slimeType2 = 4;
 
         defaultMaterial.color = slimeColor[4];
         defaultLod1Material.color = slimeColor[4];
@@ -39,6 +39,8 @@ public class LargoTabbyPhosphor : SlimeBase
         tabbyEarsAndTail.transform.GetChild(0).GetComponent<MeshRenderer>().materials[0].color = slimeColor[4];
 
         tabbyEarsAndTail.SetActive(true);
+        defaultColor = slimeColor[4];
+
     }
 
     public override void Update()

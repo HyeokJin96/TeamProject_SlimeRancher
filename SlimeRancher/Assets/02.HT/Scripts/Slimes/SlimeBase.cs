@@ -9,6 +9,12 @@ public class SlimeBase : MonoBehaviour
     public List<string> slimeNameList;
     public Sprite[] slimeIconList;
     public Sprite slimeIcon;
+
+
+
+    protected float colorAlphaValue = 0.5f;
+    protected Color defaultColor;
+    public bool isPickup;
     //test
 
 
@@ -218,6 +224,7 @@ public class SlimeBase : MonoBehaviour
 
         SetHungerValue();
         SetMoodState();
+        SetAlphaVelue();
 
         //test
         //if (!isSetDestination)
@@ -285,6 +292,38 @@ public class SlimeBase : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    void SetAlphaVelue()
+    {
+        if (isPickup)
+        {
+            Color newColor = defaultColor;
+            newColor.a = colorAlphaValue;
+            defaultMaterial.color = newColor;
+            defaultLod1Material.color = newColor;
+            defaultLod2Material.color = newColor;
+            defaultLod3Material.color = newColor;
+
+            defaultMaterial.SetFloat("_Mode", 3);
+            defaultLod1Material.SetFloat("_Mode", 3);
+            defaultLod2Material.SetFloat("_Mode", 3);
+            defaultLod3Material.SetFloat("_Mode", 3);
+        }
+        else
+        {
+            defaultMaterial.color = defaultColor;
+            defaultLod1Material.color = defaultColor;
+            defaultLod2Material.color = defaultColor;
+            defaultLod3Material.color = defaultColor;
+            if ( slimeType1 != 4 && slimeType2 != 4)
+            {
+                defaultMaterial.SetFloat("_Mode", 0);
+                defaultLod1Material.SetFloat("_Mode", 0);
+                defaultLod2Material.SetFloat("_Mode", 0);
+                defaultLod3Material.SetFloat("_Mode", 0);
+            }
         }
     }
 
