@@ -46,6 +46,8 @@ public class FacilityController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                UIManager.Instance.hasUiOpen = true;
+
                 playerController.canMove = false;
                 ui_Facility[0].SetActive(true);
 
@@ -65,6 +67,8 @@ public class FacilityController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                UIManager.Instance.hasUiOpen = true;
+
                 playerController.canMove = false;
                 ui_Facility[1].SetActive(true);
 
@@ -84,6 +88,8 @@ public class FacilityController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                UIManager.Instance.hasUiOpen = true;
+
                 playerController.canMove = false;
                 ui_Facility[2].SetActive(true);
 
@@ -103,6 +109,8 @@ public class FacilityController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                UIManager.Instance.hasUiOpen = true;
+
                 playerController.canMove = false;
                 ui_Facility[3].SetActive(true);
 
@@ -122,6 +130,8 @@ public class FacilityController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                UIManager.Instance.hasUiOpen = true;
+
                 playerController.canMove = false;
                 ui_Facility[4].SetActive(true);
 
@@ -141,6 +151,8 @@ public class FacilityController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                UIManager.Instance.hasUiOpen = true;
+
                 playerController.canMove = false;
                 ui_Facility[5].SetActive(true);
 
@@ -160,6 +172,8 @@ public class FacilityController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                UIManager.Instance.hasUiOpen = true;
+
                 playerController.canMove = false;
                 ui_Facility[6].SetActive(true);
 
@@ -179,6 +193,7 @@ public class FacilityController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                UIManager.Instance.hasUiOpen = true;
                 playerController.canMove = false;
                 ui_Facility[7].SetActive(true);
 

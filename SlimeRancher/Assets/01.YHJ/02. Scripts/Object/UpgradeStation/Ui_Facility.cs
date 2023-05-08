@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using System.Linq;
+using UnityEngine.ProBuilder;
 
 public class Ui_Facility : MonoBehaviour
 {
@@ -51,6 +52,7 @@ public class Ui_Facility : MonoBehaviour
     [SerializeField] private PlayerManager playerManager = default;
 
     [SerializeField] private GameObject garden;
+    [SerializeField] private GameObject corral;
 
     private void OnEnable()
     {
@@ -60,6 +62,7 @@ public class Ui_Facility : MonoBehaviour
     private void Awake()
     {
         garden.gameObject.SetActive(false);
+        corral.gameObject.SetActive(false);
 
         loadedIcons = Resources.LoadAll<Sprite>(resourcePath_Sprite);
         loadedText = Resources.Load<TextAsset>(resourcePath_TextAsset);
@@ -173,6 +176,7 @@ public class Ui_Facility : MonoBehaviour
                                 listButton[index].interactable = false;
                             }
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            corral.gameObject.SetActive(true);
 
                             break;
                         case "Garden":
