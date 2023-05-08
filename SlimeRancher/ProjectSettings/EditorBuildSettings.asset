@@ -10,7 +10,7 @@ EditorBuildSettings:
     guid: 6e84538fc63476e47ace4388378fb6ca
   - enabled: 1
     path: Assets/Project.SlimeRancher/01.TitleScene.unity
-    guid: ba8f33e09f273e64a8ad00f3d4edba90
+    guid: d9f1588278f9a6e4ebaeb914b5fea7ff
   - enabled: 1
     path: Assets/Project.SlimeRancher/02.PlayScene.unity
     guid: f24380b45af420941ac79690cd8cb0f3

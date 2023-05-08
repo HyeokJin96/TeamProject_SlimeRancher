@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.25420377, g: 0.5238244, b: 0.68421173, a: 1}
+  m_IndirectSpecularColor: {r: 0.2541852, g: 0.5236765, b: 0.6842552, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 7343e37cfedf2d44b8937af22379467b, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: c4981076c5e74f24f92d7cf7bccdf89d, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -3648,14 +3648,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412df157c0d515b4a94bb022d34fafa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
-  sprintSpeed: 20
-  normalSpeed: 8
-  jumpForce: 10
+  playerManager: {fileID: 0}
   groundCheckDistance: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  isSprinting: 0
+  isInAction: 0
   pivot: {fileID: 0}
   vacpack: {fileID: 0}
   arms: {fileID: 0}
@@ -3664,6 +3663,8 @@ MonoBehaviour:
   playerAnimator: {fileID: 0}
   cameraController: {fileID: 0}
   gameManager: {fileID: 0}
+  canMove: 0
+  isFlying: 0
 --- !u!114 &3264133831875664212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3729,7 +3730,8 @@ MonoBehaviour:
   crosshairImage: {fileID: 0}
   targetObjectDistance: 2
   raycastDistance: 15
-  isAppearing: 0
+  isAppearing_UpgradeStation: 0
+  isAppearing_Facility: 0
 --- !u!114 &3264133831997799096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16414,8 +16416,12 @@ MonoBehaviour:
   isEtcOp_Open: 0
   isInGameMenu_Open: 0
   isMapOpen: 0
-  interactionTextUI: {fileID: 0}
-  corralText: {fileID: 0}
+  quickSlot: {fileID: 0}
+  quickSlot1: {fileID: 0}
+  quickSlot2: {fileID: 0}
+  quickSlot3: {fileID: 0}
+  quickSlot4: {fileID: 0}
+  hasUiOpen: 0
 --- !u!4 &6289356267647942049
 Transform:
   m_ObjectHideFlags: 0

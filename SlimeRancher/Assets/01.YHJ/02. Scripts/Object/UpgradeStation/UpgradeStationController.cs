@@ -45,8 +45,8 @@ public class UpgradeStationController : MonoBehaviour
             button_UpgradeStation.SetActive(false);
             ui_UpgradeStation.SetActive(false);
         }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
+        // [KMS] 2023.05.07 Add Condition
+        if (Input.GetKeyDown(KeyCode.Escape) && UIManager.Instance.isInGameMenu_Open == false)
         {
             playerController.canMove = true;
             ui_UpgradeStation.SetActive(false);

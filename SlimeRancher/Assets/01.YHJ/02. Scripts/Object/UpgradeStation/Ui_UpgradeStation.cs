@@ -139,16 +139,6 @@ public class Ui_UpgradeStation : MonoBehaviour
 
         listButton[0].onClick.Invoke();
     }
-
-    private void Start()
-    {
-
-    }
-
-    private void Update()
-    {
-    }
-
     public void OnButtonClicked(Button clickedButton_)
     {
         for (int i = 0; i < listButton.Length; i++)
@@ -187,6 +177,9 @@ public class Ui_UpgradeStation : MonoBehaviour
                     {
                         case "Slime Key":
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
+                            // [KMS] Add Have Key 230508
+                            GameManager.Instance.isHaveKey = true;
+                            // [KMS] Add Have Key 230508
                             break;
                         case "Water Tank":
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
@@ -272,7 +265,7 @@ public class Ui_UpgradeStation : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("°ÅÁö´Ù °ÅÁö");
+                    Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
                 }
 
 

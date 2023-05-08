@@ -12,6 +12,7 @@ TagManager:
   - Button
   - Normal Slime
   - Star
+  - Door
   layers:
   - Default
   - TransparentFX

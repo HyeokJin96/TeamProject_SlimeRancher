@@ -12,6 +12,9 @@ public class UIManager : KSingleton<UIManager>
     public GameObject buttons = default;
     public GameObject map = default;
 
+    public GameObject interactEP = default;
+    public GameObject interactE = default;
+
     //Play
     public GameObject PlayMenu = default;
 
@@ -152,6 +155,8 @@ public class UIManager : KSingleton<UIManager>
         //Caching
         UiObjs = GameObject.Find("UiObjs").gameObject;
         buttons = UiObjs.transform.GetChild(2).gameObject;
+        interactEP = UiObjs.transform.GetChild(0).gameObject;
+        interactE = interactEP.transform.GetChild(0).gameObject;
 
         #region Main Objects
         PlayMenu = UiObjs.transform.GetChild(5).gameObject;
@@ -568,7 +573,7 @@ public class UIManager : KSingleton<UIManager>
     #region InGameMenu Button Function
     public void InGameMenu()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !hasUiOpen)
+        if (Input.GetKeyDown(KeyCode.Escape) && !hasUiOpen && GameManager.Instance.isInHouse == false)
         {
             isInGameMenu_Open = !isInGameMenu_Open;
             if (isInGameMenu_Open == true && isMapOpen == false)
@@ -703,6 +708,11 @@ public class UIManager : KSingleton<UIManager>
         {
             map.SetActive(false);
         }
+    }
+
+    public void InteractE()
+    {
+        
     }
     #endregion
 }

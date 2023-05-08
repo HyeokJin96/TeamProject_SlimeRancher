@@ -28,13 +28,15 @@ public class GameManager : KSingleton<GameManager>
     public bool isLightImprovement = true;
     public bool isWaterImprovement = true;
 
+    public bool isHaveKey = false;
+    public bool isInHouse = false;
+
     [SerializeField]
     public float mouseSensitivity = default; //  ���콺 ����
 
     public new void Awake()
     {
         /*Ignore DontDestroy*/
-
         water_ = water.GetComponent<MeshRenderer>();
         sun_ = sun.GetComponent<Light>();
     }

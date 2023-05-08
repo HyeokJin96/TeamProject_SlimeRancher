@@ -6,13 +6,16 @@ public class PoolManager : MonoBehaviour
 {
     // Want Prefab To Pool
     public GameObject prefabToPool;
+
     // For Arrangement
     public GameObject waitingRoom;
+
     //
     private GameObject[] gameObjects;
-    
+
     // How Many Prefabs Want to Create
     public int HowMany = 0;
+
     //
     private int index = 0;
 
@@ -21,10 +24,10 @@ public class PoolManager : MonoBehaviour
         CreatePrefabs();
     }
 
-    void Update()
-    {
-        HowToActive();
-    }
+    // void Update()
+    // {
+    //     HowToActive();
+    // }
 
     // { Create Prefabs
     private void CreatePrefabs()
@@ -32,7 +35,7 @@ public class PoolManager : MonoBehaviour
         // How Many Prefabs Want to Create
         gameObjects = new GameObject[HowMany];
 
-        // Loop for Create 
+        // Loop for Create
         for (int i = 0; i < HowMany; i++)
         {
             // Create Prefabs
@@ -48,26 +51,38 @@ public class PoolManager : MonoBehaviour
             Prefab.SetActive(false);
         }
     }
+
     // } Create Prefabs
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                HowToActive();
+            }
+
+            this.gameObject.SetActive(false);
+        }
+    }
 
     // { How To Active
     void HowToActive()
     {
         // Active terms
-        if (Input.GetKey(KeyCode.Space))
-        {
-            // Active Prefab True
-            gameObjects[index].SetActive(true);
 
-            // Create Position
-            gameObjects[index].transform.position = transform.position;
+        // Active Prefab True
+        gameObjects[index].SetActive(true);
 
-            // Index Count
-            index++;
+        // Create Position
+        gameObjects[index].transform.position = transform.position;
 
-            // If Count Last Number, Restart 0
-            if (index == HowMany) index = 0;
-        }
+        // Index Count
+        index++;
+
+        // If Count Last Number, Restart 0
+        if (index == HowMany)
+            index = 0;
     }
     // } How To Active
 }
