@@ -573,7 +573,7 @@ public class UIManager : KSingleton<UIManager>
     #region InGameMenu Button Function
     public void InGameMenu()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !hasUiOpen)
+        if (Input.GetKeyDown(KeyCode.Escape) && !hasUiOpen && GameManager.Instance.isInHouse == false)
         {
             isInGameMenu_Open = !isInGameMenu_Open;
             if (isInGameMenu_Open == true && isMapOpen == false)

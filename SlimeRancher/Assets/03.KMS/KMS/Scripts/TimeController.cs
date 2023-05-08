@@ -24,14 +24,18 @@ public class TimeController : KSingleton<TimeController>
         Timer();
     }
 
-    private void NTimesFaster20()
+    public void NTimesFaster20()
     {
         nTimesFaster = 20;
     }
 
-    private void NTimesFaster0()
+    public void NTimesFaster0()
     {
         nTimesFaster = 0;
+    }
+    public void NTimesFaster1()
+    {
+        nTimesFaster = 1;
     }
 
     private void Timer()
