@@ -22,7 +22,14 @@ public class Player_Raycast : MonoBehaviour
     private bool canAbsorb = false;
 
     [HideInInspector] public bool isAppearing_UpgradeStation = false;
-    [HideInInspector] public bool isAppearing_Facility = false;
+    [HideInInspector] public bool isAppearing_Facility_1 = false;
+    [HideInInspector] public bool isAppearing_Facility_2 = false;
+    [HideInInspector] public bool isAppearing_Facility_3 = false;
+    [HideInInspector] public bool isAppearing_Facility_4 = false;
+    [HideInInspector] public bool isAppearing_Facility_5 = false;
+    [HideInInspector] public bool isAppearing_Facility_6 = false;
+    [HideInInspector] public bool isAppearing_Facility_7 = false;
+    [HideInInspector] public bool isAppearing_Facility_8 = false;
 
     private void Awake()
     {
@@ -67,8 +74,29 @@ public class Player_Raycast : MonoBehaviour
                     case ButtonType.UpgradeStation:
                         isAppearing_UpgradeStation = true;
                         break;
-                    case ButtonType.Facility:
-                        isAppearing_Facility = true;
+                    case ButtonType.Facility_1:
+                        isAppearing_Facility_1 = true;
+                        break;
+                    case ButtonType.Facility_2:
+                        isAppearing_Facility_2 = true;
+                        break;
+                    case ButtonType.Facility_3:
+                        isAppearing_Facility_3 = true;
+                        break;
+                    case ButtonType.Facility_4:
+                        isAppearing_Facility_4 = true;
+                        break;
+                    case ButtonType.Facility_5:
+                        isAppearing_Facility_5 = true;
+                        break;
+                    case ButtonType.Facility_6:
+                        isAppearing_Facility_6 = true;
+                        break;
+                    case ButtonType.Facility_7:
+                        isAppearing_Facility_7 = true;
+                        break;
+                    case ButtonType.Facility_8:
+                        isAppearing_Facility_8 = true;
                         break;
                     default:
                         break;
@@ -77,7 +105,14 @@ public class Player_Raycast : MonoBehaviour
             else
             {
                 isAppearing_UpgradeStation = false;
-                isAppearing_Facility = false;
+                isAppearing_Facility_1 = false;
+                isAppearing_Facility_2 = false;
+                isAppearing_Facility_3 = false;
+                isAppearing_Facility_4 = false;
+                isAppearing_Facility_5 = false;
+                isAppearing_Facility_6 = false;
+                isAppearing_Facility_7 = false;
+                isAppearing_Facility_8 = false;
             }
         }
         else
@@ -85,7 +120,14 @@ public class Player_Raycast : MonoBehaviour
             crosshairImage.color = Color.white;
             canAbsorb = false;
             isAppearing_UpgradeStation = false;
-            isAppearing_Facility = false;
+            isAppearing_Facility_1 = false;
+            isAppearing_Facility_2 = false;
+            isAppearing_Facility_3 = false;
+            isAppearing_Facility_4 = false;
+            isAppearing_Facility_5 = false;
+            isAppearing_Facility_6 = false;
+            isAppearing_Facility_7 = false;
+            isAppearing_Facility_8 = false;
         }
     }
 }

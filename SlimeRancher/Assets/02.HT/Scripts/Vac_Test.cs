@@ -109,7 +109,6 @@ public class Vac_Test : MonoBehaviour
         Fire();
         fireDelayEnd = true;
         yield return new WaitForSeconds(0.5f);
-        Debug.Log("코루틴체크");
         fireDelayEnd = false;
     }
 
