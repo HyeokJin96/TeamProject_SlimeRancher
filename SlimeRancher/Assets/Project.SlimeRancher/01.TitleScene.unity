@@ -3648,14 +3648,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412df157c0d515b4a94bb022d34fafa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
-  sprintSpeed: 20
-  normalSpeed: 8
-  jumpForce: 10
+  playerManager: {fileID: 0}
   groundCheckDistance: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  isSprinting: 0
+  isInAction: 0
   pivot: {fileID: 0}
   vacpack: {fileID: 0}
   arms: {fileID: 0}
@@ -3664,6 +3663,8 @@ MonoBehaviour:
   playerAnimator: {fileID: 0}
   cameraController: {fileID: 0}
   gameManager: {fileID: 0}
+  canMove: 0
+  isFlying: 0
 --- !u!114 &3264133831875664212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3729,7 +3730,15 @@ MonoBehaviour:
   crosshairImage: {fileID: 0}
   targetObjectDistance: 2
   raycastDistance: 15
-  isAppearing: 0
+  isAppearing_UpgradeStation: 0
+  isAppearing_Facility_1: 0
+  isAppearing_Facility_2: 0
+  isAppearing_Facility_3: 0
+  isAppearing_Facility_4: 0
+  isAppearing_Facility_5: 0
+  isAppearing_Facility_6: 0
+  isAppearing_Facility_7: 0
+  isAppearing_Facility_8: 0
 --- !u!114 &3264133831997799096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16328,6 +16337,8 @@ MonoBehaviour:
   UiObjs: {fileID: 0}
   buttons: {fileID: 0}
   map: {fileID: 0}
+  interactEP: {fileID: 0}
+  interactE: {fileID: 0}
   PlayMenu: {fileID: 0}
   LoadMenu: {fileID: 0}
   optionMenu: {fileID: 0}
@@ -16414,8 +16425,12 @@ MonoBehaviour:
   isEtcOp_Open: 0
   isInGameMenu_Open: 0
   isMapOpen: 0
-  interactionTextUI: {fileID: 0}
-  corralText: {fileID: 0}
+  quickSlot: {fileID: 0}
+  quickSlot1: {fileID: 0}
+  quickSlot2: {fileID: 0}
+  quickSlot3: {fileID: 0}
+  quickSlot4: {fileID: 0}
+  hasUiOpen: 0
 --- !u!4 &6289356267647942049
 Transform:
   m_ObjectHideFlags: 0
@@ -20468,6 +20483,8 @@ MonoBehaviour:
   isShadowOn: 1
   isLightImprovement: 1
   isWaterImprovement: 1
+  isHaveKey: 0
+  isInHouse: 0
   mouseSensitivity: 2
 --- !u!4 &8099819666614102146
 Transform:

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class test_Instantiate : MonoBehaviour
 {
-    private ObjectPool objectPool;
+    public ObjectPool objectPool;
     [SerializeField] private GameObject pool;
 
+    bool test;
     private void Awake()
     {
         objectPool = pool.GetComponent<ObjectPool>();
@@ -14,14 +15,23 @@ public class test_Instantiate : MonoBehaviour
 
     private void Update()
     {
-        Vector3 position = transform.position + Random.insideUnitSphere * 3.8f;
-
-        GameObject newCarrot = objectPool.MakeObject("Carrot");
-
-        if (newCarrot != null)
+        if (!test)
         {
-            newCarrot.transform.position = position;
-            newCarrot.SetActive(true);
+            for (int i = 0; i < 30; i++)
+            {
+                Vector3 position = transform.position + Random.insideUnitSphere * 3.8f;
+
+                GameObject newCarrot = objectPool.MakeObject("Carrot");
+                if (newCarrot != null)
+                {
+                    newCarrot.transform.position = position;
+                    //newCarrot.SetActive(true);
+                }
+                if (i == 29)
+                {
+                    test = true;
+                }
+            }
         }
     }
 }

@@ -358,7 +358,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slimeName: 
+  slimeNameList: []
+  slimeIconList: []
   slimeIcon: {fileID: 0}
+  isPickup: 0
   isJumpDelay: 0
   hungerValue: 0
   agitatedValue: 0
@@ -761,7 +764,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 398873f51d5a0ed479540dd03a6d1a20, type: 2}
+  - {fileID: 2100000, guid: c9cac5f81e4002949b1462afedbb05fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -859,7 +862,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d32fc7a5465d0014ea8c19172779e809, type: 2}
+  - {fileID: 2100000, guid: c9cac5f81e4002949b1462afedbb05fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1081,7 +1084,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6a4e766d35ca43f4db223e2b23e065a9, type: 2}
+  - {fileID: 2100000, guid: c9cac5f81e4002949b1462afedbb05fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1224,7 +1227,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5fc797c7136217f48ac33b71a8bcd406, type: 2}
+  - {fileID: 2100000, guid: c9cac5f81e4002949b1462afedbb05fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

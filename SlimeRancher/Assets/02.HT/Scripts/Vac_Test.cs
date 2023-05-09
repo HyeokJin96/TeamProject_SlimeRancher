@@ -414,7 +414,7 @@ public class Vac_Test : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (fuckU && !isPickUpLargo)
+        if (fuckU && !isPickUpLargo && other.GetType() == typeof(MeshCollider))
         {
             if (eeee.Contains(other.gameObject))
             {
@@ -439,14 +439,16 @@ public class Vac_Test : MonoBehaviour
                 }
 
                 // 대상 오브젝트 콜라이더 트리거 on
-                if(other.transform.parent.GetComponent<ObjecData>().foodName == FoodName.Carrot && other.transform.parent.GetComponent<test_veggie>().isGrowing == true)
+                /* if(other.transform.parent.GetComponent<ObjecData>().foodName == FoodName.Carrot && other.transform.parent.GetComponent<test_veggie>().isGrowing == true)
                 {
                     //donothing
                 }
                 else
                 {
-                other.GetComponent<MeshCollider>().isTrigger = true;
-
+                } */
+                if (other.GetType() == typeof(MeshCollider))
+                {
+                    other.GetComponent<MeshCollider>().isTrigger = true;
                 }
 
                 // 대상 오브젝트가 슬라임이면, state 변경
@@ -544,8 +546,8 @@ public class Vac_Test : MonoBehaviour
 
                 else if (other.tag == "Food" && vacuumedList.Contains(other.gameObject))
                 {
-                    if(other.transform.parent.GetComponent<ObjecData>().foodName == FoodName.Carrot && other.transform.parent.GetComponent<test_veggie>().isGrowing == false)
-                    {
+                    /* if(other.transform.parent.GetComponent<ObjecData>().foodName == FoodName.Carrot && other.transform.parent.GetComponent<test_veggie>().isGrowing == false)
+                    { */
 
                     dir = jointArray[nearestIndex].transform.position - other.transform.parent.position;
                     other.transform.parent.GetComponent<Rigidbody>().velocity = dir * 10f;
@@ -603,7 +605,7 @@ public class Vac_Test : MonoBehaviour
                             //nearestIndex = 0;
                         }
                     }
-                    }
+                    /* } */
                 }
 
 
@@ -759,28 +761,32 @@ public class Vac_Test : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Normal Slime")
+        if (other.GetType() == typeof(MeshCollider))
         {
-            other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().currentActionState = SlimeBase.ActionState.Idle;
 
-            other.GetComponent<VacSlimeTest>().rootSlime.transform.localScale = new Vector3(2, 2, 2);
+            if (other.tag == "Normal Slime")
+            {
+                other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().currentActionState = SlimeBase.ActionState.Idle;
 
-            other.GetComponent<MeshCollider>().isTrigger = false;
-        }
-        else if (other.tag == "Food" || other.tag == "Plort")
-        {
-            other.GetComponent<MeshCollider>().isTrigger = false;
-        }
-        vacuumedList.Remove(other.gameObject);
-        /* 
-                foreach (GameObject star in stars)
-                {
-                    if (other.gameObject == star.gameObject)
+                other.GetComponent<VacSlimeTest>().rootSlime.transform.localScale = new Vector3(2, 2, 2);
+
+                other.GetComponent<MeshCollider>().isTrigger = false;
+            }
+            else if (other.tag == "Food" || other.tag == "Plort")
+            {
+                other.GetComponent<MeshCollider>().isTrigger = false;
+            }
+            vacuumedList.Remove(other.gameObject);
+            /* 
+                    foreach (GameObject star in stars)
                     {
-                        star.GetComponent<SlimeBase>().currentActionState = SlimeBase.ActionState.Idle;
+                        if (other.gameObject == star.gameObject)
+                        {
+                            star.GetComponent<SlimeBase>().currentActionState = SlimeBase.ActionState.Idle;
+                        }
                     }
-                }
-         */
+             */
+        }
     }
     public int nearestIndex;
     bool isCheckEnd;

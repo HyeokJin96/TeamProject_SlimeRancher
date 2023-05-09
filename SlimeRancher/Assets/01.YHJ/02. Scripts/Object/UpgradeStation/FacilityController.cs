@@ -28,6 +28,7 @@ public class FacilityController : MonoBehaviour
         for (int i = 0; i < button_Facility.Length; i++)
         {
             button_Facility[i] = interaction_GameObject.transform.GetChild(1).GetChild(i).gameObject;
+            button_Facility[i].SetActive(false);
         }
 
         ui_Facility = new GameObject[canvas.transform.GetChild(11).childCount];
@@ -35,6 +36,7 @@ public class FacilityController : MonoBehaviour
         for (int i = 0; i < ui_Facility.Length; i++)
         {
             ui_Facility[i] = canvas.transform.GetChild(11).GetChild(i).gameObject;
+            ui_Facility[i].SetActive(false);
         }
     }
 

@@ -61,8 +61,8 @@ public class Ui_Facility : MonoBehaviour
 
     private void Awake()
     {
-        garden.gameObject.SetActive(false);
-        corral.gameObject.SetActive(false);
+        // garden.gameObject.SetActive(false);
+        // corral.gameObject.SetActive(false);
 
         loadedIcons = Resources.LoadAll<Sprite>(resourcePath_Sprite);
         loadedText = Resources.Load<TextAsset>(resourcePath_TextAsset);

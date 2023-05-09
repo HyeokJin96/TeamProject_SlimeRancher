@@ -224,7 +224,10 @@ public class SlimeBase : MonoBehaviour
 
         SetHungerValue();
         SetMoodState();
-        SetAlphaVelue();
+        if (slimeSize == 1)
+        {
+            SetAlphaVelue();
+        }
 
         //test
         //if (!isSetDestination)
@@ -317,7 +320,7 @@ public class SlimeBase : MonoBehaviour
             defaultLod1Material.color = defaultColor;
             defaultLod2Material.color = defaultColor;
             defaultLod3Material.color = defaultColor;
-            if ( slimeType1 != 4 && slimeType2 != 4)
+            if (slimeType1 != 4 && slimeType2 != 4)
             {
                 defaultMaterial.SetFloat("_Mode", 0);
                 defaultLod1Material.SetFloat("_Mode", 0);

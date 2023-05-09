@@ -95,6 +95,14 @@ public class InventoryManager : GSingleton<InventoryManager>
                 }
             }
 
+            if (obj_.tag == "Food")
+            {
+                if (quickSlotObject[i] != null && quickSlotObject[i].tag == "Food" && quickSlotObject[i].GetComponent<ObjecData>().foodName == obj_.GetComponent<ObjecData>().foodName)
+                {
+                    return i;
+                }
+            }
+
             if (quickSlotObject[i] == obj_)
             {
                 {
