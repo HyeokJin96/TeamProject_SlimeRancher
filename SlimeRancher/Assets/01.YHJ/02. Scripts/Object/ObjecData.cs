@@ -8,7 +8,7 @@ public class ObjecData : MonoBehaviour
     [SerializeField] public FoodName foodName = default;
 
     //[HT] add Var
-    [SerializeField] public Sprite foodIcon = default;
+    public Sprite foodIcon = default;
 }
 
 public enum ObjectType
@@ -47,3 +47,4 @@ public enum FoodName
     HenHen,
     Roostro,
 }
+
