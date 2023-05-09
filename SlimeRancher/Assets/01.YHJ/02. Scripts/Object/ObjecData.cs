@@ -21,6 +21,7 @@ public enum ObjectType
 
 public enum ButtonType
 {
+    none,
     UpgradeStation,
     Facility_1,
     Facility_2,

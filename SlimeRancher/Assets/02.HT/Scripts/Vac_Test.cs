@@ -49,6 +49,7 @@ public class Vac_Test : MonoBehaviour
     GameObject pickupLargoSlime;
     MeshCollider pickupLargoCollider;
 
+    test_veggie test_Veggie;
     private void Start()
     {
         blackhole.SetActive(false);
@@ -438,7 +439,15 @@ public class Vac_Test : MonoBehaviour
                 }
 
                 // 대상 오브젝트 콜라이더 트리거 on
+                if(other.transform.parent.GetComponent<ObjecData>().foodName == FoodName.Carrot && other.transform.parent.GetComponent<test_veggie>().isGrowing == true)
+                {
+                    //donothing
+                }
+                else
+                {
                 other.GetComponent<MeshCollider>().isTrigger = true;
+
+                }
 
                 // 대상 오브젝트가 슬라임이면, state 변경
                 if (other.tag == "Normal Slime")
@@ -535,6 +544,9 @@ public class Vac_Test : MonoBehaviour
 
                 else if (other.tag == "Food" && vacuumedList.Contains(other.gameObject))
                 {
+                    if(other.transform.parent.GetComponent<ObjecData>().foodName == FoodName.Carrot && other.transform.parent.GetComponent<test_veggie>().isGrowing == false)
+                    {
+
                     dir = jointArray[nearestIndex].transform.position - other.transform.parent.position;
                     other.transform.parent.GetComponent<Rigidbody>().velocity = dir * 10f;
 
@@ -590,6 +602,7 @@ public class Vac_Test : MonoBehaviour
 
                             //nearestIndex = 0;
                         }
+                    }
                     }
                 }
 

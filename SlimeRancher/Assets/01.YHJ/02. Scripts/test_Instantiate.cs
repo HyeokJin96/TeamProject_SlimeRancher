@@ -16,7 +16,7 @@ public class test_Instantiate : MonoBehaviour
     {
         Vector3 position = transform.position + Random.insideUnitSphere * 3.8f;
 
-        GameObject newCarrot = objectPool.MakeObject("Carrot", 30);
+        GameObject newCarrot = objectPool.MakeObject("Carrot");
 
         if (newCarrot != null)
         {

@@ -2425,7 +2425,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 43
+  m_VersionIndex: 46
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2499,6 +2499,7 @@ MonoBehaviour:
   buttonType: 0
   foodType: 1
   foodName: 1
+  foodIcon: {fileID: 21300000, guid: e771e0f17b34a0c4c8f19a580b1748e2, type: 3}
 --- !u!136 &4983141542774184530
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2546,7 +2547,7 @@ GameObject:
   - component: {fileID: 5807645016401863963}
   m_Layer: 0
   m_Name: model_carrot
-  m_TagString: Untagged
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4346,7 +4347,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 43
+  m_VersionIndex: 46
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

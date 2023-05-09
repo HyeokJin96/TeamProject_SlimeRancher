@@ -18,7 +18,7 @@ public class ObjectPool : GSingleton<ObjectPool>
     {
         //bulletPrefabs = Resources.LoadAll<GameObject>(bulletPath);
 
-        carrot = new GameObject[500];
+        carrot = new GameObject[30];
 
 
         Generate();
@@ -34,7 +34,7 @@ public class ObjectPool : GSingleton<ObjectPool>
         }
     }  
 
-    public GameObject MakeObject(string type_, int value)
+    public GameObject MakeObject(string type_)
     {
         switch (type_)
         {
@@ -46,10 +46,6 @@ public class ObjectPool : GSingleton<ObjectPool>
 
         for (int index = 0; index < targetPool.Length; index++)
         {
-            if (index >= value)
-            {
-                break;
-            }
 
             if (!targetPool[index].activeSelf)
             {

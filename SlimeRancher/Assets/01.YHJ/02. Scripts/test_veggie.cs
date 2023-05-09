@@ -11,7 +11,7 @@ public class test_veggie : MonoBehaviour
     [SerializeField] private Rigidbody rigidbody = default;
     [SerializeField] private float growthRate = default;
 
-    [SerializeField] bool isGrowing = false;
+    [SerializeField] public bool isGrowing = false;
     [SerializeField] float boundForce = default;
 
     private float startPosY = default;
