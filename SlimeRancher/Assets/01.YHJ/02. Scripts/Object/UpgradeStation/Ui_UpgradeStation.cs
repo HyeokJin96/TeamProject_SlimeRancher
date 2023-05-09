@@ -176,86 +176,104 @@ public class Ui_UpgradeStation : MonoBehaviour
                     switch (selected_Name)
                     {
                         case "Slime Key":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             // [KMS] Add Have Key 230508
                             GameManager.Instance.isHaveKey = true;
                             // [KMS] Add Have Key 230508
                             break;
                         case "Water Tank":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             break;
                         case "Jetpack":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             playerManager.hasJetpack = true;
                             break;
                         case "Air Drive":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             playerManager.playerJetpackConsumption *= 0.8f;
                             break;
                         case "Dash Boots":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             playerManager.playerPowerConsumption *= 0.8f;
                             listButton[5].gameObject.SetActive(true);
                             break;
                         case "Ultra Dash Boots":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             playerManager.playerPowerConsumption *= 0.8f;
                             break;
                         case "Pulse Wave":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             break;
                         case "Heart Module":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             playerManager.playerMaxHealth += 50;
                             listButton[8].gameObject.SetActive(true);
                             break;
                         case "Heart Module Mk2":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             playerManager.playerMaxHealth += 50;
                             listButton[9].gameObject.SetActive(true);
                             break;
                         case "Heart Module Mk3":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             playerManager.playerMaxHealth += 50;
                             listButton[10].gameObject.SetActive(true);
                             break;
                         case "Heart Module Ultra":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             playerManager.playerMaxHealth += 50;
                             break;
                         case "Power Core":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             playerManager.playerMaxEnergy += 50;
                             playerManager.playerEnergyincrease *= 1.5f;
                             listButton[12].gameObject.SetActive(true);
                             break;
                         case "Power Core Mk2":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             playerManager.playerMaxEnergy += 50;
                             playerManager.playerEnergyincrease *= 1.5f;
                             listButton[13].gameObject.SetActive(true);
                             break;
                         case "Power Core Mk3":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             playerManager.playerMaxEnergy += 50;
                             playerManager.playerEnergyincrease *= 1.5f;
                             break;
                         case "Tank Booster":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             playerManager.playerStorageSpace += 10;
                             listButton[15].gameObject.SetActive(true);
                             break;
                         case "Tank Booster Mk2":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             playerManager.playerStorageSpace += 10;
                             listButton[16].gameObject.SetActive(true);
                             break;
                         case "Tank Booster Mk3":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             playerManager.playerStorageSpace += 10;
                             listButton[17].gameObject.SetActive(true);
                             break;
                         case "Tank Booster Ultra":
+                            listButton[i].interactable = false;
                             playerManager.playerNewbucksCoin -= int.Parse(selected_Cost);
                             playerManager.playerStorageSpace += 100;
                             break;

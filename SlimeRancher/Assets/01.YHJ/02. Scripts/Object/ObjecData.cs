@@ -21,8 +21,17 @@ public enum ObjectType
 
 public enum ButtonType
 {
+    none,
     UpgradeStation,
-    Facility
+    Facility_1,
+    Facility_2,
+    Facility_3,
+    Facility_4,
+    Facility_5,
+    Facility_6,
+    Facility_7,
+    Facility_8
+
 }
 
 public enum FoodType

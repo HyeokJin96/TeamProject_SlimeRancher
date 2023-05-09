@@ -18,7 +18,7 @@ public class ObjectPool : GSingleton<ObjectPool>
     {
         //bulletPrefabs = Resources.LoadAll<GameObject>(bulletPath);
 
-        carrot = new GameObject[10];
+        carrot = new GameObject[30];
 
 
         Generate();
@@ -46,6 +46,7 @@ public class ObjectPool : GSingleton<ObjectPool>
 
         for (int index = 0; index < targetPool.Length; index++)
         {
+
             if (!targetPool[index].activeSelf)
             {
                 targetPool[index].SetActive(true);

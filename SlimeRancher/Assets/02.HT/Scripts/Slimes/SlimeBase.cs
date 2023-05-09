@@ -375,7 +375,6 @@ public class SlimeBase : MonoBehaviour
         anim.SetBool("isStunned", true);
         yield return new WaitForSeconds(3f);
         anim.SetBool("isStunned", false);
-        Debug.Log("end stun");
         StartCoroutine(JumpDelay(jumpDelay));
 
         currentActionState = ActionState.Idle;
@@ -655,7 +654,6 @@ public class SlimeBase : MonoBehaviour
             }
             else if (slimeSize == 1)
             {
-                Debug.Log("?????????");
                 clone_.GetComponent<PlortBase>().plortType = slimeType1;
                 Instantiate(clone_, transform.position, transform.rotation);
                 clone_.GetComponent<PlortBase>().plortType = slimeType2;
@@ -675,7 +673,6 @@ public class SlimeBase : MonoBehaviour
     protected IEnumerator JumpDelay(int delayTime_)
     {
         yield return new WaitForSeconds(delayTime_);
-        Debug.Log("ResetJumpDelay!!!"); ;
         isJumpDelay = false;
     }
 

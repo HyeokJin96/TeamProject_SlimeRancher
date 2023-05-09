@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) && playerManager.hasJetpack)
         {
-            if (pressedTime >= 0.5f)
+            if (pressedTime >= 0.3f)
             {
                 if (transform.position.y < playerPos.y + 10f)
                 {
@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerPosCheck()
     {
-        if (!isFlying)
+        if (!isFlying && isGrounded)
         {
             playerPos = transform.position;
         }
