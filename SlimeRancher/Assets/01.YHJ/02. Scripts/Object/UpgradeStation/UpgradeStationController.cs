@@ -22,12 +22,22 @@ public class UpgradeStationController : MonoBehaviour
         interaction_GameObject = canvas.transform.GetChild(9).gameObject;
         button_UpgradeStation = interaction_GameObject.transform.GetChild(0).gameObject;
         ui_UpgradeStation = canvas.transform.GetChild(10).gameObject;
+
+        ui_UpgradeStation.SetActive(false);
+        button_UpgradeStation.SetActive(false);
+    }
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+        player_Raycast = player.GetComponent<Player_Raycast>();
+
     }
 
     private void Update()
     {
         if (player_Raycast.isAppearing_UpgradeStation)
         {
+            player.GetComponent<Rigidbody>().AddForce(Vector3.up * 20f, ForceMode.Impulse);
             button_UpgradeStation.SetActive(true);
 
             if (Input.GetKeyDown(KeyCode.E))
