@@ -414,7 +414,7 @@ public class Vac_Test : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (fuckU && !isPickUpLargo &&other.GetType() == typeof(MeshCollider))
+        if (fuckU && !isPickUpLargo && other.GetType() == typeof(MeshCollider))
         {
             if (eeee.Contains(other.gameObject))
             {
@@ -761,28 +761,32 @@ public class Vac_Test : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Normal Slime")
+        if (other.GetType() == typeof(MeshCollider))
         {
-            other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().currentActionState = SlimeBase.ActionState.Idle;
 
-            other.GetComponent<VacSlimeTest>().rootSlime.transform.localScale = new Vector3(2, 2, 2);
+            if (other.tag == "Normal Slime")
+            {
+                other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().currentActionState = SlimeBase.ActionState.Idle;
 
-            other.GetComponent<MeshCollider>().isTrigger = false;
-        }
-        else if (other.tag == "Food" || other.tag == "Plort")
-        {
-            other.GetComponent<MeshCollider>().isTrigger = false;
-        }
-        vacuumedList.Remove(other.gameObject);
-        /* 
-                foreach (GameObject star in stars)
-                {
-                    if (other.gameObject == star.gameObject)
+                other.GetComponent<VacSlimeTest>().rootSlime.transform.localScale = new Vector3(2, 2, 2);
+
+                other.GetComponent<MeshCollider>().isTrigger = false;
+            }
+            else if (other.tag == "Food" || other.tag == "Plort")
+            {
+                other.GetComponent<MeshCollider>().isTrigger = false;
+            }
+            vacuumedList.Remove(other.gameObject);
+            /* 
+                    foreach (GameObject star in stars)
                     {
-                        star.GetComponent<SlimeBase>().currentActionState = SlimeBase.ActionState.Idle;
+                        if (other.gameObject == star.gameObject)
+                        {
+                            star.GetComponent<SlimeBase>().currentActionState = SlimeBase.ActionState.Idle;
+                        }
                     }
-                }
-         */
+             */
+        }
     }
     public int nearestIndex;
     bool isCheckEnd;

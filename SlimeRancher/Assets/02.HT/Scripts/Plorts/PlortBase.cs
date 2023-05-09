@@ -23,7 +23,7 @@ public class PlortBase : MonoBehaviour
         plortColor.Add(new Color32(30, 125, 200, 255));  //rock
         plortColor.Add(new Color32(75, 75, 75, 255));  //tabby
         plortColor.Add(new Color32(175, 175, 255, 200));  //phosphor
-        plortColor.Add(new Color32(225, 60, 90, 255));  //boom(=pink)
+        plortColor.Add(new Color32(255, 30, 0, 255));  //boom(=pink)
         plortColor.Add(new Color32(25, 125, 25, 255));  //Rad
 
         plortName = new List<string>();

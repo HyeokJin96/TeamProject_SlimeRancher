@@ -18,7 +18,7 @@ public class ObjectPool : GSingleton<ObjectPool>
     {
         //bulletPrefabs = Resources.LoadAll<GameObject>(bulletPath);
 
-        carrot = new GameObject[30];
+        carrot = new GameObject[50];
 
 
         Generate();
