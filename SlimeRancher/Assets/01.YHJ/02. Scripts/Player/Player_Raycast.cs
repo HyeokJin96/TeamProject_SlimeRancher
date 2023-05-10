@@ -31,10 +31,6 @@ public class Player_Raycast : MonoBehaviour
     [HideInInspector] public bool isAppearing_Facility_7 = false;
     [HideInInspector] public bool isAppearing_Facility_8 = false;
 
-    [SerializeField] private GameObject interaction_GameObject;
-    [SerializeField] private GameObject button_UpgradeStation;
-    [SerializeField] private GameObject ui_UpgradeStation;
-
     private void Awake()
     {
         mainCamera = Camera.main;
