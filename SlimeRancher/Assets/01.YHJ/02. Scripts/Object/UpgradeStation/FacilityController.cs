@@ -17,10 +17,10 @@ public class FacilityController : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.FindWithTag("Player");
+        //player = GameObject.FindWithTag("Player");
         canvas = FindObjectOfType<Canvas>();
-        player_Raycast = player.GetComponent<Player_Raycast>();
-        playerController = player.GetComponent<PlayerController>();
+        //player_Raycast = player.GetComponent<Player_Raycast>();
+        //playerController = player.GetComponent<PlayerController>();
         interaction_GameObject = canvas.transform.GetChild(9).gameObject;
 
         button_Facility = new GameObject[interaction_GameObject.transform.GetChild(1).childCount];

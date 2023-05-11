@@ -187,129 +187,13 @@ public class Vac_Test : MonoBehaviour
             }
         }
 
-        /* if (!fireDelayEnd)
-        {
-            if (InventoryManager.Instance.quickSlotArray[selctedSlotNumber].Count != 0)
-            {
-                switch (selctedSlotNumber)
-                {
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                        firedObj_ = (InventoryManager.Instance.quickSlotArray[selctedSlotNumber])[0];
-                        break;
-                }
-                FireObject(firedObj_);
-            }
-        } */
-
-
         if (Input.GetMouseButtonDown(0))
         {
-            isLeftClick_ = true;
-
-            //blackhole.SetActive(true);
-            //GameObject firedObj_;
-
-            // if (InventoryManager.Instance.quickSlotArray[selctedSlotNumber].Count == 0)
-            // {
-            //     Debug.Log("null");
-            // }
-            // else
-            // {
-            //     switch (selctedSlotNumber)
-            //     {
-            //         case 0:
-            //             firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
-            //             //FireObject(firedObj_);
-            //             /* firedObj_.transform.SetParent(defaultSlimePool.transform);
-            //             firedObj_.transform.localScale = Vector3.one;
-            //             firedObj_.SetActive(true);
-            //             Vector3 fireDir_ = -(fireDirTarget.transform.position - firedObj_.transform.position).normalized;
-            //             firedObj_.GetComponent<Rigidbody>().AddForce(fireDir_ * 50, ForceMode.Impulse); */
-
-            //             //[0503]
-            //             //InventoryManager.Instance.quickSlot1_.transform.GetChild(0).gameObject.SetActive(true);
-            //             //InventoryManager.Instance.quickSlot1_.transform.GetChild(0).gameObject.GetComponent<Rigidbody>().AddForce(muzzle.transform.up * 10, ForceMode.Impulse);
-            //             break;
-            //         case 1:
-            //             firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
-            //             //FireObject(firedObj_);
-            //             break;
-            //         case 2:
-            //             firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
-            //             //FireObject(firedObj_);
-            //             break;
-            //         case 3:
-            //             firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
-            //             //FireObject(firedObj_);
-            //             break;
-            //     }
-            //     FireObject(firedObj_);
-            // }
-
-            //while (InventoryManager.Instance.quickSlotArray[selctedSlotNumber].Count != 0)
-            //{
-            //    StartCoroutine(FireDelay());
-            //}
-            /* while (InventoryManager.Instance.quickSlotArray[selctedSlotNumber].Count != 0)
+            if(!UIManager.Instance.hasUiOpen)
             {
-                switch (selctedSlotNumber)
-                {
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                        //firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
-                        firedObj_ = (InventoryManager.Instance.quickSlotArray[selctedSlotNumber])[objIndex];
-                        break;
-                }
-                FireObject(firedObj_);
+                isLeftClick_ = true;
             }
-             */
 
-
-
-
-
-
-
-
-            // while (InventoryManager.Instance.quickSlotArray[selctedSlotNumber].Count != 0)
-            // {
-            //     switch (selctedSlotNumber)
-            //     {
-            //         case 0:
-            //             firedObj_ = (InventoryManager.Instance.quickSlotArray[0])[0];
-            //             //firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
-
-            //             //FireObject(firedObj_);
-            //             /* firedObj_.transform.SetParent(defaultSlimePool.transform);
-            //             firedObj_.transform.localScale = Vector3.one;
-            //             firedObj_.SetActive(true);
-            //             Vector3 fireDir_ = -(fireDirTarget.transform.position - firedObj_.transform.position).normalized;
-            //             firedObj_.GetComponent<Rigidbody>().AddForce(fireDir_ * 50, ForceMode.Impulse); */
-
-            //             //[0503]
-            //             //InventoryManager.Instance.quickSlot1_.transform.GetChild(0).gameObject.SetActive(true);
-            //             //InventoryManager.Instance.quickSlot1_.transform.GetChild(0).gameObject.GetComponent<Rigidbody>().AddForce(muzzle.transform.up * 10, ForceMode.Impulse);
-            //             break;
-            //         case 1:
-            //             firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
-            //             //FireObject(firedObj_);
-            //             break;
-            //         case 2:
-            //             firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
-            //             //FireObject(firedObj_);
-            //             break;
-            //         case 3:
-            //             firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
-            //             //FireObject(firedObj_);
-            //             break;
-            //     }
-            //     FireObject(firedObj_);
-            // }
         }
         else if (Input.GetMouseButtonUp(0))
         {
@@ -320,14 +204,17 @@ public class Vac_Test : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            blackhole.SetActive(true);
+            if (!UIManager.Instance.hasUiOpen)
+            {
+                blackhole.SetActive(true);
 
-            joint2DefaultPos = joint2.transform.position;
-            joint3DefaultPos = joint3.transform.position;
-            joint4DefaultPos = joint4.transform.position;
-            joint5DefaultPos = joint5.transform.position;
-            joint6DefaultPos = joint6.transform.position;
-            fuckU = true;
+                joint2DefaultPos = joint2.transform.position;
+                joint3DefaultPos = joint3.transform.position;
+                joint4DefaultPos = joint4.transform.position;
+                joint5DefaultPos = joint5.transform.position;
+                joint6DefaultPos = joint6.transform.position;
+                fuckU = true;
+            }
         }
         else if (Input.GetMouseButtonUp(1))
         {

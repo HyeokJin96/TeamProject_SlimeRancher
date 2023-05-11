@@ -11,37 +11,33 @@ public class UpgradeStationController : MonoBehaviour
 
     [SerializeField] private GameObject interaction_GameObject = default;
     [SerializeField] private GameObject button_UpgradeStation = default;
+    [SerializeField] private GameObject button_UpgradeStation_Text = default;
     [SerializeField] private GameObject ui_UpgradeStation = default;
 
     private void Awake()
     {
-        player = GameObject.FindWithTag("Player");
-        canvas = FindObjectOfType<Canvas>();
-        player_Raycast = player.GetComponent<Player_Raycast>();
-        playerController = player.GetComponent<PlayerController>();
-        interaction_GameObject = canvas.transform.GetChild(9).gameObject;
-        button_UpgradeStation = interaction_GameObject.transform.GetChild(0).gameObject;
-        ui_UpgradeStation = canvas.transform.GetChild(10).gameObject;
+        //player = GameObject.FindWithTag("Player");
+        //canvas = FindObjectOfType<Canvas>();
+        //player_Raycast = player.GetComponent<Player_Raycast>();
+        //playerController = player.GetComponent<PlayerController>();
+        //interaction_GameObject = canvas.transform.GetChild(9).gameObject;
+        //button_UpgradeStation = interaction_GameObject.transform.GetChild(0).gameObject;
+        //ui_UpgradeStation = canvas.transform.GetChild(10).gameObject;
 
         ui_UpgradeStation.SetActive(false);
         button_UpgradeStation.SetActive(false);
-    }
-    private void Start()
-    {
-        player = GameObject.FindWithTag("Player");
-        player_Raycast = player.GetComponent<Player_Raycast>();
-
     }
 
     private void Update()
     {
         if (player_Raycast.isAppearing_UpgradeStation)
         {
-            player.GetComponent<Rigidbody>().AddForce(Vector3.up * 20f, ForceMode.Impulse);
             button_UpgradeStation.SetActive(true);
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                button_UpgradeStation_Text.SetActive(false);
+
                 UIManager.Instance.hasUiOpen = true;
                 playerController.canMove = false;
                 ui_UpgradeStation.SetActive(true);
@@ -52,6 +48,8 @@ public class UpgradeStationController : MonoBehaviour
         }
         else
         {
+            button_UpgradeStation_Text.SetActive(true);
+
             button_UpgradeStation.SetActive(false);
             ui_UpgradeStation.SetActive(false);
         }
@@ -60,6 +58,7 @@ public class UpgradeStationController : MonoBehaviour
         {
             playerController.canMove = true;
             ui_UpgradeStation.SetActive(false);
+            UIManager.Instance.hasUiOpen = false;
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
