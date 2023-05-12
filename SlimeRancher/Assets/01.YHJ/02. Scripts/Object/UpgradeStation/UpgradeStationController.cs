@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 public class UpgradeStationController : MonoBehaviour
 {
-    [SerializeField] private GameObject player = default;
-    [SerializeField] private Player_Raycast player_Raycast = default;
-    [SerializeField] private PlayerController playerController = default;
-    [SerializeField] private Canvas canvas = default;
+    private GameObject player = default;
+    private Player_Raycast player_Raycast = default;
+    private PlayerController playerController = default;
+    private Canvas canvas = default;
 
-    [SerializeField] private GameObject interaction_GameObject = default;
-    [SerializeField] private GameObject button_UpgradeStation = default;
-    [SerializeField] private GameObject ui_UpgradeStation = default;
+    private GameObject interaction_GameObject = default;
+    private GameObject button_UpgradeStation = default;
+    private GameObject ui_UpgradeStation = default;
 
     private void Awake()
     {
@@ -37,7 +37,8 @@ public class UpgradeStationController : MonoBehaviour
     {
         if (player_Raycast.isAppearing_UpgradeStation)
         {
-            player.GetComponent<Rigidbody>().AddForce(Vector3.up * 20f, ForceMode.Impulse);
+            //player.GetComponent<Rigidbody>().AddForce(Vector3.up * 20f, ForceMode.Impulse);
+            
             button_UpgradeStation.SetActive(true);
 
             if (Input.GetKeyDown(KeyCode.E))
