@@ -8,6 +8,15 @@ public class test_veggie : MonoBehaviour
     [SerializeField] private GameObject model_carrot;
     [SerializeField] private GameObject sprout_carrot;
 
+    [SerializeField] private GameObject model_heartbeet;
+    [SerializeField] private GameObject sprout_heartbeet;
+
+    [SerializeField] private GameObject model_ocaoca;
+    [SerializeField] private GameObject sprout_ocaoca;
+
+    [SerializeField] private GameObject model_cuberry;
+    [SerializeField] private GameObject sprout_cuberry;
+
     [SerializeField] private Rigidbody rigidbody = default;
     [SerializeField] private float growthRate = default;
 

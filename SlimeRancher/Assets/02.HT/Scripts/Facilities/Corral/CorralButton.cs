@@ -31,7 +31,7 @@ public class CorralButton : MonoBehaviour
 
     void activate()
     {
-        // if (UIManager.Instance.corralText.activeSelf == true && Input.GetKeyDown(KeyCode.E))
+        //if (UIManager.Instance.corralText.activeSelf == true && Input.GetKeyDown(KeyCode.E))
         // {
         //     Debug.Log("activate");
         //     if (level != 3)

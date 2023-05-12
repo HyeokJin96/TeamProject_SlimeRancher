@@ -31,6 +31,10 @@ public class Player_Raycast : MonoBehaviour
     [HideInInspector] public bool isAppearing_Facility_7 = false;
     [HideInInspector] public bool isAppearing_Facility_8 = false;
 
+    [SerializeField] private GameObject interaction_GameObject;
+    [SerializeField] private GameObject button_UpgradeStation;
+    [SerializeField] private GameObject ui_UpgradeStation;
+
     private void Awake()
     {
         mainCamera = Camera.main;
@@ -41,6 +45,15 @@ public class Player_Raycast : MonoBehaviour
         crosshair = player_Ui.transform.GetChild(4).gameObject;
         crosshairImage = crosshair.transform.GetChild(0).GetComponent<Image>();
 
+        interaction_GameObject = canvas_Ui.transform.GetChild(9).gameObject;
+        button_UpgradeStation = interaction_GameObject.transform.GetChild(0).gameObject;
+        ui_UpgradeStation = canvas_Ui.transform.GetChild(10).gameObject;
+    }
+
+    private void Start()
+    {
+        button_UpgradeStation.SetActive(false);
+        ui_UpgradeStation.SetActive(false);
     }
 
     private void Update()
@@ -73,6 +86,19 @@ public class Player_Raycast : MonoBehaviour
                 {
                     case ButtonType.UpgradeStation:
                         isAppearing_UpgradeStation = true;
+
+                        //button_UpgradeStation.SetActive(true);
+
+                        //if (Input.GetKeyDown(KeyCode.E))
+                        //{
+                        //    UIManager.Instance.hasUiOpen = true;
+                        //    this.GetComponent<PlayerController>().canMove = false;
+                        //    ui_UpgradeStation.SetActive(true);
+
+                        //    Cursor.lockState = CursorLockMode.None;
+                        //    Cursor.visible = true;
+                        //}
+
                         break;
                     case ButtonType.Facility_1:
                         isAppearing_Facility_1 = true;

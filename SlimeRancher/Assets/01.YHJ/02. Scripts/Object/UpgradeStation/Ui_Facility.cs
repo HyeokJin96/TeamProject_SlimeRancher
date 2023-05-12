@@ -69,8 +69,8 @@ public class Ui_Facility : MonoBehaviour
 
         canvs = transform.parent.GetComponent<Canvas>();
 
-        player = GameObject.FindWithTag("Player");
-        player_Raycast = player.GetComponent<Player_Raycast>();
+        //player = GameObject.FindWithTag("Player");
+        //player_Raycast = player.GetComponent<Player_Raycast>();
 
         upgradeList = transform.GetChild(1).GetChild(0).GetChild(0).gameObject;
         Information = transform.GetChild(1).GetChild(2).GetChild(0).gameObject;
@@ -91,7 +91,7 @@ public class Ui_Facility : MonoBehaviour
         button_Purchase = new Button[ButtonList_Selected.transform.childCount];
         text_Purchase = new TMP_Text[ButtonList_Selected.transform.childCount];
 
-        playerManager = player.GetComponent<PlayerManager>();
+        //playerManager = player.GetComponent<PlayerManager>();
 
         lines = loadedText.text.Split('\n');
 

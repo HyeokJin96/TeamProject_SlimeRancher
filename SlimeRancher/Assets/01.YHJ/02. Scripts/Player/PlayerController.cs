@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (canMove)
+        if (canMove && !UIManager.Instance.isInGameMenu_Open)
         {
             Movement();
         }
@@ -89,9 +89,17 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        //PlayerStatus();
+
         PlayerPosCheck();
 
-        if (canMove)
+        if (UIManager.Instance.isInGameMenu_Open)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+
+        if (canMove && !UIManager.Instance.isInGameMenu_Open)
         {
             Jump();
             JetPack();
@@ -100,6 +108,30 @@ public class PlayerController : MonoBehaviour
 
             AnimationControll();
             //Absorption();
+        }
+    }
+
+    private void PlayerStatus()
+    {
+        if (UIManager.Instance.hasUiOpen)
+        {
+            canMove = false;
+        }
+        else
+        {
+            canMove = true;
+        }
+
+        if (UIManager.Instance.isInGameMenu_Open)
+        {
+            canMove = false;
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            canMove = true;
         }
     }
 
