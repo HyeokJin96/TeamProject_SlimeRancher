@@ -32,9 +32,6 @@ public enum ButtonType
     Facility_7,
     Facility_8,
     test
-
-
-
 }
 
 public enum FoodType

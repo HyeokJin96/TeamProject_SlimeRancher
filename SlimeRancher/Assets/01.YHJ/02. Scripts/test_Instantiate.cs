@@ -7,6 +7,8 @@ public class test_Instantiate : MonoBehaviour
     public ObjectPool objectPool;
     [SerializeField] private GameObject pool;
 
+    [SerializeField] private test_garden test_garden;
+
     bool test;
     private void Awake()
     {
@@ -15,7 +17,7 @@ public class test_Instantiate : MonoBehaviour
 
     private void Update()
     {
-        if (!test)
+        if (!test && test_garden.isCarrot)
         {
             for (int i = 0; i < 30; i++)
             {
