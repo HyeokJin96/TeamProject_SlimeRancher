@@ -181,11 +181,13 @@ public class SlimeBase : MonoBehaviour
 
     private void OnEnable()
     {
+        isJumpDelay = false;
         StartCoroutine(IncreaseHunger(1, increaseHungerValue)); // test value 1: after test, change to 60
         StartCoroutine(DestOnOffTest());
     }
     private void OnDisable()
     {
+        isJumpDelay = false;
         StopAllCoroutines();
     }
 
@@ -387,6 +389,7 @@ public class SlimeBase : MonoBehaviour
 
     protected void PounceEnd()
     {
+        isJumpDelay = false;
         StartCoroutine(JumpDelay(jumpDelay));
         anim.SetBool("isPounce", false);
         currentActionState = ActionState.Idle;

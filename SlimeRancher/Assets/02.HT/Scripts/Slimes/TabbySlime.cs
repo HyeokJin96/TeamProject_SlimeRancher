@@ -36,7 +36,7 @@ public class TabbySlime : SlimeBase
         defaultLod3Material.SetTexture("_MainTex", tabbyBodyTexture);
 
         tabbyEarsAndTail = shadow.GetChild(6).gameObject;
-        
+
         slimeName = slimeNameList[slimeType1];
         slimeIcon = slimeIconList[slimeType1];
 
@@ -89,17 +89,22 @@ public class TabbySlime : SlimeBase
         // { if(target to eat != null)
         Vector3 direction = pounceTarget.position - transform.position;
         float distance = direction.magnitude;
-        if (distance <= 0f) return;
-        float height = direction.y;
-        float angle = 45f * Mathf.Deg2Rad; // 45도 각도로 발사
-        float velocity = Mathf.Sqrt(distance * gravity / (Mathf.Sin(2 * angle)));
-        Vector3 horizontalDirection = new Vector3(direction.x, 0f, direction.z);
-        float horizontalDistance = horizontalDirection.magnitude;
-        float time = horizontalDistance / (velocity * Mathf.Cos(angle));
-        float verticalVelocity = gravity * time / 2f;
-        Vector3 initialVelocity = (velocity * direction.normalized) + (Vector3.up * verticalVelocity);
-
-        rigid.velocity = initialVelocity;
+        if (distance <= 0f)
+        {
+            pounceTarget = null;
+        }
+        else
+        {
+            float height = direction.y;
+            float angle = 45f * Mathf.Deg2Rad; // 45도 각도로 발사
+            float velocity = Mathf.Sqrt(distance * gravity / (Mathf.Sin(2 * angle)));
+            Vector3 horizontalDirection = new Vector3(direction.x, 0f, direction.z);
+            float horizontalDistance = horizontalDirection.magnitude;
+            float time = horizontalDistance / (velocity * Mathf.Cos(angle));
+            float verticalVelocity = gravity * time / 2f;
+            Vector3 initialVelocity = (velocity * direction.normalized) + (Vector3.up * verticalVelocity);
+            rigid.velocity = initialVelocity * 0.8f;
+        }
     }
 
     protected void AfterPounce()

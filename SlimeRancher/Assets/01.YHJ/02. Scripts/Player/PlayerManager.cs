@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
-    [Header ("Movement")]
+    [Header("Movement")]
     [SerializeField] public float playerSpeed = default;
     [SerializeField] public float playerMoveSpeed = default;
     [SerializeField] public float playerSprintSpeed = default;
     [SerializeField] public float playerJumpForce = default;
     [SerializeField] public float playerJetPackForce = default;
 
-    [Header ("Health")]
+    [Header("Health")]
     [SerializeField] public float playerCurrentHealth = default;
     [SerializeField] public float playerMaxHealth = default;
 
@@ -37,7 +37,7 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] private GameObject player_Coin = default;
     [SerializeField] private GameObject player_Health = default;
-    [SerializeField] private GameObject player_HealthBar = default;
+    [SerializeField] private Image player_HealthBar = default;
     [SerializeField] private GameObject player_Energy = default;
     [SerializeField] private Image player_EnegyBar = default;
 
@@ -48,6 +48,7 @@ public class PlayerManager : MonoBehaviour
     private bool isInAction = false;
     private float delayTime = default;
     private float delayTimer = default;
+    private float delayTimerHp = default;
 
     public bool hasJetpack = false;
 
@@ -60,6 +61,7 @@ public class PlayerManager : MonoBehaviour
         player_Coin = player_Ui.transform.GetChild(0).gameObject;
         player_Health = player_Ui.transform.GetChild(1).gameObject;
         player_Energy = player_Ui.transform.GetChild(2).gameObject;
+        player_HealthBar = player_Health.transform.GetChild(1).GetChild(1).GetComponent<Image>();
         player_EnegyBar = player_Energy.transform.GetChild(1).GetChild(1).GetComponent<Image>();
 
         player_Coin_Text = player_Coin.transform.GetChild(1).GetComponent<TMP_Text>();
@@ -76,7 +78,7 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {
         UdatePlayerUi();
-
+        PlayerHealth();
         PlayerEnergy();
     }
 
@@ -89,7 +91,30 @@ public class PlayerManager : MonoBehaviour
 
     private void PlayerHealth()
     {
+        player_HealthBar.fillAmount = playerCurrentHealth / playerMaxHealth;
+        if (playerCurrentHealth == playerMaxHealth)
+        {
+            //do nothing
+            delayTimerHp = 0;
+        }
+        else
+        {
+            if (playerCurrentHealth < playerMaxHealth)
+            {
+                delayTimerHp += Time.deltaTime;
 
+                if (delayTimerHp > delayTime)
+                {
+                    playerCurrentHealth += Time.deltaTime * playerEnergyincrease;
+                    player_HealthBar.fillAmount = playerCurrentHealth / playerMaxHealth;
+
+                    if (playerCurrentHealth > playerMaxHealth)
+                    {
+                        playerCurrentHealth = playerMaxHealth;
+                    }
+                }
+            }
+        }
     }
 
     private void PlayerEnergy()

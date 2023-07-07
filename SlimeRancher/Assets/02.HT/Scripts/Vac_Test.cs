@@ -12,7 +12,7 @@ public class Vac_Test : MonoBehaviour
 
     Vector3 dir;
 
-    public bool fuckU;
+    public bool isVacuumOn;
 
     public GameObject joint1;
     public GameObject joint2;
@@ -54,8 +54,6 @@ public class Vac_Test : MonoBehaviour
     {
         blackhole.SetActive(false);
 
-        // "Star"?? ?��?? ?????? ???????????? ???? Star ?��?? ??��?.
-        //stars = GameObject.FindGameObjectsWithTag("Star");
         stars = GameObject.FindGameObjectsWithTag("Normal Slime");
 
         jointArray = new GameObject[] { joint1, joint2, joint3, joint4, joint5, joint6 };
@@ -98,10 +96,6 @@ public class Vac_Test : MonoBehaviour
         Vector3 fireDir_ = (fireDirTarget.transform.position - inventory.transform.position).normalized;
         obj_.GetComponent<Rigidbody>().AddForce(fireDir_ * 50, ForceMode.Impulse);
 
-        /* if (InventoryManager.Instance.quickSlotArray[selctedSlotNumber].Count != 0)
-        {
-            firedObj_ = InventoryManager.Instance.quickSlot[selctedSlotNumber].transform.GetChild(0).gameObject;
-        } */
     }
     public bool fireDelayEnd;
 
@@ -172,10 +166,6 @@ public class Vac_Test : MonoBehaviour
             selctedSlotNumber = 3;
         }
 
-        /* if (isFire)
-        {
-            StartCoroutine(FireDelay());
-        } */
         if (Input.GetMouseButton(0))
         {
             if (isLeftClick_)
@@ -197,7 +187,6 @@ public class Vac_Test : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            //blackhole.SetActive(false);
             isLeftClick_ = false;
             StopCoroutine(FireDelay());
         }
@@ -213,13 +202,13 @@ public class Vac_Test : MonoBehaviour
                 joint4DefaultPos = joint4.transform.position;
                 joint5DefaultPos = joint5.transform.position;
                 joint6DefaultPos = joint6.transform.position;
-                fuckU = true;
+                isVacuumOn = true;
             }
         }
         else if (Input.GetMouseButtonUp(1))
         {
             blackhole.SetActive(false);
-            fuckU = false;
+            isVacuumOn = false;
             isCheckEnd = false;
 
             int triggerCheckCount_ = 0;
@@ -248,7 +237,7 @@ public class Vac_Test : MonoBehaviour
 
         time += Time.deltaTime;
 
-        if (fuckU)
+        if (isVacuumOn)
         {
             joint2.transform.position = joint2DefaultPos;
             joint3.transform.position = joint3DefaultPos;
@@ -263,37 +252,6 @@ public class Vac_Test : MonoBehaviour
             joint6DefaultPos = Vector3.Slerp(joint6DefaultPos, joint6_OriginPos.transform.position, 0.1f);
 
             blackhole.transform.rotation *= Quaternion.Euler(0f, 1f, 0f);
-            /* foreach (GameObject star in stars)
-            {
-                // ??????? ???? ??��? ????? ???????.
-                float dis = Vector3.Distance(this.transform.position, star.transform.position);
-                Debug.Log(dis);
-
-                // 1??? ?????? ??(= ??????? ??????? 1??? ?????? ??)
-                if (time > 1)
-                {
-                    // ?????��??? ??????? ????? ?????? ?????.
-                    dir = blackhole.transform.position - star.transform.position;
-                    // ???? ????? ??????? ???????? ???? ????????.
-                    star.transform.position += dir * 1f * Time.deltaTime;
-                }
-                // ??????? ???? ????? 0.3f????? ???
-                //if (dis <= 0.3f)
-                if (dis >= 2.5f)
-                {
-                    // ???? ??????? ???? ?? ?????? ????????.
-                    star.transform.position += dir * 3f * Time.deltaTime;
-                }
-                // ??????? ???? ????? 0.05f ????? ???
-                //if (dis <= 0.05f)
-                if (dis < 2.5f)
-                {
-                    // ???? ??????? ?? ?????? ????????.
-                    star.transform.position += dir * 5f * Time.deltaTime;
-                    // ???? ??? ????????? 0.9?? ??????? ?????.
-                    star.transform.localScale *= 0.9f;
-                }
-            } */
         }
     }
 
@@ -301,13 +259,11 @@ public class Vac_Test : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (fuckU && !isPickUpLargo && other.GetType() == typeof(MeshCollider))
+        if (isVacuumOn && !isPickUpLargo && other.GetType() == typeof(MeshCollider))
         {
             if (eeee.Contains(other.gameObject))
             {
-                //Vector3 fireDir_ = (fireDirTarget.transform.position - inventory.transform.position).normalized;
                 other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<Rigidbody>().AddForce(inventory.transform.up * 10, ForceMode.Impulse);
-                //eeee.Remove(other.gameObject);
             }
 
             if ((other.tag == "Normal Slime" || other.tag == "Food" || other.tag == "Plort") && !eeee.Contains(other.gameObject)) //slime Tag 통일(Normal Slime, Largo Slime, Tarr Slime => Slime)
@@ -325,14 +281,7 @@ public class Vac_Test : MonoBehaviour
                     NearestJointCheck(other.gameObject);
                 }
 
-                // 대상 오브젝트 콜라이더 트리거 on
-                /* if(other.transform.parent.GetComponent<ObjecData>().foodName == FoodName.Carrot && other.transform.parent.GetComponent<test_veggie>().isGrowing == true)
-                {
-                    //donothing
-                }
-                else
-                {
-                } */
+                
                 if (other.GetType() == typeof(MeshCollider))
                 {
                     other.GetComponent<MeshCollider>().isTrigger = true;
@@ -433,9 +382,6 @@ public class Vac_Test : MonoBehaviour
 
                 else if (other.tag == "Food" && vacuumedList.Contains(other.gameObject))
                 {
-                    /* if(other.transform.parent.GetComponent<ObjecData>().foodName == FoodName.Carrot && other.transform.parent.GetComponent<test_veggie>().isGrowing == false)
-                    { */
-
                     dir = jointArray[nearestIndex].transform.position - other.transform.parent.position;
                     other.transform.parent.GetComponent<Rigidbody>().velocity = dir * 10f;
 
@@ -492,7 +438,6 @@ public class Vac_Test : MonoBehaviour
                             //nearestIndex = 0;
                         }
                     }
-                    /* } */
                 }
 
 
@@ -551,98 +496,10 @@ public class Vac_Test : MonoBehaviour
                             other.transform.rotation = Quaternion.identity;
                             other.gameObject.SetActive(false);
 
-                            //nearestIndex = 0;
                         }
                     }
                 }
-
-
             }
-
-
-
-
-            // foreach (GameObject star in stars)
-            // {
-            //     if (other.gameObject == star.gameObject)
-            //     {
-            //         if (!vacuumedList.Contains(other.gameObject))
-            //         {
-            //             vacuumedList.Add(other.gameObject);
-            //         }
-
-
-
-            //         if (isCheckEnd == false)
-            //         {
-            //             NearestJointCheck(other.gameObject);
-            //         }
-
-            //         star.GetComponent<MeshCollider>().isTrigger = true;
-
-            //         star.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().currentActionState = SlimeBase.ActionState.VacuumTarget;
-            //         // ??????? ???? ??��? ????? ???????.
-
-            //         float dis = Vector3.Distance(this.transform.position, star.transform.position);
-
-            //         Vector3 defaultScale = star.GetComponent<VacSlimeTest>().rootSlime.transform.localScale;
-
-
-            //         // 1??? ?????? ??(= ??????? ??????? 1??? ?????? ??)
-            //         if (time > 1)
-            //         {
-            //             // ?????��??? ??????? ????? ?????? ?????.
-            //             dir = jointArray[nearestIndex].transform.position - star.GetComponent<VacSlimeTest>().rootSlime.transform.position;
-            //             // ???? ????? ??????? ???????? ???? ????????.
-            //             star.GetComponent<VacSlimeTest>().rootSlime.transform.position += dir * 1f * Time.deltaTime;
-            //         }
-            //         //star.GetComponent<VacSlimeTest>().rootSlime.transform.position += dir * 10f * Time.deltaTime;
-            //         star.GetComponent<VacSlimeTest>().rootSlime.GetComponent<Rigidbody>().velocity = dir * 10f;
-
-            //         if (Vector3.Distance(jointArray[nearestIndex].transform.position, star.GetComponent<VacSlimeTest>().rootSlime.transform.position) < 0.1f && nearestIndex > 0)
-            //         {
-            //             nearestIndex--;
-            //         }
-
-            //         if (nearestIndex == 1)
-            //         {
-            //             star.GetComponent<VacSlimeTest>().rootSlime.transform.localScale *= 0.9f;
-            //             if (star.GetComponent<VacSlimeTest>().rootSlime.transform.localScale.x < 0.5f)
-            //             {
-            //                 star.GetComponent<VacSlimeTest>().rootSlime.SetActive(false);
-            //                 //nearestIndex = 0;
-            //             }
-            //         }
-
-            //         /* if (star.GetComponent<VacSlimeTest>().rootSlime.transform.localScale.x / defaultScale.x <= 0.3f)
-            //         {
-            //             star.GetComponent<VacSlimeTest>().rootSlime.SetActive(false);
-            //             Debug.Log("����!");
-            //         } */
-
-            //         /* if (nearestIndex == 0)
-            //         {
-            //             star.GetComponent<VacSlimeTest>().rootSlime.transform.localScale *= 0.9f;
-            //         } */
-
-            //         // ??????? ???? ????? 0.3f????? ???
-            //         //if (dis <= 0.3f)
-            //         /* if (dis >= 2.5f)
-            //         {
-            //             // ???? ??????? ???? ?? ?????? ????????.
-            //             star.GetComponent<VacSlimeTest>().rootSlime.transform.position += dir * 1f * Time.deltaTime;
-            //         }
-            //         // ??????? ???? ????? 0.05f ????? ???
-            //         //if (dis <= 0.05f)
-            //         if (dis < 2.5f)
-            //         {
-            //             // ???? ??????? ?? ?????? ????????.
-            //             star.GetComponent<VacSlimeTest>().rootSlime.transform.position += dir * 1.5f * Time.deltaTime;
-            //             // ???? ??? ????????? 0.9?? ??????? ?????.
-            //             //star.GetComponent<VacSlimeTest>().rootSlime.transform.localScale *= 0.9f;
-            //         } */
-            //     }
-            // }
         }
     }
 
@@ -650,7 +507,6 @@ public class Vac_Test : MonoBehaviour
     {
         if (other.GetType() == typeof(MeshCollider))
         {
-
             if (other.tag == "Normal Slime")
             {
                 other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().currentActionState = SlimeBase.ActionState.Idle;
@@ -664,15 +520,6 @@ public class Vac_Test : MonoBehaviour
                 other.GetComponent<MeshCollider>().isTrigger = false;
             }
             vacuumedList.Remove(other.gameObject);
-            /* 
-                    foreach (GameObject star in stars)
-                    {
-                        if (other.gameObject == star.gameObject)
-                        {
-                            star.GetComponent<SlimeBase>().currentActionState = SlimeBase.ActionState.Idle;
-                        }
-                    }
-             */
         }
     }
     public int nearestIndex;
