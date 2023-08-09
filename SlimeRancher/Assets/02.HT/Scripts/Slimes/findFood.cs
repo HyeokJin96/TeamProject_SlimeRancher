@@ -25,7 +25,8 @@ public class findFood : MonoBehaviour
 
         if (!slimeBase.isTarrSlime)
         {
-            if (slimeBase.currentMoodState != SlimeBase.MoodState.Elated && slimeBase.currentActionState == SlimeBase.ActionState.Idle && (slimeBase.targetToEat == null || slimeBase.targetToEat.activeSelf == false))
+            //if (slimeBase.currentMoodState != SlimeBase.MoodState.Elated && slimeBase.currentActionState == SlimeBase.ActionState.Idle && (slimeBase.targetToEat == null || slimeBase.targetToEat.activeSelf == false))
+            if (slimeBase.currentActionState == SlimeBase.ActionState.Idle && (slimeBase.targetToEat == null || slimeBase.targetToEat.activeSelf == false))
             {
                 if (other.gameObject.CompareTag("Plort") || other.gameObject.CompareTag("Food"))
                 {
@@ -46,7 +47,8 @@ public class findFood : MonoBehaviour
         else
         {
             //temporary test
-            if (slimeBase.currentMoodState != SlimeBase.MoodState.Elated && slimeBase.currentActionState == SlimeBase.ActionState.Idle && (slimeBase.targetToEat == null || slimeBase.targetToEat.activeSelf == false))
+            //if (slimeBase.currentMoodState != SlimeBase.MoodState.Elated && slimeBase.currentActionState == SlimeBase.ActionState.Idle && (slimeBase.targetToEat == null || slimeBase.targetToEat.activeSelf == false))
+            if (slimeBase.currentActionState == SlimeBase.ActionState.Idle && (slimeBase.targetToEat == null || slimeBase.targetToEat.activeSelf == false))
             {
 
                 if (other.gameObject.CompareTag("Normal Slime") || other.gameObject.CompareTag("Largo Slime") || other.gameObject.CompareTag("Player"))

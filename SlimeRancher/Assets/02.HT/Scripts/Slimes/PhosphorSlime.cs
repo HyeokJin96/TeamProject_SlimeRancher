@@ -30,4 +30,9 @@ public class PhosphorSlime : SlimeBase
     {
         base.Update();
     }
+
+    public override void Action()
+    {
+        currentActionState = ActionState.Jump;
+    }
 }

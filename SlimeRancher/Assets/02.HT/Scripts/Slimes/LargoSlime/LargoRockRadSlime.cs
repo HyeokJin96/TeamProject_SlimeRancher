@@ -54,7 +54,7 @@ public class LargoRockRadSlime : SlimeBase
         radField = transform.GetChild(3).GetComponent<MeshRenderer>().materials[0];
         defaultRadFieldValue = 0.9f;
         currentRadFieldValue = defaultRadFieldValue;
-    
+
         defaultColor = slimeColor[6];
     }
 
@@ -63,6 +63,20 @@ public class LargoRockRadSlime : SlimeBase
         base.Update();
 
         SetRadFieldMotion();
+    }
+
+    public override void Action()
+    {
+        int frequency_;
+        frequency_ = Random.Range(0, 5);
+        if (frequency_ >= 0 && frequency_ < 3)
+        {
+            currentActionState = ActionState.Jump;
+        }
+        else
+        {
+            currentActionState = ActionState.RockFire;
+        }
     }
 
     void SetRadFieldMotion()
@@ -89,26 +103,5 @@ public class LargoRockRadSlime : SlimeBase
         }
 
         radField.SetFloat("_FresnelWidth", currentRadFieldValue);
-    }
-
-    protected override void Jump(int jumpForce_, int delayTime_)
-    {
-        //base.Jump(jumpForce_, delayTime_);
-        if (!isJumpDelay)
-        {
-            int frequency_;
-            frequency_ = Random.Range(0, 5);
-            isJumpDelay = true;
-            if (frequency_ >= 0 && frequency_ < 3)
-            {
-                currentActionState = ActionState.Jump;
-                rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
-                StartCoroutine(JumpDelay(delayTime_));
-            }
-            else
-            {
-                currentActionState = ActionState.RockFire;
-            }
-        }
     }
 }

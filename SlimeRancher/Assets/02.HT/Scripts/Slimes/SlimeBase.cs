@@ -2,42 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlimeBase : MonoBehaviour
+public abstract class SlimeBase : MonoBehaviour
 {
-    //test
+    // variables for Info
+    #region slimeInfo
     public string slimeName;
     public List<string> slimeNameList;
     public Sprite[] slimeIconList;
     public Sprite slimeIcon;
+    #endregion
 
 
 
-    protected float colorAlphaValue = 0.5f;
-    protected Color defaultColor;
+    public Rigidbody rigid;
     public bool isPickup;
-    //test
-
-
-    protected Rigidbody rigid;
-
     protected bool isGrounded;
     public bool isJumpDelay;
 
-    protected int jumpDelay = 5;
-    int jumpForce = 5;
+    public int jumpDelay = 10;
+    public int jumpForce = 5;
 
-    public float hungerValue;   // after test, delete public 
-    public float agitatedValue; // after test, delete public
+    public float hungerValue;
+    public float agitatedValue;
     float minHunger = 0;
-    float maxHunger = 100;
+    public float maxHunger = 100;
     float increaseHungerValue = 5.56f;
 
     public GameObject targetToEat = null;
     Vector3 targetPosition;
     float targetDistance;
 
-    protected float targetDistanceValue1;
-    protected float targetDistanceValue2;
+    public float targetDistanceValue1;
+    public float targetDistanceValue2;
 
     public Transform pounceTarget;
     //var for move
@@ -67,9 +63,11 @@ public class SlimeBase : MonoBehaviour
     public int slimeType1;
     public int slimeType2;
 
+    #region Apprearance
 
-    //set color
+    protected Color defaultColor;
     public List<Color32> slimeColor;
+    protected float colorAlphaValue = 0.5f;
 
     protected Transform shadow;
     MeshRenderer defaultMeshRenderer;
@@ -80,27 +78,44 @@ public class SlimeBase : MonoBehaviour
     public Material defaultLod2Material;
     MeshRenderer defaultLod3MeshRenderer;
     public Material defaultLod3Material;
+    #endregion
 
-    protected Animator anim;
+    public Animator anim;
 
     //var for LargoSlime
     bool isFeral;
 
-    public enum MoodState   // after test, delete public
-    {
-        Elated,
-        Happy,
-        Hungry,
-        Agitated
-    }
-    public MoodState currentMoodState;  // after test, delete public
+    public MoodStateMachine moodStateMachine;
+    public ActionStateMachine actionStateMachine;
+
+
+    #region ActionState
+
+    public bool canEat;
+    public bool canAct;
+    public bool isCoolCheckEnd = true;
+    public int coolTime = 10;
+
+    public Dictionary<string, IActionState> actionTable = new Dictionary<string, IActionState>();
+
+    public string action1;
+    public string action2;
+    public int actionNumber;
+
+    public bool isGround;
+    public bool isReadyToEat;
+    public bool isAbsorbed;
+    #endregion
+
+
+
 
     public enum ActionState
     {
         Idle,
         Eat,
         Jump,
-        Wait,
+        //Wait,
         RockFire,
         Pounce,
         Boom,
@@ -119,7 +134,10 @@ public class SlimeBase : MonoBehaviour
 
     private void Awake()
     {
-        //slimeArray = Resources.LoadAll<GameObject>("02.HT/Prefabs/Slimes");
+        moodStateMachine = new MoodStateMachine(this);
+        actionStateMachine = new ActionStateMachine(this);
+
+
         normalSlimeArray = Resources.LoadAll<GameObject>("02.HT/Prefabs/Slimes/NormalSlimes");
         largoSlimeArray = Resources.LoadAll<GameObject>("02.HT/Prefabs/Slimes/LargoSlimes");
         tarrSlime = Resources.Load<GameObject>("02.HT/Prefabs/Slimes/TarrSlime/TarrSlime");
@@ -147,16 +165,19 @@ public class SlimeBase : MonoBehaviour
         slimeIconList = Resources.LoadAll<Sprite>("02.HT/Slimes/SlimeIcon");
 
 
-        //slimeColor.Add(new Color32(95, 95, 185, 200));  //phosphor_Legacy
 
         targetDistanceValue1 = 5;
         targetDistanceValue2 = 2.5f;
+
+        plortPrefab = Resources.Load<GameObject>("02.HT/Prefabs/Plort/Plort");
     }
     public virtual void Start()
     {
+        moodStateMachine.InitState(moodStateMachine.elated);
+        actionStateMachine.InitState(actionStateMachine.idleState);
+
         rigid = GetComponent<Rigidbody>();
 
-        currentMoodState = MoodState.Elated;
         currentActionState = ActionState.Idle;
 
         shadow = transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(3);
@@ -176,24 +197,29 @@ public class SlimeBase : MonoBehaviour
         anim = GetComponent<Animator>();
 
         StartCoroutine(IncreaseHunger(1, increaseHungerValue)); // test value 1: after test, change to 60
-        StartCoroutine(DestOnOffTest());
+        StartCoroutine(DestinationReset());
+
+        //currentMState = new MoodState_Elated();
+        //currentMState.InitState(this);
     }
 
     private void OnEnable()
     {
         isJumpDelay = false;
         StartCoroutine(IncreaseHunger(1, increaseHungerValue)); // test value 1: after test, change to 60
-        StartCoroutine(DestOnOffTest());
+        StartCoroutine(DestinationReset());
     }
     private void OnDisable()
     {
+        isCoolCheckEnd = true;
+        isAbsorbed = false;
         isJumpDelay = false;
         StopAllCoroutines();
     }
 
     //test
     public bool isDestOn;
-    IEnumerator DestOnOffTest()
+    IEnumerator DestinationReset()
     {
         while (true)
         {
@@ -217,68 +243,49 @@ public class SlimeBase : MonoBehaviour
 
     public virtual void Update()
     {
-        //test
-        if (isDestOn)
+        moodStateMachine.Update();
+        actionStateMachine.Act();
+        AnyStateToAbsorbedState();
+        SetHungerValue();
+
+
+        /* if (isDestOn)
         {
             DestTestMethod();
         }
-        //test
 
-        SetHungerValue();
-        SetMoodState();
+        //SetMoodState();
         if (slimeSize == 1)
         {
             SetAlphaVelue();
         }
 
-        //test
-        //if (!isSetDestination)
-        //{
-        //    StartCoroutine(SetDestination());
-        //}
-        //test
-
-
-        switch (currentMoodState)
-        {
-            case MoodState.Elated:
-            case MoodState.Happy:
-                jumpForce = 5;
-                jumpDelay = 5;
-                break;
-            case MoodState.Hungry:
-                jumpForce = 6;
-                jumpDelay = 4;
-                break;
-            case MoodState.Agitated:
-                jumpForce = 7;
-                jumpDelay = 3;
-                break;
-            default:
-                break;
-        }
-
         switch (currentActionState)
         {
             case ActionState.Idle:
-                Move(targetDistanceValue1, targetDistanceValue2);
-                Jump(jumpForce, jumpDelay); //move 메서드 안으로 이동?
+                if (isJumpDelay)
+                {
+                    Move(targetDistanceValue1, targetDistanceValue2);
+                }
+                else
+                {
+                    Action();
+                }
                 StopCoroutine(SetStun());
                 break;
             case ActionState.Eat:
-                Debug.Log(anim);
                 anim.SetBool("isBite", true);
 
                 destination = Vector3.zero;
-                isSetDestination = false;
+                isDestOn = true;
                 //StartCoroutine(Eat());
                 break;
             case ActionState.Jump:
-                //Do Nothing
+                Jump(jumpForce, jumpDelay);
                 break;
-            case ActionState.Wait:
-                //Do Nothing
-                break;
+            //case ActionState.Wait:
+            //Do Nothing
+            //break;
             case ActionState.RockFire:
                 anim.SetBool("isWindup", true);
                 break;
@@ -297,6 +304,14 @@ public class SlimeBase : MonoBehaviour
                 break;
             default:
                 break;
+        } */
+    }
+
+    void AnyStateToAbsorbedState()
+    {
+        if (isAbsorbed)
+        {
+            actionStateMachine.TransitionTo(actionStateMachine.absorbedState);
         }
     }
 
@@ -332,7 +347,7 @@ public class SlimeBase : MonoBehaviour
         }
     }
 
-    protected void RockFire()
+    /* protected void RockFire()
     {
         anim.SetBool("isWindup", false);
         anim.SetBool("isRockFire", true);
@@ -356,7 +371,7 @@ public class SlimeBase : MonoBehaviour
         StartCoroutine(JumpDelay(jumpDelay));
         anim.SetBool("isRockRecover", false);
         currentActionState = ActionState.Idle;
-    }
+    } */
     protected virtual void Pounce()
     {
 
@@ -395,7 +410,7 @@ public class SlimeBase : MonoBehaviour
         currentActionState = ActionState.Idle;
     }
 
-
+    //tarr로 이동
     public IEnumerator DestroyTarr()
     {
         yield return new WaitForSeconds(10);
@@ -423,53 +438,21 @@ public class SlimeBase : MonoBehaviour
         else { }
     }
 
-
+    public abstract void Action();
 
     protected virtual void Jump(int jumpForce_, int delayTime_)
     {
         if (!isJumpDelay)
         {
             isJumpDelay = true;
-            currentActionState = ActionState.Jump;
             rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
             StartCoroutine(JumpDelay(delayTime_));
         }
     }
 
-    // { jump method backup before modify
-    /* protected void Jump(int jumpForce_, int delayTime_)
+    public void Move(float targetDistanceValue1_, float targetDistanceValue2_)
     {
-        if (!isJumpDelay)
-        {
-            int frequency_;
-            frequency_ = Random.Range(0, 5);
-            isJumpDelay = true;
-            if (slimeType1 == 2)
-            {
-                if (frequency_ >= 0 && frequency_ < 3)
-                {
-                    currentActionState = ActionState.Jump;
-                    rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
-                    StartCoroutine(JumpDelay(delayTime_));
-                }
-                else
-                {
-                    currentActionState = ActionState.RockFire;
-                }
-            }
-            else
-            {
-                currentActionState = ActionState.Jump;
-                rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
-                StartCoroutine(JumpDelay(delayTime_));
-            }
-        }
-    } */
-    // } jump method backup before modify
-
-    protected void Move(float targetDistanceValue1_, float targetDistanceValue2_)
-    {
-        if (currentMoodState == MoodState.Elated)
+        if (moodStateMachine.currentState == moodStateMachine.elated)
         {
             if (Vector3.Distance(transform.position, destination) > 0.3f && destination != Vector3.zero)
             {
@@ -479,8 +462,7 @@ public class SlimeBase : MonoBehaviour
             else
             {
                 destination = Vector3.zero;
-                StopCoroutine(SetDestination());
-
+                isDestOn = true;
             }
         }
         else
@@ -495,7 +477,7 @@ public class SlimeBase : MonoBehaviour
                 else
                 {
                     destination = Vector3.zero;
-                    StopCoroutine(SetDestination());
+                    isDestOn = true;
                 }
             }
             else
@@ -545,90 +527,12 @@ public class SlimeBase : MonoBehaviour
 
     }
 
-    float destinationDistance;
-    IEnumerator SetDestination()
-    {
-        isSetDestination = true;
-        yield return new WaitForSeconds(7);
-        if (destination == Vector3.zero)
-        {
-            angle = Random.Range(0f, 360f);
-            radiusX = Random.Range(5, 10);
-            radiusZ = Random.Range(5, 10);
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            posX = transform.position.x + radiusX * Mathf.Cos(angle * Mathf.Deg2Rad);
-            posZ = transform.position.z + radiusZ * Mathf.Sin(angle * Mathf.Deg2Rad);
-            destinationDistance = Mathf.Sqrt(Mathf.Pow(posX - transform.position.x, 2f) + Mathf.Pow(posZ - transform.position.z, 2f));
-        }
-
-        destination = new Vector3(posX, transform.position.y, posZ);
-
-        isSetDestination = false;
-
-        yield return new WaitForSeconds(7);
-        destination = Vector3.zero;
-        isSetDestination = false;
-
-    }
-
-    //Eat(): Legacy
-    /* public virtual IEnumerator Eat()
-    {
-        //currentActionState = ActionState.Eat;
-        currentActionState = ActionState.Wait;
-        yield return new WaitForSeconds(1f);
-        targetToEat.SetActive(false);
-        hungerValue = 0;
-        agitatedValue = 0;
-        if (targetToEat.tag == "Plort")
-        {
-            Debug.Log("합체");
-            if (slimeSize == 0)
-            {
-                slimeSize = 1;
-                slimeType2 = targetToEat.GetComponent<PlortBase>().plortType;
-
-                TransformSlime();
-            }
-            else if (slimeSize == 1)
-            {
-                //Transform into TarrSlime
-                Instantiate(tarrSlime, transform.position, transform.rotation);
-                gameObject.SetActive(false);
-            }
-        }
-        else if (targetToEat.tag == "Food")
-        {
-            Debug.Log("플로트 생산");
-            GameObject clone_ = Resources.Load<GameObject>("02.HT/Prefabs/Plort/Plort");
-            if (slimeSize == 0)
-            {
-                clone_.GetComponent<PlortBase>().plortType = slimeType1;
-                Instantiate(clone_, transform.position, transform.rotation);
-            }
-            else if (slimeSize == 1)
-            {
-                clone_.GetComponent<PlortBase>().plortType = slimeType1;
-                Instantiate(clone_, transform.position, transform.rotation);
-                clone_.GetComponent<PlortBase>().plortType = slimeType2;
-                Instantiate(clone_, transform.position, transform.rotation);
-            }
-            else
-            {
-
-            }
-
-            //색상부여 관련 수정예정
-        }
-        yield return new WaitForSeconds(1f);
-        currentActionState = ActionState.Idle;
-    } */
-
-    protected virtual void Eat()
+    /* protected virtual void Eat()
     {
         targetToEat.SetActive(false);
         hungerValue = 0;
         agitatedValue = 0;
+
         if (targetToEat.tag == "Plort")
         {
             Debug.Log("합체");
@@ -671,7 +575,7 @@ public class SlimeBase : MonoBehaviour
         }
         currentActionState = ActionState.Idle;
         anim.SetBool("isBite", false);
-    }
+    } */
 
     protected IEnumerator JumpDelay(int delayTime_)
     {
@@ -679,96 +583,103 @@ public class SlimeBase : MonoBehaviour
         isJumpDelay = false;
     }
 
-    protected IEnumerator IncreaseHunger(int time_, float increaseHungerValue_)
+    protected IEnumerator IncreaseHunger(int time_, float increaseValue_)
     {
-        while (currentMoodState != MoodState.Agitated)
+        while (agitatedValue < 100)
         {
             yield return new WaitForSeconds(time_);
             if (hungerValue != maxHunger)
             {
-                hungerValue += increaseHungerValue_;
+                hungerValue += increaseValue_;
             }
             else
             {
-                agitatedValue += increaseHungerValue_;
+                agitatedValue += increaseValue_;
             }
-        }
-    }
-
-    void SetMoodState()
-    {
-        if (hungerValue >= minHunger && hungerValue < 33)
-        {
-            currentMoodState = MoodState.Elated;
-        }
-        else if (hungerValue >= 33 && hungerValue < 100)
-        {
-            currentMoodState = MoodState.Happy;
-        }
-        else if (hungerValue == maxHunger)
-        {
-            currentMoodState = MoodState.Hungry;
-        }
-        else
-        {
-
-        }
-
-        if (agitatedValue >= 100)
-        {
-            currentMoodState = MoodState.Agitated;
-        }
-        else
-        {
-
         }
     }
 
     protected void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Terrain" && currentActionState != ActionState.Stunned)
+        if (other.gameObject.tag == "Terrain")
         {
-            currentActionState = ActionState.Idle;
+            isGround = true;
+        }
+
+        if (canEat && !isReadyToEat)
+        {
+            if (other.gameObject.tag == "Food" ||
+            (other.gameObject.tag == "Plort" &&
+            other.gameObject.GetComponent<PlortBase>().plortType != slimeType1 &&
+            other.gameObject.GetComponent<PlortBase>().plortType != slimeType2))
+            {
+                isReadyToEat = true;
+                targetToEat = other.gameObject;
+            }
         }
     }
 
-    private void OnCollisionExit(Collision other)
+    public void TransformSlime()
     {
-        /* if (other.gameObject.tag == "Terrain")
+        if (slimeSize == 0)
         {
-            currentActionState = ActionState.Jump;
-        } */
-    }
-    void TransformSlime()
-    {
-        int largoSlimeIndex_ = 0;
-        for (int i = 1; i < normalSlimeArray.Length - 1; i++)
-        {
-            for (int j = i + 1; j < normalSlimeArray.Length; j++)
+            slimeType2 = targetToEat.GetComponent<PlortBase>().plortType;
+
+            int largoSlimeIndex_ = 0;
+            for (int i = 1; i < normalSlimeArray.Length - 1; i++)
             {
-                largoSlimeIndex_++;
-
-                if (slimeType1 > slimeType2 && i == slimeType2 && j == slimeType1)
+                for (int j = i + 1; j < normalSlimeArray.Length; j++)
                 {
-                    Debug.Log("t1>t2");
-                    Debug.Log(slimeType1);
-                    Debug.Log(slimeType2);
-                    Debug.Log(largoSlimeIndex_);
-                    Instantiate(largoSlimeArray[largoSlimeIndex_], transform.position, transform.rotation);
-                    gameObject.SetActive(false);
+                    largoSlimeIndex_++;
 
-                }
-                else if (slimeType1 < slimeType2 && i == slimeType1 && j == slimeType2)
-                {
-                    Debug.Log("t2>t1");
-                    Debug.Log(slimeType1);
-                    Debug.Log(slimeType2);
-                    Debug.Log(largoSlimeIndex_);
-                    Instantiate(largoSlimeArray[largoSlimeIndex_], transform.position, transform.rotation);
-                    gameObject.SetActive(false);
-                }
+                    if (slimeType1 > slimeType2 && i == slimeType2 && j == slimeType1)
+                    {
+                        Debug.Log("t1>t2");
+                        Debug.Log(slimeType1);
+                        Debug.Log(slimeType2);
+                        Debug.Log(largoSlimeIndex_);
+                        Instantiate(largoSlimeArray[largoSlimeIndex_], transform.position, transform.rotation);
+                        gameObject.SetActive(false);
 
+                    }
+                    else if (slimeType1 < slimeType2 && i == slimeType1 && j == slimeType2)
+                    {
+                        Debug.Log("t2>t1");
+                        Debug.Log(slimeType1);
+                        Debug.Log(slimeType2);
+                        Debug.Log(largoSlimeIndex_);
+                        Instantiate(largoSlimeArray[largoSlimeIndex_], transform.position, transform.rotation);
+                        gameObject.SetActive(false);
+                    }
+                }
             }
+        }
+        else if (slimeSize == 1)
+        {
+            //Transform into TarrSlime
+            Instantiate(tarrSlime, transform.position, transform.rotation);
+            gameObject.SetActive(false);
+        }
+    }
+
+    GameObject plortPrefab;
+    public void MakePlort()
+    {
+        if (slimeSize == 0)
+        {
+            plortPrefab.GetComponent<PlortBase>().plortType = slimeType1;
+            Instantiate(plortPrefab, transform.position, transform.rotation);
+        }
+        else if (slimeSize == 1)
+        {
+            plortPrefab.GetComponent<PlortBase>().plortType = slimeType1;
+            Instantiate(plortPrefab, transform.position, transform.rotation);
+            plortPrefab.GetComponent<PlortBase>().plortType = slimeType2;
+            Instantiate(plortPrefab, transform.position, transform.rotation);
+        }
+        else
+        {
+
         }
     }
 }

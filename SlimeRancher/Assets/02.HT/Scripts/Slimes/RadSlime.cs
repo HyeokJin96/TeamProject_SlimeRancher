@@ -36,6 +36,11 @@ public class RadSlime : SlimeBase
         SetRadFieldMotion();
     }
 
+    public override void Action()
+    {
+        currentActionState = ActionState.Jump;
+    }
+
     void SetRadFieldMotion()
     {
         if (currentRadFieldValue > 1.2f)

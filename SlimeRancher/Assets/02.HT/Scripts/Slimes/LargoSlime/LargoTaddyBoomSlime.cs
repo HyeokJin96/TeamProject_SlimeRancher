@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LargoTaddyBoomSlime : SlimeBase
+public class LargoTabbyBoomSlime : SlimeBase
 {
     //[SimeSize] 0: normal, 1: largo 2: gordo
     //[SlimeType]  0: Default(White), 1: Pink, 2: Rock...
@@ -69,72 +69,39 @@ public class LargoTaddyBoomSlime : SlimeBase
             }
         }
     }
-    protected override void Jump(int jumpForce_, int delayTime_)
+    public override void Action()
     {
-        //base.Jump(jumpForce_, delayTime_);
-        if (!isJumpDelay)
+        int frequency_;
+        frequency_ = Random.Range(0, 5);
+        switch (frequency_)
         {
-            int frequency_;
-            frequency_ = Random.Range(0, 5);
-            isJumpDelay = true;
-            if (frequency_ >= 0 && frequency_ < 3)
-            {
+            case 0:
                 currentActionState = ActionState.Jump;
-                rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
-                StartCoroutine(JumpDelay(delayTime_));
-            }
-            else
-            {
-                if (currentMoodState == MoodState.Agitated | currentMoodState == MoodState.Hungry)
+                break;
+            case 1:
+            case 2:
+                if (moodStateMachine.currentState != moodStateMachine.agitated && pounceTarget != null)
                 {
-                    Debug.Log("boom1?");
+                    currentActionState = ActionState.Pounce;
+                }
+                else
+                {
+                    currentActionState = ActionState.Jump;
+                }
+                break;
+            case 3:
+            case 4:
+                if (moodStateMachine.currentState == moodStateMachine.agitated | moodStateMachine.currentState == moodStateMachine.hungry)
+                {
                     currentActionState = ActionState.Boom;
                 }
                 else
                 {
                     currentActionState = ActionState.Jump;
-                    rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
-                    StartCoroutine(JumpDelay(delayTime_));
                 }
-            }
-
-
-            switch (frequency_)
-            {
-                case 0:
-                case 1:
-                    currentActionState = ActionState.Jump;
-                    rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
-                    StartCoroutine(JumpDelay(delayTime_));
-                    break;
-                case 2:
-                case 3:
-                    if (currentMoodState != MoodState.Agitated && pounceTarget != null)
-                    {
-                        currentActionState = ActionState.Pounce;
-                    }
-                    else
-                    {
-                        currentActionState = ActionState.Jump;
-                        rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
-                        StartCoroutine(JumpDelay(delayTime_));
-                    }
-                    break;
-                case 4:
-                    if (currentMoodState == MoodState.Agitated | currentMoodState == MoodState.Hungry)
-                    {
-                        currentActionState = ActionState.Boom;
-                    }
-                    else
-                    {
-                        currentActionState = ActionState.Jump;
-                        rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
-                        StartCoroutine(JumpDelay(delayTime_));
-                    }
-                    break;
-                default:
-                    break;
-            }
+                break;
+            default:
+                break;
         }
     }
 

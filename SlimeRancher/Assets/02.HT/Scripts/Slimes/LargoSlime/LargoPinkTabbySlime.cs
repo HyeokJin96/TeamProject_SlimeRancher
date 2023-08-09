@@ -47,32 +47,23 @@ public class LargoPinkTabbySlime : SlimeBase
     {
         base.Update();
     }
-    protected override void Jump(int jumpForce_, int delayTime_)
+    public override void Action()
     {
-        //base.Jump(jumpForce_, delayTime_);
-        if (!isJumpDelay)
+        int frequency_;
+        frequency_ = Random.Range(0, 5);
+        if (frequency_ >= 0 && frequency_ < 3)
         {
-            int frequency_;
-            frequency_ = Random.Range(0, 5);
-            isJumpDelay = true;
-            if (frequency_ >= 0 && frequency_ < 3)
+            currentActionState = ActionState.Jump;
+        }
+        else
+        {
+            if (moodStateMachine.currentState != moodStateMachine.agitated && pounceTarget != null)
             {
-                currentActionState = ActionState.Jump;
-                rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
-                StartCoroutine(JumpDelay(delayTime_));
+                currentActionState = ActionState.Pounce;
             }
             else
             {
-                if (currentMoodState != MoodState.Agitated && pounceTarget != null)
-                {
-                    currentActionState = ActionState.Pounce;
-                }
-                else
-                {
-                    currentActionState = ActionState.Jump;
-                    rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
-                    StartCoroutine(JumpDelay(delayTime_));
-                }
+                currentActionState = ActionState.Jump;
             }
         }
     }

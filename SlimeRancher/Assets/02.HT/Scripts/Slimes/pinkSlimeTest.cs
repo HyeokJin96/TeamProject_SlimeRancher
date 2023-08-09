@@ -13,4 +13,8 @@ public class pinkSlimeTest : SlimeBase
             Jump(7, 7);
         }
     }
+    public override void Action()
+    {
+        throw new System.NotImplementedException();
+    }
 }

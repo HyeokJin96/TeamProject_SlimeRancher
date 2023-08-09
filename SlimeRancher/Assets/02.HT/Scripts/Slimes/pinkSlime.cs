@@ -29,4 +29,9 @@ public class pinkSlime : SlimeBase
     {
         base.Update();
     }
+
+    public override void Action()
+    {
+        currentActionState = ActionState.Jump;
+    }
 }

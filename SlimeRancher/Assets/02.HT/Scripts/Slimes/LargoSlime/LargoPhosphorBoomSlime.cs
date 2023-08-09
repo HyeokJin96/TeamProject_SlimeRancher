@@ -24,7 +24,7 @@ public class LargoPhosphorBoomSlime : SlimeBase
         slimeSize = 1;
         slimeType1 = 4;
         slimeType1 = 5;
-        
+
         defaultColor = slimeColor[8];
 
         defaultMaterial.color = slimeColor[8];
@@ -78,33 +78,23 @@ public class LargoPhosphorBoomSlime : SlimeBase
             }
         }
     }
-    protected override void Jump(int jumpForce_, int delayTime_)
+    public override void Action()
     {
-        //base.Jump(jumpForce_, delayTime_);
-        if (!isJumpDelay)
+        int frequency_;
+        frequency_ = Random.Range(0, 5);
+        if (frequency_ >= 0 && frequency_ < 3)
         {
-            int frequency_;
-            frequency_ = Random.Range(0, 5);
-            isJumpDelay = true;
-            if (frequency_ >= 0 && frequency_ < 3)
+            currentActionState = ActionState.Jump;
+        }
+        else
+        {
+            if (moodStateMachine.currentState == moodStateMachine.agitated | moodStateMachine.currentState == moodStateMachine.hungry)
             {
-                currentActionState = ActionState.Jump;
-                rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
-                StartCoroutine(JumpDelay(delayTime_));
+                currentActionState = ActionState.Boom;
             }
             else
             {
-                if (currentMoodState == MoodState.Agitated | currentMoodState == MoodState.Hungry)
-                {
-                    Debug.Log("boom1?");
-                    currentActionState = ActionState.Boom;
-                }
-                else
-                {
-                    currentActionState = ActionState.Jump;
-                    rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
-                    StartCoroutine(JumpDelay(delayTime_));
-                }
+                currentActionState = ActionState.Jump;
             }
         }
     }

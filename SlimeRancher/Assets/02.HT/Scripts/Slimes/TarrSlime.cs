@@ -10,7 +10,6 @@ public class TarrSlime : SlimeBase
         //base.Start();
         rigid = GetComponent<Rigidbody>();
 
-        currentMoodState = MoodState.Elated;
         currentActionState = ActionState.Idle;
         isTarrSlime = true;
         targetDistanceValue1 = 7;
@@ -25,7 +24,7 @@ public class TarrSlime : SlimeBase
     public override void Update()
     {
         base.Update();
-        if (currentMoodState == MoodState.Agitated)
+        if (moodStateMachine.currentState == moodStateMachine.agitated)
         {
             StartCoroutine(DestroyTarr());
         }
@@ -33,6 +32,11 @@ public class TarrSlime : SlimeBase
         {
             StopCoroutine(DestroyTarr());
         }
+    }
+
+    public override void Action()
+    {
+        currentActionState = ActionState.Jump;
     }
 
     // Eat(): legacy
@@ -67,14 +71,12 @@ public class TarrSlime : SlimeBase
     //     currentActionState = ActionState.Idle;
     // }
 
-    protected override void Eat()
+    /* protected override void Eat()
     {
         if (targetToEat != null)
         {
             if (targetToEat.tag == "Player")
             {
-                /*Do Nothing*/
-                //player Hp 감소 추가 예정
                 Debug.Log("player attack");
             }
             else
@@ -91,10 +93,10 @@ public class TarrSlime : SlimeBase
         }
         else
         {
-            /*Do Nothing*/
+            
         }
         currentActionState = ActionState.Idle;
         anim.SetBool("isBite", false);
-    }
+    } */
 }
 

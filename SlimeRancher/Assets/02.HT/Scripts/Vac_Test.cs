@@ -136,7 +136,7 @@ public class Vac_Test : MonoBehaviour
             FireObject(firedObj_);
         }
     }
-    public bool isLeftClick_;
+    public bool isLeftClick;
 
     private void Update()
     {
@@ -168,7 +168,7 @@ public class Vac_Test : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            if (isLeftClick_)
+            if (isLeftClick)
             {
                 if (fireDelayEnd == false)
                 {
@@ -179,15 +179,15 @@ public class Vac_Test : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if(!UIManager.Instance.hasUiOpen)
+            if (!UIManager.Instance.hasUiOpen)
             {
-                isLeftClick_ = true;
+                isLeftClick = true;
             }
 
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            isLeftClick_ = false;
+            isLeftClick = false;
             StopCoroutine(FireDelay());
         }
 
@@ -281,7 +281,7 @@ public class Vac_Test : MonoBehaviour
                     NearestJointCheck(other.gameObject);
                 }
 
-                
+
                 if (other.GetType() == typeof(MeshCollider))
                 {
                     other.GetComponent<MeshCollider>().isTrigger = true;
@@ -290,6 +290,7 @@ public class Vac_Test : MonoBehaviour
                 // 대상 오브젝트가 슬라임이면, state 변경
                 if (other.tag == "Normal Slime")
                 {
+                    other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().isAbsorbed = true;
                     other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().currentActionState = SlimeBase.ActionState.VacuumTarget;
                 }
 
@@ -510,6 +511,7 @@ public class Vac_Test : MonoBehaviour
             if (other.tag == "Normal Slime")
             {
                 other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().currentActionState = SlimeBase.ActionState.Idle;
+                other.GetComponent<VacSlimeTest>().rootSlime.GetComponent<SlimeBase>().isAbsorbed = false;
 
                 other.GetComponent<VacSlimeTest>().rootSlime.transform.localScale = new Vector3(2, 2, 2);
 

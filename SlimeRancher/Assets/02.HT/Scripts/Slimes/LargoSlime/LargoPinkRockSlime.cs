@@ -47,24 +47,17 @@ public class LargoPinkRockSlime : SlimeBase
     {
         base.Update();
     }
-    protected override void Jump(int jumpForce_, int delayTime_)
+    public override void Action()
     {
-        //base.Jump(jumpForce_, delayTime_);
-        if (!isJumpDelay)
+        int frequency_;
+        frequency_ = Random.Range(0, 5);
+        if (frequency_ >= 0 && frequency_ < 3)
         {
-            int frequency_;
-            frequency_ = Random.Range(0, 5);
-            isJumpDelay = true;
-            if (frequency_ >= 0 && frequency_ < 3)
-            {
-                currentActionState = ActionState.Jump;
-                rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
-                StartCoroutine(JumpDelay(delayTime_));
-            }
-            else
-            {
-                currentActionState = ActionState.RockFire;
-            }
+            currentActionState = ActionState.Jump;
+        }
+        else
+        {
+            currentActionState = ActionState.RockFire;
         }
     }
 }

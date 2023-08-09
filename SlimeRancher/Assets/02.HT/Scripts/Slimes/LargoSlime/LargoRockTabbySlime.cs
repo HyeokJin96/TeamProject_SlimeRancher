@@ -68,53 +68,36 @@ public class LargoRockTabbySlime : SlimeBase
     {
         base.Update();
     }
-    protected override void Jump(int jumpForce_, int delayTime_)
+
+    public override void Action()
     {
-        //base.Jump(jumpForce_, delayTime_);
-        if (!isJumpDelay)
+        int frequency_;
+        frequency_ = Random.Range(0, 5);
+        switch (frequency_)
         {
-            int frequency_;
-            frequency_ = Random.Range(0, 5);
-            isJumpDelay = true;
-
-            /* if (frequency_ >= 0 && frequency_ < 3)
-            {
+            case 0:
                 currentActionState = ActionState.Jump;
-                rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
-                StartCoroutine(JumpDelay(delayTime_));
-            }
-            else
-            {
+                break;
+            case 1:
+            case 2:
                 currentActionState = ActionState.RockFire;
-            } */
-
-            switch (frequency_)
-            {
-                case 0:
-                case 1:
-                    currentActionState = ActionState.Jump;
-                    rigid.AddForce(Vector3.up * jumpForce_, ForceMode.Impulse);
-                    StartCoroutine(JumpDelay(delayTime_));
-                    break;
-                case 2:
+                break;
+            case 3:
+            case 4:
+                if (moodStateMachine.currentState != moodStateMachine.agitated && pounceTarget != null)
+                {
+                    currentActionState = ActionState.Pounce;
+                }
+                else
+                {
                     currentActionState = ActionState.RockFire;
-                    break;
-                case 3:
-                case 4:
-                    if (currentMoodState != MoodState.Agitated && pounceTarget != null)
-                    {
-                        currentActionState = ActionState.Pounce;
-                    }
-                    else
-                    {
-                        currentActionState = ActionState.RockFire;
-                    }
-                    break;
-                default:
-                    break;
-            }
+                }
+                break;
+            default:
+                break;
         }
     }
+
     public float speed = 10f;
     public float gravity = 9.81f;
 
